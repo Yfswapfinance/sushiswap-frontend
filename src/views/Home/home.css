@@ -1,0 +1,25 @@
+.section-outline{
+   border: 1px solid #e2d6cfff;
+   border-radius: 12px;
+   box-shadow: inset 1px 1px 0px #f7f4f2;
+   background: #eefcfe;
+   color: rgb(65 181 196);
+   line-height: 1.2;
+}
+.img-size{
+   width: 3rem;
+   height: 3rem;
+}
+.head-text{
+   -ms-flex-pack: start;
+   justify-content: flex-start;
+   -ms-flex-align: center;
+   color: rgb(49 136 147);
+   font-size: 22px;
+   font-weight: 700;
+}
+.percentage{
+   color: rgb(49 136 147);
+   font-size: 30px;
+   font-weight: 700;
+}

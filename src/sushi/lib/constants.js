@@ -77,9 +77,9 @@ export const supportedPools = [
     tokenAddresses: {
       1: '0x6b3595068778dd592e39a122f4f5a5cf09c90fe2',
     },
-    name: 'Sushi Party!',
-    symbol: 'SUSHI-ETH UNI-V2 LP',
-    tokenSymbol: 'SUSHI',
+    name: 'YFBTC Party!',
+    symbol: 'YFBTC-ETH UNI-V2 LP',
+    tokenSymbol: 'YFBTC',
     icon: '🍣',
   },
   {
@@ -285,9 +285,9 @@ export const supportedPools = [
     tokenAddresses: {
       1: '0xaba8cac6866b83ae4eec97dd07ed254282f6ad8a',
     },
-    name: 'SUSHIv2 SUSHI',
-    symbol: 'SUSHIv2-ETH UNI-V2 LP',
-    tokenSymbol: 'SUSHIv2',
+    name: 'YFBTCv2 YFBTC',
+    symbol: 'YFBTCv2-ETH UNI-V2 LP',
+    tokenSymbol: 'YFBTCv2',
     icon: '🍠',
   },
   {

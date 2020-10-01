@@ -53,8 +53,8 @@ const Farm: React.FC = () => {
         <>
           <PageHeader
             icon={<img src={chef} height="120" />}
-            title="Stake Sushi Tokens & Earn Fees"
-            subtitle="0.05% of all SushiSwap trades are rewarded to SUSHI stakers"
+            title="Stake YFBTC Tokens & Earn Fees"
+            subtitle="0.05% of all YFBTCSwap trades are rewarded to YFBTC stakers"
           />
           {/* <FarmCards /> */}
           <div>TBD</div>
