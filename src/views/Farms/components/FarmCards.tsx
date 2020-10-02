@@ -46,10 +46,10 @@ const FarmCards: React.FC = () => {
         ...stakedValue[i],
         apy: stakedValue[i]
           ? sushiPrice
-              .times(SUSHI_PER_BLOCK)
-              .times(BLOCKS_PER_YEAR)
-              .times(stakedValue[i].poolWeight)
-              .div(stakedValue[i].totalWethValue)
+            .times(SUSHI_PER_BLOCK)
+            .times(BLOCKS_PER_YEAR)
+            .times(stakedValue[i].poolWeight)
+            .div(stakedValue[i].totalWethValue)
           : null,
       }
       const newFarmRows = [...farmRows]
@@ -77,10 +77,10 @@ const FarmCards: React.FC = () => {
           </StyledRow>
         ))
       ) : (
-        <StyledLoadingWrapper>
-          <Loader text="Cooking the rice ..." />
-        </StyledLoadingWrapper>
-      )}
+          <StyledLoadingWrapper>
+            <Loader text="Cooking the rice ..." />
+          </StyledLoadingWrapper>
+        )}
     </StyledCards>
   )
 }
@@ -132,7 +132,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
       <Card>
         <CardContent>
           <StyledContent>
-            <CardIcon>{farm.icon}</CardIcon>
+              <img style={{ width: 55 , height :65 }}  src={farm.icon.toString()} alt="" />
             <StyledTitle>{farm.name}</StyledTitle>
             <StyledDetails>
               <StyledDetail>Deposit {farm.lpToken.toUpperCase()}</StyledDetail>
@@ -156,10 +156,10 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
               <span>
                 {farm.apy
                   ? `${farm.apy
-                      .times(new BigNumber(100))
-                      .toNumber()
-                      .toLocaleString('en-US')
-                      .slice(0, -1)}%`
+                    .times(new BigNumber(100))
+                    .toNumber()
+                    .toLocaleString('en-US')
+                    .slice(0, -1)}%`
                   : 'Loading ...'}
               </span>
               {/* <span>
@@ -254,8 +254,8 @@ const StyledCardWrapper = styled.div`
 `
 
 const StyledTitle = styled.h4`
-  color: ${(props) => props.theme.color.grey[600]};
-  font-size: 24px;
+  color: ${(props) => props.theme.color.grey[1000]};
+  font-size: 20px;
   font-weight: 700;
   margin: ${(props) => props.theme.spacing[2]}px 0 0;
   padding: 0;
@@ -278,7 +278,7 @@ const StyledDetails = styled.div`
 `
 
 const StyledDetail = styled.div`
-  color: ${(props) => props.theme.color.grey[500]};
+  color: ${(props) => props.theme.color.grey[1000]};
 `
 
 const StyledInsight = styled.div`

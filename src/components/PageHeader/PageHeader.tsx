@@ -37,15 +37,15 @@ const StyledIcon = styled.div`
   line-height: 120px;
   text-align: center;
   width: 120px;
+  margin-right: 40px;
 `
 
 const StyledTitle = styled.h1`
-  font-family: 'Kaushan Script', sans-serif;
-  color: ${(props) => props.theme.color.grey[600]};
-  font-size: 36px;
-  font-weight: 700;
-  margin: 0;
-  padding: 0;
+  color: ${(props) => props.theme.color.grey[900]};
+  font-size: 27px;
+  font-family: sans-serif Chivo ;
+  font-size: 35px;
+}
 `
 
 const StyledSubtitle = styled.h3`

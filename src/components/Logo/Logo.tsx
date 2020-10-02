@@ -1,14 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import chef from '../../assets/img/chef.png'
+import btcIcon from '../../assets/img/btcIcon.png';
 
 const Logo: React.FC = () => {
   return (
     <StyledLogo to="/">
-      <img src={chef} height="32" style={{ marginTop: -4 }} />
+      <img src={btcIcon} height="50" style={{ marginTop: 15 }} />
       <StyledText>
-        YFBTCSwap <MasterChefText>MasterChef</MasterChefText>
+        YFBTC<MasterChefText>.vip</MasterChefText>
       </StyledText>
     </StyledLogo>
   )
@@ -26,19 +26,26 @@ const StyledLogo = styled(Link)`
 `
 
 const StyledText = styled.span`
-  color: ${(props) => props.theme.color.grey[600]};
-  font-family: 'Reem Kufi', sans-serif;
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: 0.03em;
+  color: ${(props) => props.theme.color.grey[900]};
   margin-left: ${(props) => props.theme.spacing[2]}px;
   @media (max-width: 400px) {
     display: none;
   }
+  font-family:  sans-serif MyriadPro;
+  font-size: 30px;
+  font-weight: bold;
+  font-stretch: normal;
 `
 
 const MasterChefText = styled.span`
-  font-family: 'Kaushan Script', sans-serif;
-`
+color: ${(props) => props.theme.color.grey[11]};
+font-family: 'Reem Kufi', sans-serif;
+font-size: 20px;
+font-weight: 700;
+letter-spacing: 0.03em;
+margin-left: ${(props) => props.theme.spacing[2]}px;
+@media (max-width: 400px) {
+  display: none;
+}`
 
 export default Logo

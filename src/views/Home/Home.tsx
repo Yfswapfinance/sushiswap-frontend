@@ -1,28 +1,28 @@
 import React from 'react'
 import styled from 'styled-components'
-import chef from '../../assets/img/chef.png'
+import formar from '../../assets/img/formar.png'
 import Button from '../../components/Button'
 import Container from '../../components/Container'
 import Page from '../../components/Page'
 import PageHeader from '../../components/PageHeader'
 import Spacer from '../../components/Spacer'
 import Balances from './components/Balances'
-import worldImg from '../../assets/img/world.svg';
-import peachImg from '../../assets/img/peach.svg';
-import pearlImg from '../../assets/img/oyster.svg';
+import rocketImg from '../../assets/img/rocket.png';
+import changeImg from '../../assets/img/change.svg';
+import sweetImg from '../../assets/img/sweet.svg';
 
 import './home.css';
 const Home: React.FC = () => {
   const data: any = [
-    { name: 'USDT Stats', logo: worldImg },
-    { name: 'TAI Stats', logo: peachImg },
-    { name: 'PEARL/TRX LP Stats', logo: pearlImg }
+    { name: 'YFBTC/BITTO Stats', logo: rocketImg , class : 'img-size' },
+    { name: 'YFBTC/ETH Stats', logo: changeImg , class : 'img-con' },
+    { name: 'YFBTC/WBTC Stats', logo: sweetImg , class : 'img-con'}
   ];
   const renderRateBoxes = () => {
     return data.map((elements: any) => {
       return (
         <div className="col section-outline mr-3 p-3">
-          <img className="img-size" src={elements.logo} alt="" /><span className="head-text ml-3">{elements.name}</span>
+          <img className={elements.class} src={elements.logo} alt="" /><span className="head-text ml-2">{elements.name}</span>
           <span className="percentage d-block">0.000000</span>
           <span className="d-block">My Stake</span>
           <span className="percentage ">0.0000</span><small>0.00%</small><br />
@@ -45,8 +45,8 @@ const Home: React.FC = () => {
   return (
     <Page>
       <PageHeader
-        icon={<img src={chef} height={120} />}
-        title="MasterChef is Ready"
+        icon={<img src={formar} height={120} />}
+        title="Farming is Ready"
         subtitle="Stake Uniswap LP tokens to claim your very own yummy YFBTC!"
       />
 
@@ -64,18 +64,21 @@ const Home: React.FC = () => {
       </div>
       <div
         style={{
-          margin: '0 auto',
+          margin: '0 auto', 
+          boxShadow: '0 20px 40px 0 rgba(255, 148, 22, 0.8)',
+          border:' solid 1px rgba(0, 0, 0, 0)',
+          background : '#ffffff'
         }}
       >
 
-        <Button text="🔪 See the Menu" to="/farms" variant="secondary" />
+        <Button text="🔪 Join Farm" size="md" to="/farms" variant="secondary" />
       </div>
     </Page>
   )
 }
 
 const StyledInfo = styled.h3`
-  color: ${(props) => props.theme.color.grey[500]};
+  color: ${(props) => props.theme.color.grey[900]};
   font-size: 16px;
   font-weight: 400;
   margin: 0;
@@ -83,7 +86,7 @@ const StyledInfo = styled.h3`
   text-align: center;
 
   > b {
-    color: ${(props) => props.theme.color.grey[600]};
+    color: ${(props) => props.theme.color.grey[900]};
   }
 `
 

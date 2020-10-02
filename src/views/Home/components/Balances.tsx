@@ -16,6 +16,7 @@ import useTokenBalance from '../../../hooks/useTokenBalance'
 import useSushi from '../../../hooks/useSushi'
 import { getSushiAddress, getSushiSupply } from '../../../sushi/utils'
 import { getBalanceNumber } from '../../../utils/formatBalance'
+import { black } from '../../../theme/colors'
 
 const PendingRewards: React.FC = () => {
   const [start, setStart] = useState(0)
@@ -93,12 +94,12 @@ const Balances: React.FC = () => {
             <StyledBalance>
               <SushiIcon />
               <Spacer />
-              <div style={{ flex: 1 }}>
-                <Label text="Your YFBTC Balance" />
-                <Value
-                  value={!!account ? getBalanceNumber(sushiBalance) : 'Locked'}
-                />
+              <div style={{ flex: 1, color: '#5c5c5c' }}>
+                <Label text="YFBTC" />
               </div>
+              <Value
+                value={!!account ? getBalanceNumber(sushiBalance) : 'Locked'}
+              />
             </StyledBalance>
           </StyledBalances>
         </CardContent>
@@ -113,10 +114,20 @@ const Balances: React.FC = () => {
 
       <Card>
         <CardContent>
-          <Label text="Total YFBTC Supply" />
-          <Value
-            value={totalSupply ? getBalanceNumber(totalSupply) : 'Locked'}
-          />
+          <StyledBalances>
+            <StyledBalance>
+              <div style={{ color: '#5c5c5c' }}>
+                <Label text="Total YFBTC Supply" />
+              </div>
+              {totalSupply ?
+                '':
+                <><Spacer /><Spacer /></>
+              }
+              <Value
+                value={totalSupply ? getBalanceNumber(totalSupply) : 'Locked'}
+              />
+            </StyledBalance>
+          </StyledBalances>
         </CardContent>
         <Footnote>
           New rewards per block
@@ -130,8 +141,8 @@ const Balances: React.FC = () => {
 const Footnote = styled.div`
   font-size: 14px;
   padding: 8px 20px;
-  color: ${(props) => props.theme.color.grey[400]};
-  border-top: solid 1px ${(props) => props.theme.color.grey[300]};
+  color: ${(props) => props.theme.color.grey[1000]};
+  border-top: solid 1px ${(props) => props.theme.color.grey[10]};
 `
 const FootnoteValue = styled.div`
   font-family: 'Roboto Mono', monospace;
