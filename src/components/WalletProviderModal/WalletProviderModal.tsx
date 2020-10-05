@@ -58,8 +58,8 @@ const StyledWalletsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   @media (max-width: ${(props) => props.theme.breakpoints.mobile}px) {
-    flex-direction: column;
-    flex-wrap: none;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 `
 

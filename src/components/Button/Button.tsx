@@ -62,7 +62,7 @@ const Button: React.FC<ButtonProps> = ({
       boxShadow = `8px 10px 15px 0 rgba(255, 148, 22, 0.7)`
       buttonPadding = spacing[4]
       buttonSize = 40
-      fontSize = 10
+      fontSize = 11
       break
     case 'ps':
       boxShadow = `none`

@@ -32,6 +32,7 @@ const AccountButton: React.FC<AccountButtonProps> = (props) => {
   )
 }
 
-const StyledAccountButton = styled.div``
+const StyledAccountButton = styled.div`
+`
 
 export default AccountButton

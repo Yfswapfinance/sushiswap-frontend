@@ -82,7 +82,7 @@ export const supportedPools = [
     tokenAddresses: {
       1: '0x6b3595068778dd592e39a122f4f5a5cf09c90fe2',
     },
-    name: 'YFBTC Party!',
+    name: 'YFBTC/BITTO 2.5x',
     symbol: 'YFBTC-ETH UNI-V2 LP',
     tokenSymbol: 'YFBTC',
     icon: change,
@@ -95,7 +95,7 @@ export const supportedPools = [
     tokenAddresses: {
       1: '0x57ab1ec28d129707052df4df418d58a2d46d5f51',
     },
-    name: 'Spartan Dollar',
+    name: 'YFBTC/ETH 1.5x',
     symbol: 'SUSD-ETH UNI-V2 LP',
     tokenSymbol: 'SUSD',
     icon: rocket,
@@ -108,7 +108,7 @@ export const supportedPools = [
     tokenAddresses: {
       1: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
     },
-    name: 'Circle Snail',
+    name: 'YFBTC/DAI',
     symbol: 'USDC-ETH UNI-V2 LP',
     tokenSymbol: 'USDC',
     icon: sweet,
@@ -121,7 +121,7 @@ export const supportedPools = [
     tokenAddresses: {
       1: '0x6b175474e89094c44da98b954eedeac495271d0f',
     },
-    name: 'Donald DAI',
+    name: 'YFBTC/USDT',
     symbol: 'DAI-ETH UNI-V2 LP',
     tokenSymbol: 'DAI',
     icon: duck,
@@ -134,7 +134,7 @@ export const supportedPools = [
     tokenAddresses: {
       1: '0xdac17f958d2ee523a2206206994597c13d831ec7',
     },
-    name: 'Tether Turtle',
+    name: 'YFBTC/RenBTC',
     symbol: 'USDT-ETH UNI-V2 LP',
     tokenSymbol: 'USDT',
     icon: turt,
@@ -148,7 +148,7 @@ export const supportedPools = [
     tokenAddresses: {
       1: '0x04fa0d235c4abf4bcf4787af4cf447de572ef828',
     },
-    name: 'Umami Squid',
+    name: 'YFBTC/wBTC 1.5x',
     symbol: 'UMA-ETH UNI-V2 LP',
     tokenSymbol: 'UMA',
     icon: hen,
