@@ -8,7 +8,7 @@ interface ButtonProps {
   disabled?: boolean,
   href?: string,
   onClick?: () => void,
-  size?: 'sm' | 'md' | 'lg' | 'cs',
+  size?: 'sm' | 'md' | 'lg' | 'cs' | 'ps',
   text?: string,
   to?: string,
   variant?: 'default' | 'secondary' | 'tertiary' | 'normal'
@@ -64,6 +64,12 @@ const Button: React.FC<ButtonProps> = ({
       buttonSize = 40
       fontSize = 10
       break
+    case 'ps':
+      boxShadow = `none`
+      buttonPadding = spacing[4]
+      buttonSize = 40
+      fontSize = 12
+      break
     case 'md':
     default:
       boxShadow = `6px 6px 12px ${color.grey[300]},
@@ -110,9 +116,9 @@ interface StyledButtonProps {
 
 const StyledButton = styled.button<StyledButtonProps>`
   align-items: center;
-  background-color: ${props => props.color === 'white' ?  '#110f40' : props => props.theme.color.grey[200]};
+  background-color: ${props => props.color === 'white' ? '#110f40' : props => props.theme.color.grey[200]};
   border: 0;
-  border-radius: 12px;
+  border-radius: ${props => props.fontSize === 12 ? '18px' : '12px' };
   box-shadow: ${props => props.boxShadow};
   color: ${props => !props.disabled ? props.color : `${props.color}55`};
   cursor: pointer;
@@ -127,8 +133,8 @@ const StyledButton = styled.button<StyledButtonProps>`
   pointer-events: ${props => !props.disabled ? undefined : 'none'};
   width: 100%;
   &:hover {
-    background-color: ${props => props.color === 'white' ?  '#110f40' :  '#ffdde3'};
-    color:  ${props => props.color === 'white' ? 'white' : 'blue' }
+    background-color: ${props => props.color === 'white' ? '#110f40' : '#ffdde3'};
+    color:  ${props => props.color === 'white' ? 'white' : 'blue'}
   }
 `
 

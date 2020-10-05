@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-
+// import StickyBar from './stickyNote';
 import Container from '../Container'
 import Logo from '../Logo'
 
@@ -14,6 +14,7 @@ interface TopBarProps {
 const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu }) => {
   return (
     <StyledTopBar>
+      {/* <StickyBar /> */}
       <Container size="lg">
         <StyledTopBarInner>
           <StyledLogoWrapper>
@@ -41,6 +42,7 @@ const StyledTopBar = styled.div``
 const StyledTopBarInner = styled.div`
   align-items: center;
   display: flex;
+  padding-top : 28px;
   height: ${(props) => props.theme.topBarSize}px;
   justify-content: space-between;
   max-width: ${(props) => props.theme.siteWidth}px;

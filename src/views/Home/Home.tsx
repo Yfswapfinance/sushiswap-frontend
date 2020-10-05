@@ -10,7 +10,7 @@ import Balances from './components/Balances'
 import rocketImg from '../../assets/img/rocket.png';
 import changeImg from '../../assets/img/change.svg';
 import sweetImg from '../../assets/img/sweet.svg';
-
+import StickyBar from "../../components/TopBar/stickyNote"
 import './home.css';
 const Home: React.FC = () => {
   const data: any = [
@@ -43,6 +43,8 @@ const Home: React.FC = () => {
     })
   }
   return (
+    <>
+    <StickyBar/>
     <Page>
       <PageHeader
         icon={<img src={formar} height={120} />}
@@ -74,6 +76,7 @@ const Home: React.FC = () => {
         <Button text="🔪 Join Farm" size="md" to="/farms" variant="secondary" />
       </div>
     </Page>
+    </>
   )
 }
 
