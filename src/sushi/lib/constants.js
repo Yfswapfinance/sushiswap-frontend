@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js/bignumber'
 import change from "../../assets/img/change.svg"
-import rocket from "../../assets/img/rocket.png"
+import rocket from "../../assets/img/rocket.svg"
 import sweet from "../../assets/img/sweet.svg"
 import hen from "../../assets/img/hen.svg"
 import duck from "../../assets/img/duck.svg"
@@ -82,10 +82,11 @@ export const supportedPools = [
     tokenAddresses: {
       1: '0x6b3595068778dd592e39a122f4f5a5cf09c90fe2',
     },
-    name: 'YFBTC/BITTO 2.5x',
-    symbol: 'YFBTC-ETH UNI-V2 LP',
+    // name: 'YFBTC/BITTO 2.5x',
+     name: 'YFBTC-BITTO',
+    symbol: 'YFBTC-BITTO UNI-V2 LP',
     tokenSymbol: 'YFBTC',
-    icon: change,
+    icon: rocket,
   },
   {
     pid: 3,
@@ -95,10 +96,12 @@ export const supportedPools = [
     tokenAddresses: {
       1: '0x57ab1ec28d129707052df4df418d58a2d46d5f51',
     },
-    name: 'YFBTC/ETH 1.5x',
-    symbol: 'SUSD-ETH UNI-V2 LP',
+    // name: 'YFBTC/ETH 1.5x',
+    name:'YFBTC-ETH',
+    symbol: 'YFBTC-ETH UNI-V2 LP',
     tokenSymbol: 'SUSD',
-    icon: rocket,
+    
+    icon: change,
   },
   {
     pid: 1,
@@ -108,8 +111,9 @@ export const supportedPools = [
     tokenAddresses: {
       1: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
     },
-    name: 'YFBTC/DAI',
-    symbol: 'USDC-ETH UNI-V2 LP',
+    // name: 'YFBTC/DAI',
+    name:'TBTC-ETH',
+    symbol: 'TBTC-ETH UNI-V2 LP',
     tokenSymbol: 'USDC',
     icon: sweet,
   },
@@ -121,8 +125,9 @@ export const supportedPools = [
     tokenAddresses: {
       1: '0x6b175474e89094c44da98b954eedeac495271d0f',
     },
-    name: 'YFBTC/USDT',
-    symbol: 'DAI-ETH UNI-V2 LP',
+    // name: 'YFBTC/USDT',
+    name:'RenBTC-ETH',
+    symbol: 'RenBTC-ETH UNI-V2 LP',
     tokenSymbol: 'DAI',
     icon: duck,
   },
@@ -134,8 +139,9 @@ export const supportedPools = [
     tokenAddresses: {
       1: '0xdac17f958d2ee523a2206206994597c13d831ec7',
     },
-    name: 'YFBTC/RenBTC',
-    symbol: 'USDT-ETH UNI-V2 LP',
+    // name: 'YFBTC/RenBTC',
+    name:'WBTC-USDT',
+    symbol: 'WBTC-USDT UNI-V2 LP',
     tokenSymbol: 'USDT',
     icon: turt,
   },
@@ -148,8 +154,9 @@ export const supportedPools = [
     tokenAddresses: {
       1: '0x04fa0d235c4abf4bcf4787af4cf447de572ef828',
     },
-    name: 'YFBTC/wBTC 1.5x',
-    symbol: 'UMA-ETH UNI-V2 LP',
+    // name: 'YFBTC/wBTC 1.5x',
+    name:'WBTC-WETH',
+    symbol: 'WBTC-WETH UNI-V2 LP',
     tokenSymbol: 'UMA',
     icon: hen,
   },

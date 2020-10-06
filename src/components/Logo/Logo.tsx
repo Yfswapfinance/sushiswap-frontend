@@ -1,14 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import btcIcon from '../../assets/img/btcIcon.png';
+import mainlogo from '../../assets/img/mainlogo.png';
 
 const Logo: React.FC = () => {
   return (
     <StyledLogo to="/">
-      <img src={btcIcon} height="50" style={{ marginTop: 15 }} />
+      <img src={mainlogo} height="50" style={{  }} />
       <StyledText>
-        YFBTC<MasterChefText>.vip</MasterChefText>
+        <MasterChefText>.network</MasterChefText>
       </StyledText>
     </StyledLogo>
   )
@@ -27,7 +27,7 @@ const StyledLogo = styled(Link)`
 
 const StyledText = styled.span`
   color: ${(props) => props.theme.color.grey[900]};
-  margin-left: ${(props) => props.theme.spacing[2]}px;
+  margin-top : 12px;
   @media (max-width: 400px) {
     display: none;
   }
@@ -43,7 +43,6 @@ font-family: 'Reem Kufi', sans-serif;
 font-size: 20px;
 font-weight: 700;
 letter-spacing: 0.03em;
-margin-left: ${(props) => props.theme.spacing[2]}px;
 @media (max-width: 400px) {
   display: none;
 }`

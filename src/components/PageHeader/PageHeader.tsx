@@ -43,8 +43,9 @@ const StyledIcon = styled.div`
 const StyledTitle = styled.h1`
   color: ${(props) => props.theme.color.grey[900]};
   font-size: 27px;
-  font-family: sans-serif Chivo ;
+  font-family: Kaushan Script;
   font-size: 35px;
+  regular:400
 }
 `
 

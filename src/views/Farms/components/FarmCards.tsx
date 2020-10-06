@@ -4,7 +4,7 @@ import Countdown, { CountdownRenderProps } from 'react-countdown'
 import styled, { keyframes } from 'styled-components'
 import { useWallet } from 'use-wallet'
 import Button from '../../../components/Button'
-import Card from '../../../components/Card'
+import Card from '../../../components/Card-custom'
 import CardContent from '../../../components/CardContent'
 import CardIcon from '../../../components/CardIcon'
 import Loader from '../../../components/Loader'
@@ -46,10 +46,10 @@ const FarmCards: React.FC = () => {
         ...stakedValue[i],
         apy: stakedValue[i]
           ? sushiPrice
-            .times(SUSHI_PER_BLOCK)
-            .times(BLOCKS_PER_YEAR)
-            .times(stakedValue[i].poolWeight)
-            .div(stakedValue[i].totalWethValue)
+              .times(SUSHI_PER_BLOCK)
+              .times(BLOCKS_PER_YEAR)
+              .times(stakedValue[i].poolWeight)
+              .div(stakedValue[i].totalWethValue)
           : null,
       }
       const newFarmRows = [...farmRows]
@@ -77,10 +77,10 @@ const FarmCards: React.FC = () => {
           </StyledRow>
         ))
       ) : (
-          <StyledLoadingWrapper>
-            <Loader text="Cooking the rice ..." />
-          </StyledLoadingWrapper>
-        )}
+        <StyledLoadingWrapper>
+          <Loader text="Cooking the rice ..." />
+        </StyledLoadingWrapper>
+      )}
     </StyledCards>
   )
 }
@@ -129,10 +129,15 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
   return (
     <StyledCardWrapper>
       {farm.tokenSymbol === 'SUSHI' && <StyledCardAccent />}
+      <StyledBoxBorder/>
       <Card>
         <CardContent>
           <StyledContent>
-              <img style={{ width: 55 , height :65 }}  src={farm.icon.toString()} alt="" />
+            <img
+              style={{ width: 55, height: 65 }}
+              src={farm.icon.toString()}
+              alt=""
+            />
             <StyledTitle>{farm.name}</StyledTitle>
             <StyledDetails>
               <StyledDetail>Deposit {farm.lpToken.toUpperCase()}</StyledDetail>
@@ -156,10 +161,10 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
               <span>
                 {farm.apy
                   ? `${farm.apy
-                    .times(new BigNumber(100))
-                    .toNumber()
-                    .toLocaleString('en-US')
-                    .slice(0, -1)}%`
+                      .times(new BigNumber(100))
+                      .toNumber()
+                      .toLocaleString('en-US')
+                      .slice(0, -1)}%`
                   : 'Loading ...'}
               </span>
               {/* <span>
@@ -265,6 +270,7 @@ const StyledContent = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
+  border-color: green;
 `
 
 const StyledSpacer = styled.div`
@@ -296,5 +302,30 @@ const StyledInsight = styled.div`
   text-align: center;
   padding: 0 12px;
 `
-
+const StyledBoxBorder = styled.div`
+  filter: blur(6px);
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  bottom: -2px;
+  left: -2px;
+  z-index: -1;
+  background: linear-gradient(
+      45deg,
+      rgb(255, 0, 0) 0%,
+      rgb(255, 154, 0) 10%,
+      rgb(208, 222, 33) 20%,
+      rgb(79, 220, 74) 30%,
+      rgb(63, 218, 216) 40%,
+      rgb(47, 201, 226) 50%,
+      rgb(28, 127, 238) 60%,
+      rgb(95, 21, 242) 70%,
+      rgb(186, 12, 248) 80%,
+      rgb(251, 7, 217) 90%,
+      rgb(255, 0, 0) 100%
+    )
+    0% 0% / 300% 300%;
+  animation: 2s linear 0s infinite normal none running dOtNsp;
+  border-radius: 12px;
+`
 export default FarmCards

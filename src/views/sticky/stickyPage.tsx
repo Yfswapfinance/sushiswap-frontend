@@ -47,7 +47,7 @@ const Farms: React.FC = () => {
                                 </div>
                                 <StyledButtonDiv>
                                     <img src={Unicon} className="unicon" alt=""/>
-                                    <Button size="ps" variant='normal' text="DO NOT BUY" />
+                                    <Button size="ts" variant='normal' text=" DO NOT BUY" />
                                 </StyledButtonDiv>
 
                             </CardContent>
@@ -59,7 +59,7 @@ const Farms: React.FC = () => {
         </StyledPage>)
 }
 const StyledTitle = styled.h1`
-font-family: sans-serif, Handwriting-Dakota;
+font-family: Kaushan Script, Handwriting-Dakota;
 font-size: 23px;
 font-weight: normal;
 font-stretch: normal;
@@ -121,6 +121,7 @@ const StyledButtonDiv = styled.div`
   margin-top : 20px;
   align-self: center;
   position: relative;
+  
   @media (max-width: 768px) {
     width: 80%;
   }

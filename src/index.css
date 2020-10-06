@@ -1,7 +1,11 @@
+/* @import url('https://fonts.googleapis.com/css?family=Josefin+Sans'); */
+
 body {
   background: #EDF7F6;
   margin: 0;
-  font-family: 'Noto Sans', sans-serif;
+  /* font-family: 'Josefin Sans', cursive; */
+   /* font-family: 'Kaushan Script'; */
+  /* font-family: 'Noto Sans', sans-serif; */
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

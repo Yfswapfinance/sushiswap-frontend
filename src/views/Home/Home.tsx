@@ -12,6 +12,10 @@ import changeImg from '../../assets/img/change.svg';
 import sweetImg from '../../assets/img/sweet.svg';
 import StickyBar from "../../components/TopBar/stickyNote"
 import './home.css';
+
+
+
+
 const Home: React.FC = () => {
   const data: any = [
     { name: 'YFBTC/BITTO Stats', logo: rocketImg , class : 'img-size' },
@@ -19,6 +23,7 @@ const Home: React.FC = () => {
     { name: 'YFBTC/WBTC Stats', logo: sweetImg , class : 'img-con'}
   ];
   const renderRateBoxes = () => {
+
     return data.map((elements: any) => {
       return (
         <div className="col section-outline mr-3 p-3">
@@ -65,12 +70,12 @@ const Home: React.FC = () => {
         {renderRateBoxes()}
       </div>
       <div
-        style={{
-          margin: '0 auto', 
-          boxShadow: '0 20px 40px 0 rgba(255, 148, 22, 0.8)',
-          border:' solid 1px rgba(0, 0, 0, 0)',
-          background : '#ffffff'
-        }}
+        // style={{
+        //   margin: '0 auto', 
+        //   boxShadow: '0 20px 40px 0 rgba(255, 148, 22, 0.8)',
+        //   border:' solid 1px rgba(0, 0, 0, 0)',
+        //   background : '#ffffff'
+        // }}
       >
 
         <Button text="🔪 Join Farm" size="md" to="/farms" variant="secondary" />

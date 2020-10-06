@@ -25,6 +25,7 @@ const Nav: React.FC = () => {
 const StyledNav = styled.nav`
   align-items: center;
   display: flex;
+  margin-right : 156px;
 `
 
 const StyledLink = styled(NavLink)`
