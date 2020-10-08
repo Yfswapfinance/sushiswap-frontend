@@ -10,6 +10,8 @@ import useEarnings from '../../../hooks/useEarnings'
 import useReward from '../../../hooks/useReward'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 
+import btc from '../../../../src/assets/img/btc.svg';
+
 interface HarvestProps {
   pid: number
 }
@@ -24,7 +26,7 @@ const Harvest: React.FC<HarvestProps> = ({ pid }) => {
       <CardContent>
         <StyledCardContentInner>
           <StyledCardHeader>
-            <CardIcon>🍣</CardIcon>
+            <CardIcon> <img src={btc} height="70" style={{  }} /></CardIcon>
             <Value value={getBalanceNumber(earnings)} />
             <Label text="YFBTC Earned" />
           </StyledCardHeader>

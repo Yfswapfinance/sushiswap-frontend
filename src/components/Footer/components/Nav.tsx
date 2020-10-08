@@ -2,14 +2,25 @@ import React from 'react'
 import styled from 'styled-components'
 import { AiFillMediumCircle, AiOutlineGithub } from 'react-icons/ai';
 import { FaTelegram } from 'react-icons/fa';
+
+const style = {
+  color: 'white', 
+};
 const Nav: React.FC = () => {
   return (
     <StyledNav>
       <div className="py-5">
         <div className="center">
-          <AiFillMediumCircle className="mr-2" style={{ fontSize: 30 }} />
+          <a href="https://medium.com/@yfswap" target="blank" style={style}>
+            <AiFillMediumCircle className="mr-2" style={{ fontSize: 30 }}/>
+          </a>
+
           <FaTelegram className="mr-2" style={{ fontSize: 30 }} />
+
+          <a href="https://github.com/abanshinoburu" target="blank" style={style}>
           <AiOutlineGithub style={{ fontSize: 30 }} />
+          </a>
+          
         </div>
         <Styledspan>
           <span>© 2020 yfswap.finance</span>

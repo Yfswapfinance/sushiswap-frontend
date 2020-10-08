@@ -8,7 +8,7 @@ const Logo: React.FC = () => {
     <StyledLogo to="/">
       <img src={mainlogo} height="50" style={{  }} />
       <StyledText>
-        <MasterChefText>.network</MasterChefText>
+        <MasterChefText>.net</MasterChefText>
       </StyledText>
     </StyledLogo>
   )
