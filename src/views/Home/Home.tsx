@@ -18,7 +18,7 @@ import './home.css';
 
 const Home: React.FC = () => {
   const data: any = [
-    { name: 'YFBTC/BITTO Stats', logo: rocketImg , class : 'img-size' },
+    { name: 'BITTO/ETH Stats', logo: rocketImg , class : 'img-size' },
     { name: 'YFBTC/ETH Stats', logo: changeImg , class : 'img-con' },
     { name: 'YFBTC/WBTC Stats', logo: sweetImg , class : 'img-con'}
   ];
@@ -33,7 +33,7 @@ const Home: React.FC = () => {
           <span className="percentage ">0.0000</span><small>0.00%</small><br />
             Total Staked<br /><br />
             ========== PRICES ==========<br />
-            1 YFBTC = 379.1565$<br />
+            1 YFBTC = 1000.0$<br />
             1 USDT = 1.0020$<br /><br />
             ======== YFBTC REWARDS ========<br />
             <span className="d-block">Claimable Rewards:0.0000 YFBTC=$0.0000</span>

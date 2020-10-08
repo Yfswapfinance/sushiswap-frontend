@@ -1,25 +1,25 @@
 Arguments: 
-  /Users/syedyasiriqbal/.nvm/versions/node/v12.14.0/bin/node /usr/local/Cellar/yarn/1.17.3/libexec/bin/yarn.js install
+  /home/irfan/.nvm/versions/node/v12.18.0/bin/node /usr/share/yarn/bin/yarn.js install
 
 PATH: 
-  /Users/syedyasiriqbal/.rvm/gems/ruby-2.6.3/bin:/Users/syedyasiriqbal/.rvm/gems/ruby-2.6.3@global/bin:/Users/syedyasiriqbal/.rvm/rubies/ruby-2.6.3/bin:/Users/syedyasiriqbal/.nvm/versions/node/v12.14.0/bin:/usr/local/opt/mysql@5.7/bin:/Users/syedyasiriqbal/google-cloud-sdk/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/syedyasiriqbal/.rvm/gems/ruby-2.6.3/bin:/Users/syedyasiriqbal/.rvm/gems/ruby-2.6.3@global/bin:/Users/syedyasiriqbal/.rvm/rubies/ruby-2.6.3/bin:/usr/local/opt/mysql@5.7/bin:/Users/syedyasiriqbal/google-cloud-sdk/bin:/Users/syedyasiriqbal/Library/Android/sdk/emulator:/Users/syedyasiriqbal/Library/Android/sdk/tools:/Users/syedyasiriqbal/Library/Android/sdk/tools/bin:/Users/syedyasiriqbal/Library/Android/sdk/platform-tools:/Users/syedyasiriqbal/.rvm/bin:/Users/syedyasiriqbal/google-cloud-sdk/bin:/Users/syedyasiriqbal/Library/Android/sdk/emulator:/Users/syedyasiriqbal/Library/Android/sdk/tools:/Users/syedyasiriqbal/Library/Android/sdk/tools/bin:/Users/syedyasiriqbal/Library/Android/sdk/platform-tools
+  /home/irfan/.nvm/versions/node/v12.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
 
 Yarn version: 
-  1.17.3
+  1.22.5
 
 Node version: 
-  12.14.0
+  12.18.0
 
 Platform: 
-  darwin x64
+  linux x64
 
 Trace: 
-  SyntaxError: /Users/syedyasiriqbal/Desktop/Projects/Server/yfswapfinance-frontend/package.json: Unexpected token / in JSON at position 808
+  SyntaxError: /home/irfan/projects/sushiswap-frontend-master/package.json: Unexpected token / in JSON at position 808
       at JSON.parse (<anonymous>)
-      at /usr/local/Cellar/yarn/1.17.3/libexec/lib/cli.js:1625:59
+      at /usr/share/yarn/lib/cli.js:1625:59
       at Generator.next (<anonymous>)
-      at step (/usr/local/Cellar/yarn/1.17.3/libexec/lib/cli.js:304:30)
-      at /usr/local/Cellar/yarn/1.17.3/libexec/lib/cli.js:315:13
+      at step (/usr/share/yarn/lib/cli.js:310:30)
+      at /usr/share/yarn/lib/cli.js:321:13
 
 npm manifest: 
   {
