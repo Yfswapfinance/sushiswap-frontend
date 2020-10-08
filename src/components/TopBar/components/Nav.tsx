@@ -26,6 +26,7 @@ const StyledNav = styled.nav`
   align-items: center;
   display: flex;
   margin-right : 156px;
+  padding-top:2px;
 `
 
 const StyledLink = styled(NavLink)`

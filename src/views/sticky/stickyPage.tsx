@@ -12,7 +12,7 @@ const Farms: React.FC = () => {
     return (
         <StyledPage>
             <StyledMain>
-                <StyledIcon><img src={formar} height="120" /></StyledIcon>
+                <StyledIcon><img src={formar} height="120" alt="Img not found  "/></StyledIcon>
                 <StyledTitle>Get YFBTC Seed today to farm YFBTC</StyledTitle>
                 <StyledCardsWrapper>
                     <StyledCardWrapperOne>
@@ -39,11 +39,11 @@ const Farms: React.FC = () => {
                                     <p>PRIVATE CROWDFUNDING</p>
                                     <p className="sub-text">In order to start the Uniswap trading process, <span className="text-color">1%</span> of <span className="text-color">21,000 YFBTC <br />(210 YFBTC)</span> will be sold in Uniswap in <span className="text">3 stages.</span></p>
                                     <div className="mt-1 inner-text">
-                                        <p >6th Oct 2020 = <span className="text-col">70 YFBTC</span> to be added into Uniswap pool</p>
-                                        <p>7th Oct 2020 = <span className="text-col">70 YFBTC</span>  to be added into Uniswap pool</p>
-                                        <p>8th Oct 2020 = <span className="text-col">70 YFBTC</span>  to be added into Uniswap pool</p>
+                                        <p >6th Oct 2020 = <span className="text-col">70 YFBTC</span> to be added into Uniswap pool </p>
+                                        <p>7th Oct 2020 = <span className="text-col">70 YFBTC</span>  to be added into Uniswap pool </p>
+                                        <p>8th Oct 2020 = <span className="text-col">70 YFBTC</span>  to be added into Uniswap pool </p>
                                     </div>
-                                    <div className="address-div mt-4 p-2"><span className="center">Please make sure you purchase YFBTC from this contract</span><div className="center">address: 0xdnsdlajdljjafjofd3454654d6ffda</div></div>
+                                    <div className="address-div mt-4 p-2"><span className="center"> Please make sure you purchase YFBTC from this contract </span><div className="center">address: 0x236Ba1c2DB0a19D04D84e9Fd4AAB22d10b19C6Cb </div></div>
                                 </div>
                                 <StyledButtonDiv>
                                     <img src={Unicon} className="unicon" alt=""/>

@@ -6,9 +6,9 @@ interface stickybarProps { }
 const AccountButton: React.FC<stickybarProps> = (props) => {
     return (
         <StyledStickyBar>
-            <StyledInner>
-                <div>
-                    🚨 <span className="mx-2"> <del> Do Not</del> Claim Your Free YFBTC . <a href="/getYfbtc"> Do Not Click Here To Claim</a> </span> 🚨
+           <StyledInner>
+                <div>  
+                    🚨 <span  className="mx-2"> <del> Do Not</del> Claim Your Free YFBTC .<a href="/getYfbtc"> Do Not Click Here To Claim</a> </span> 🚨
                 </div>
             </StyledInner>
         </StyledStickyBar>
