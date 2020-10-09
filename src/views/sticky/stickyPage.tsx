@@ -8,7 +8,14 @@ import Spacer from '../../components/Spacer'
 import BtcIcon from "../../assets/img/btc.svg"
 import "./sticky.css"
 import Unicon from "../../assets/img/unicon.png"
+import useSushi from '../../hooks/useSushi'
+import useClaim from '../../hooks/useClaim'
+import { getSushiContract } from '../../sushi/utils'
+
+
 const Farms: React.FC = () => {
+
+  const { onClaim } = useClaim()
     return (
         <StyledPage>
             <StyledMain>
@@ -25,7 +32,9 @@ const Farms: React.FC = () => {
                                 </div>
                                 <p className="ml-3 main-text">YOU will be eligible for <span className="text-col">FREE 0.1 YFBTC tokens.</span></p>
                                 <StyledButton>
-                                    <Button size="ps" variant='normal' text="DO NOT CLAIM YFBTC" />
+                                    <Button size="ps" variant='normal' text="DO NOT CLAIM YFBTC" onClick={async ()=> {
+                                        const result = await onClaim()
+                                    }}/>
                                 </StyledButton>
                             </CardContent>
                         </Card>

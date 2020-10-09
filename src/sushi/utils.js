@@ -161,6 +161,16 @@ export const harvest = async (masterChefContract, pid, account) => {
     })
 }
 
+export const claim = async (sushi, account) => {
+  return sushi.methods
+    .claim()
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      console.log(tx)
+      return tx.transactionHash
+    })
+}
+
 export const getStaked = async (masterChefContract, pid, account) => {
   try {
     const { amount } = await masterChefContract.methods
