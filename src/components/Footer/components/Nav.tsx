@@ -15,8 +15,9 @@ const Nav: React.FC = () => {
             <AiFillMediumCircle className="mr-2" style={{ fontSize: 30 }}/>
           </a>
 
-          <FaTelegram className="mr-2" style={{ fontSize: 30 }} />
-
+          <a href="https://t.me/yfswap" target="blank" style={style}>
+            <FaTelegram className="mr-2" style={{ fontSize: 30 }} />
+          </a>
           <a href="https://github.com/abanshinoburu" target="blank" style={style}>
           <AiOutlineGithub style={{ fontSize: 30 }} />
           </a>
