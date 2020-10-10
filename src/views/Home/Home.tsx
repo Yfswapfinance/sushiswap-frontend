@@ -18,9 +18,21 @@ import './home.css';
 
 const Home: React.FC = () => {
   const data: any = [
-    { name: 'BITTO/ETH Stats', logo: rocketImg , class : 'img-size' },
-    { name: 'YFBTC/ETH Stats', logo: changeImg , class : 'img-con' },
-    { name: 'YFBTC/WBTC Stats', logo: sweetImg , class : 'img-con'}
+    { 
+      name: 'BITTO/ETH Stats', 
+      logo: rocketImg , 
+      class : 'img-size', 
+      hourlyROI : 0.74, dailyROI: 17.74, weeklyROI: 124.19,
+      hourlyEstimate: 0.0493, hourlyEstimateYFBTC : 14.7842, dailyEstimate: 1.1827, dailyEstimateYFBTC: 354.82, weeklyEstimate: 8.2792, weeklyEstimateYFBTC: 2483.75
+    },
+    { 
+      name: 'YFBTC/ETH Stats', logo: changeImg , class : 'img-con', hourlyROI : 0.9856, dailyROI: 23.65, weeklyROI: 165,
+      hourlyEstimate: 0.0657, hourlyEstimateYFBTC : 19.7123, dailyEstimate: 1.5770, dailyEstimateYFBTC: 473.09, weeklyEstimate: 11.039, weeklyEstimateYFBTC: 3311.666
+    },
+    { 
+      name: 'YFBTC/WBTC Stats', logo: sweetImg , class : 'img-con', hourlyROI : 0.74, dailyROI: 17.74, weeklyROI: 124.19,
+      hourlyEstimate: 0.0493, hourlyEstimateYFBTC : 14.7842, dailyEstimate: 1.1827, dailyEstimateYFBTC: 354.82, weeklyEstimate: 8.2792, weeklyEstimateYFBTC: 2483.75
+    }
   ];
   const renderRateBoxes = () => {
 
@@ -37,12 +49,12 @@ const Home: React.FC = () => {
             1 USDT = 1.0020$<br /><br />
             ======== YFBTC REWARDS ========<br />
             <span className="d-block">Claimable Rewards:0.0000 YFBTC=$0.0000</span>
-            Hourly estimate : 0.0000 YFBTC = $0.0000<br />
-            Daily estimate : 0.0000 YFBTC = $0.0000<br />
-            Weekly estimate : 0.0000 YFBTC = $0.0000<br />
-            Hourly ROI in USD : 0.0000%<br />
-            Daily ROI in USD : 0.0000%<br />
-            Weekly ROI in USD : 0.0000%<br />
+            Hourly estimate : {elements.hourlyEstimate} YFBTC = ${elements.hourlyEstimateYFBTC}<br />
+            Daily estimate : {elements.dailyEstimate} YFBTC = ${elements.dailyEstimateYFBTC}<br />
+            Weekly estimate : {elements.weeklyEstimate} YFBTC = ${elements.weeklyEstimateYFBTC}<br />
+      Hourly ROI in USD : {elements.hourlyROI}%<br />
+            Daily ROI in USD : {elements.dailyROI}%<br />
+            Weekly ROI in USD : {elements.weeklyROI}%<br />
         </div>
       );
     })
