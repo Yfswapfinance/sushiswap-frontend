@@ -45,7 +45,7 @@ const Home: React.FC = () => {
           <span className="percentage ">0.0000</span><small>0.00%</small><br />
             Total Staked<br /><br />
             ========== PRICES ==========<br />
-            1 YFBTC = 1000.0$<br />
+            1 YFBTC = 300.0$<br />
             1 USDT = 1.0020$<br /><br />
             ======== YFBTC REWARDS ========<br />
             <span className="d-block">Claimable Rewards:0.0000 YFBTC=$0.0000</span>
