@@ -18,20 +18,20 @@ import './home.css';
 
 const Home: React.FC = () => {
   const data: any = [
-    { 
-      name: 'BITTO/ETH Stats', 
-      logo: rocketImg , 
-      class : 'img-size', 
-      hourlyROI : 0.74, dailyROI: 17.74, weeklyROI: 124.19,
-      hourlyEstimate: 0.0493, hourlyEstimateYFBTC : 14.7842, dailyEstimate: 1.1827, dailyEstimateYFBTC: 354.82, weeklyEstimate: 8.2792, weeklyEstimateYFBTC: 2483.75
+    {
+      name: 'BITTO/ETH Stats',
+      logo: rocketImg ,
+      class : 'img-size',
+      hourlyROI : 0.1, dailyROI: 2.4, weeklyROI: 16.8,
+      hourlyEstimate: 0.005, hourlyEstimateYFBTC : 2, dailyEstimate: 0.12, dailyEstimateYFBTC: 48, weeklyEstimate: 0.84, weeklyEstimateYFBTC: 336
     },
-    { 
-      name: 'YFBTC/ETH Stats', logo: changeImg , class : 'img-con', hourlyROI : 0.9856, dailyROI: 23.65, weeklyROI: 165,
-      hourlyEstimate: 0.0657, hourlyEstimateYFBTC : 19.7123, dailyEstimate: 1.5770, dailyEstimateYFBTC: 473.09, weeklyEstimate: 11.039, weeklyEstimateYFBTC: 3311.666
+    {
+      name: 'YFBTC/ETH Stats', logo: changeImg , class : 'img-con', hourlyROI : 0.16, dailyROI: 3.84, weeklyROI: 26.88,
+      hourlyEstimate: 0.008, hourlyEstimateYFBTC : 3.2, dailyEstimate: 0.192, dailyEstimateYFBTC: 76.8, weeklyEstimate: 1.344, weeklyEstimateYFBTC: 537
     },
-    { 
-      name: 'YFBTC/WBTC Stats', logo: sweetImg , class : 'img-con', hourlyROI : 0.74, dailyROI: 17.74, weeklyROI: 124.19,
-      hourlyEstimate: 0.0493, hourlyEstimateYFBTC : 14.7842, dailyEstimate: 1.1827, dailyEstimateYFBTC: 354.82, weeklyEstimate: 8.2792, weeklyEstimateYFBTC: 2483.75
+    {
+      name: 'wBTC/wETH Stats', logo: sweetImg , class : 'img-con', hourlyROI : 0.12, dailyROI: 2.88, weeklyROI: 20.16,
+      hourlyEstimate: 0.006, hourlyEstimateYFBTC : 2.4, dailyEstimate: 0.144, dailyEstimateYFBTC: 57.6, weeklyEstimate: 1.008, weeklyEstimateYFBTC: 403.2
     }
   ];
   const renderRateBoxes = () => {
