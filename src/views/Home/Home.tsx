@@ -81,6 +81,14 @@ const Home: React.FC = () => {
       <div className="row container mt-2 mb-5">
         {renderRateBoxes()}
       </div>
+      <div className="row  ">
+        <div className="">
+          <div className="red-band ">
+            THIS ROI IS JUST AN ESTIMATION PLEASE REFER TO <a href="http://bit.ly/DeFiROI"><u>MEDIUM</u></a> FOR <br/><span className="text-center">MORE
+            INFORMATION.</span>
+          </div>
+        </div>
+      </div>
       <div
         // style={{
         //   margin: '0 auto', 
