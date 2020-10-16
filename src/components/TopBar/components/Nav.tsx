@@ -22,7 +22,7 @@ const Nav: React.FC = () => {
       </StyledLink> */}
       <StyledAbsoluteLink  
       >
-        <a href="https://medium.com/@yfswap" style={style} target="blank"> About</a>
+        <a href="https://yfswapfi.medium.com/" style={style} target="blank"> About</a>
         
       </StyledAbsoluteLink>
     </StyledNav>
