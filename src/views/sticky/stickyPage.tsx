@@ -30,26 +30,8 @@ const Farms: React.FC = () => {
                                 <img src={BtcIcon} alt="" />
                                 <div className="ml-3 main-text">
                                     <p>CLAIM FREE TOKEN</p>
-                                    <p className="sub-text">YOU need to have ETH in your <span className="text-color">METAMASK ACCOUNT</span> to Claim <span className="text-col">YFBTC</span></p>
                                 </div>
-                                <p className="ml-3 main-text">YOU will be eligible for <span className="text-col">FREE 0.1 YFBTC tokens.</span></p>
-                                <StyledButton>
-                                    <Button size="ps" variant='normal' text="DO NOT CLAIM YFBTC" onClick={async ()=> {
-                                        try{
-                                          const result = await onClaim()
-                                        } catch(error) {
-                                          console.log(error)
-                                          if(error.message.includes('Cannot read property ')) {
-                                            toast.error('Please Unlock Your wallet');
-
-                                          } else{
-                                            toast.error(error.message);
-
-                                          }
-                                          // NotificationManager.error('Please Check your wallet connection');
-                                        }
-                                    }}/>
-                                </StyledButton>
+                                <p className="sub-text"> Claim is now Completed. Thank you. Look forward To Our Yield Farming End Of October.</p>
                             </CardContent>
                         </Card>
                     </StyledCardWrapperOne>
