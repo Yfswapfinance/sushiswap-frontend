@@ -45,12 +45,11 @@ const Farms: React.FC = () => {
                             <CardContent>
                                 <img src={BtcIcon} alt="" />
                                 <div className="ml-4 main-text">
-                                    <p>PRIVATE CROWDFUNDING</p>
-                                    <p className="sub-text">In order to start the Uniswap trading process, <span className="text-color">1%</span> of <span className="text-color">21,000 YFBTC <br />(210 YFBTC)</span> will be sold in Uniswap in <span className="text">3 stages.</span></p>
+                                    <p>YFBTC farming will start end of the month, for more updates join us on</p>
                                     <div className="mt-1 inner-text">
-                                        <p >6th Oct 2020 = <span className="text-col">70 YFBTC</span> to be added into Uniswap pool </p>
-                                        <p>7th Oct 2020 = <span className="text-col">70 YFBTC</span>  to be added into Uniswap pool </p>
-                                        <p>8th Oct 2020 = <span className="text-col">70 YFBTC</span>  to be added into Uniswap pool </p>
+                                        <span ><a href="https://t.me/yfswap">1. https://t.me/yfswap</a> </span><br/>
+                                        <span ><a href="https://twitter.com/yfswap">2. https://twitter.com/yfswap</a> </span><br/>
+                                        <span ><a href="https://yfswapfi.medium.com/">3. https://yfswapfi.medium.com/</a> </span><br/>
                                     </div>
                                     <div className="address-div mt-4 p-2"><span className="center"> Please make sure you purchase YFBTC from this contract </span><div className="center">address: 0x236Ba1c2DB0a19D04D84e9Fd4AAB22d10b19C6Cb </div></div>
                                 </div>
