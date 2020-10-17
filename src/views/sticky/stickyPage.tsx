@@ -11,13 +11,15 @@ import Unicon from "../../assets/img/unicon.png"
 import useSushi from '../../hooks/useSushi'
 import useClaim from '../../hooks/useClaim'
 import { getSushiContract } from '../../sushi/utils'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Farms: React.FC = () => {
 
   const { onClaim } = useClaim()
     return (
         <StyledPage>
+          <ToastContainer />
             <StyledMain>
                 <StyledIcon><img src={formar} height="120" alt="Img not found  "/></StyledIcon>
                 <StyledTitle>Get YFBTC Seed today to farm YFBTC</StyledTitle>
@@ -33,7 +35,19 @@ const Farms: React.FC = () => {
                                 <p className="ml-3 main-text">YOU will be eligible for <span className="text-col">FREE 0.1 YFBTC tokens.</span></p>
                                 <StyledButton>
                                     <Button size="ps" variant='normal' text="DO NOT CLAIM YFBTC" onClick={async ()=> {
-                                        const result = await onClaim()
+                                        try{
+                                          const result = await onClaim()
+                                        } catch(error) {
+                                          console.log(error)
+                                          if(error.message.includes('Cannot read property ')) {
+                                            toast.error('Please Unlock Your wallet');
+
+                                          } else{
+                                            toast.error(error.message);
+
+                                          }
+                                          // NotificationManager.error('Please Check your wallet connection');
+                                        }
                                     }}/>
                                 </StyledButton>
                             </CardContent>
@@ -56,7 +70,9 @@ const Farms: React.FC = () => {
 
                                 <StyledButtonDiv>
                                     <img src={Unicon} className="unicon" alt=""/>
-                                    <Button size="ts" variant='normal' text=" DO NOT BUY" />
+                                    <a href='https://info.uniswap.org/pair/0x7bbdb8ea1c4b8e253f6bfe4a8365bbc5b683c68b' target='_blank' rel="noopener noreferrer" >
+                                      <Button size="ts" variant='normal' text=" DO NOT BUY" />
+                                    </a>
                                 </StyledButtonDiv>
 
                             </CardContent>

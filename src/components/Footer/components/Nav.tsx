@@ -11,7 +11,7 @@ const Nav: React.FC = () => {
     <StyledNav>
       <div className="py-5">
         <div className="center">
-          <a href="https://medium.com/@yfswap" target="blank" style={style}>
+          <a href="https://yfswapfi.medium.com/" target="blank" style={style}>
             <AiFillMediumCircle className="mr-2" style={{ fontSize: 30 }}/>
           </a>
 
