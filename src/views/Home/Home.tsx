@@ -66,7 +66,7 @@ const Home: React.FC = () => {
       <PageHeader
         icon={<img src={formar} height={120} />}
         title="Farming is Ready"
-        subtitle="Stake Uniswap LP tokens to claim your very own yummy YFBTC!"
+        subtitle="Stake Uniswap LP tokens to claim the future of BTC, YFBTC!"
       />
 
       <Container>

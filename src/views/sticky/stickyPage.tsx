@@ -47,13 +47,13 @@ const Farms: React.FC = () => {
                                         <span ><a href="https://twitter.com/yfswap">2. https://twitter.com/yfswap</a> </span><br/>
                                         <span ><a href="https://yfswapfi.medium.com/">3. https://yfswapfi.medium.com/</a> </span><br/>
                                     </div>
-                                    <div className="address-div mt-4 p-2"><span className="center"> Please make sure you purchase YFBTC from this contract </span><div className="center">address: 0x236Ba1c2DB0a19D04D84e9Fd4AAB22d10b19C6Cb </div></div>
+                                    <div className="address-div mt-4 p-2"><span className="center"> Please make sure you purchase YFBTC from this contract </span><div className="center">address: 0xff034d12353867fc4228f4ae3e689cd6dcaad120 </div></div>
                                 </div>
 
                                 <StyledButtonDiv>
                                     <img src={Unicon} className="unicon" alt=""/>
-                                    <a href='https://info.uniswap.org/pair/0x7bbdb8ea1c4b8e253f6bfe4a8365bbc5b683c68b' target='_blank' rel="noopener noreferrer" >
-                                      <Button size="ts" variant='normal' text=" DO NOT BUY" />
+                                    <a href='https://info.uniswap.org/pair/0x9fb24efec63c6a978efd21bda010099cb4f23707' target='_blank' rel="noopener noreferrer" >
+                                      <Button size="ts" variant='normal' text=" BUY YFBTC HERE" />
                                     </a>
                                 </StyledButtonDiv>
 

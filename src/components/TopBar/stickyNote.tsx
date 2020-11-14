@@ -7,8 +7,8 @@ const AccountButton: React.FC<stickybarProps> = (props) => {
     return (
         <StyledStickyBar>
            <StyledInner>
-                <div>  
-                    🚨 <span  className="mx-2"> <del> Do Not</del> Claim Your Free YFBTC .<a href="/getYfbtc"> Do Not Click Here To Claim</a> </span> 🚨
+                <div>
+                    🚨 <span  className="mx-2">Claim is now over. <a href="/getYfbtc"> Click here for further info</a> is the link to next page</span> 🚨
                 </div>
             </StyledInner>
         </StyledStickyBar>
