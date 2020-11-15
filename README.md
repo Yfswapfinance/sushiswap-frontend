@@ -1,3 +1,4 @@
+
 ### To run project through PM2 command
 
      $ pm2 start yarn --interpreter bash --name yfbtc_net_production -- start
@@ -17,7 +18,8 @@ Or
 Sometimes watch command consume more memories. To avoid this after pulling the git repo 
 you can restart the process like this.
 
-     $ pm2 reload yfbtc_net_production
+    $ pm2 list
+    $ pm2 reload yfbtc_net_production
 
 
 ---------------------------------
