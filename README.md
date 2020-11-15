@@ -70,3 +70,6 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 ### To run project through PM2 command
 pm2 start yarn --interpreter bash --name yfbtc_net_production -- start
 
+### Run on different port
+NODE_PORT=4001 pm2 start yarn --interpreter bash --name yfbtc_net_staging -- start --watch
+
