@@ -1,19 +1,23 @@
 ### To run project through PM2 command
- $ pm2 start yarn --interpreter bash --name yfbtc_net_production -- start
+
+     $ pm2 start yarn --interpreter bash --name yfbtc_net_production -- start
 
 ### Run on different port
- $ NODE_PORT=4001 pm2 start yarn --interpreter bash --name yfbtc_net_staging -- start
+
+     $ NODE_PORT=4001 pm2 start yarn --interpreter bash --name yfbtc_net_staging -- start
 
 ###Problems & Solutions
 Sometimes you may face after updating the code, on production server it is not reflecting properly.
 On that case you can run the pm2 process like this -
- $ pm2 start yarn --interpreter bash --name yfbtc_net_staging -- start --watch
+
+     $ pm2 start yarn --interpreter bash --name yfbtc_net_staging -- start --watch
 
 Or
 
 Sometimes watch command consume more memories. To avoid this after pulling the git repo 
 you can restart the process like this.
- $ pm2 reload yfbtc_net_production
+
+     $ pm2 reload yfbtc_net_production
 
 
 ---------------------------------
