@@ -47,6 +47,11 @@ const StyledTopBarInner = styled.div`
   justify-content: space-between;
   max-width: ${(props) => props.theme.siteWidth}px;
   width: 100%;
+  @media (max-width: 768px) {
+    flex-direction:column;
+    align-items:center;
+    height:230px;
+  }
 `
 const StyledNavWrapper = styled.div`
   display: flex;

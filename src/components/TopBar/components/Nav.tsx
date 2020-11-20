@@ -34,6 +34,9 @@ const StyledNav = styled.nav`
   display: flex;
   margin-right : 156px;
   padding-top:2px;
+  @media (max-width: 768px) {
+    margin-right : 0px;
+  }
 `
 
 

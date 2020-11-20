@@ -119,10 +119,14 @@ const Balances: React.FC = () => {
               <div style={{ color: '#5c5c5c' }}>
                 <Label text="Total YFBTC Supply" />
               </div>
-              {totalSupply ?
-                '':
-                <><Spacer /><Spacer /></>
-              }
+              {totalSupply ? (
+                ''
+              ) : (
+                <>
+                  <Spacer />
+                  <Spacer />
+                </>
+              )}
               <Value
                 value={totalSupply ? getBalanceNumber(totalSupply) : 'Locked'}
               />
@@ -167,6 +171,9 @@ const StyledBalance = styled.div`
   align-items: center;
   display: flex;
   flex: 1;
+  @media (max-width: 536px) {
+    flex-direction:column
+  }
 `
 
 export default Balances
