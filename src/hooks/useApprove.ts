@@ -13,17 +13,6 @@ const useApprove = (lpContract: Contract) => {
   const sushi = useSushi()
   const masterChefContract = getMasterChefContract(sushi)
 
-  const contractAddress = "0xe97dece9f7c817fa09594abf14b040caf8c7f3db";
-  const { ethereum } = useWallet()
-  const contract = getContract(ethereum as provider,contractAddress);
-  const balance =  getBalance(ethereum as provider, contractAddress, account)
-  const fetchBalance = async () => {
-    const balance = await  getBalance(ethereum as provider, contractAddress, account)
-    console.log('balance')
-    console.log(balance)
-  }
-  fetchBalance();
-
   const handleApprove = useCallback(async () => {
     try {
       const tx = await approve(lpContract, masterChefContract, account)

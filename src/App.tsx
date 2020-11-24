@@ -15,7 +15,7 @@ import Farms from './views/Farms'
 import Home from './views/Home'
 import Stake from './views/Stake'
 import GetYfbtc from './views/sticky'
-
+import Config from './constants/abi/config'
 
 const App: React.FC = () => {
   const [mobileMenu, setMobileMenu] = useState(false)
@@ -57,9 +57,9 @@ const Providers: React.FC = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
       <UseWalletProvider
-        chainId={1}
+        chainId={Config.chainId}
         connectors={{
-          walletconnect: { rpcUrl: 'https://mainnet.eth.aragon.network/' },
+          walletconnect: { rpcUrl: Config.rpcUrl },
         }}
       >
         <SushiProvider>

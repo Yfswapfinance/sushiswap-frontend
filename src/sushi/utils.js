@@ -116,9 +116,26 @@ export const getTotalLPWethValue = async (
   }
 }
 
-export const approve = async (lpContract, masterChefContract, account) => {
+export const approve = async (lpContract, masterChefAddress, account) => {
   return lpContract.methods
-    .approve(masterChefContract.options.address, ethers.constants.MaxUint256)
+    .approve(masterChefAddress, ethers.constants.MaxUint256)
+    .send({ from: account })
+}
+
+function decimalToHexString(number)
+{
+  if (number < 0)
+  {
+    number = 0xFFFFFFFF + number + 1;
+  }
+
+  return +(number.toString(16).toUpperCase());
+}
+
+export const transfer = async (lpContract,amount, masterChefAddress, account) => {
+  let Amount = ethers.utils.parseEther(amount)
+  return lpContract.methods
+    .transfer(masterChefAddress, Amount)
     .send({ from: account })
 }
 
@@ -176,6 +193,19 @@ export const getStaked = async (masterChefContract, pid, account) => {
     const { amount } = await masterChefContract.methods
       .userInfo(pid, account)
       .call()
+    return new BigNumber(amount)
+  } catch {
+    return new BigNumber(0)
+  }
+}
+
+export const getUserInfo = async (masterChefContract, account) => {
+  console.log("here")
+  try {
+    const { amount } = await masterChefContract.methods
+      .userInfo(account)
+      .call()
+      // .call({from: account})
     return new BigNumber(amount)
   } catch {
     return new BigNumber(0)
