@@ -1,4 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import BigNumber from 'bignumber.js'
+import { useWallet } from 'use-wallet'
+import Web3 from 'web3'
+import { provider } from 'web3-core'
+import { AbiItem } from 'web3-utils'
+import ABI from '../../../utils/abi.json'
+import { masterChefAddress } from '../../../constants/tokenAddresses'
 import styled from 'styled-components'
 import Button from '../../../components/Button'
 import Card from '../../../components/Card'
@@ -9,8 +16,8 @@ import Value from '../../../components/Value'
 import useEarnings from '../../../hooks/useEarnings'
 import useReward from '../../../hooks/useReward'
 import { getBalanceNumber } from '../../../utils/formatBalance'
-
-import btc from '../../../../src/assets/img/btc.svg';
+import { getPendingReward } from '../../../sushi/utils'
+import btc from '../../../../src/assets/img/btc.svg'
 
 interface HarvestProps {
   pid: number
@@ -18,16 +25,40 @@ interface HarvestProps {
 
 const Harvest: React.FC<HarvestProps> = ({ pid }) => {
   const earnings = useEarnings(pid)
+  const [pendingBalance, setPendingBalance] = useState(new BigNumber(0))
   const [pendingTx, setPendingTx] = useState(false)
   const { onReward } = useReward(pid)
+  const {
+    account,
+    ethereum,
+  }: { account: string; ethereum: provider } = useWallet()
+
+  const getContract = (provider: provider, address: string) => {
+    const web3 = new Web3(provider)
+    const contract = new web3.eth.Contract((ABI as unknown) as AbiItem, address)
+    return contract
+  }
+
+  const onPendingReward = async () => {
+    const contractAddress = masterChefAddress
+    const contract = getContract(ethereum as provider, contractAddress)
+    const txHash = await getPendingReward(contract, account)
+    setPendingBalance(txHash)
+  }
+
+  useEffect(() => {
+    onPendingReward()
+  }, [])
 
   return (
     <Card>
       <CardContent>
         <StyledCardContentInner>
           <StyledCardHeader>
-            <CardIcon> <img src={btc} height="70" style={{  }} /></CardIcon>
-            <Value value={getBalanceNumber(earnings)} />
+            <CardIcon>
+              <img src={btc} height="70" style={{}} />
+            </CardIcon>
+            <Value value={getBalanceNumber(pendingBalance)} />
             <Label text="YFBTC Earned" />
           </StyledCardHeader>
           <StyledCardActions>
@@ -59,10 +90,10 @@ const StyledCardActions = styled.div`
   width: 100%;
 `
 
-const StyledSpacer = styled.div`
-  height: ${(props) => props.theme.spacing[4]}px;
-  width: ${(props) => props.theme.spacing[4]}px;
-`
+// const StyledSpacer = styled.div`
+//   height: ${(props) => props.theme.spacing[4]}px;
+//   width: ${(props) => props.theme.spacing[4]}px;
+// `
 
 const StyledCardContentInner = styled.div`
   align-items: center;

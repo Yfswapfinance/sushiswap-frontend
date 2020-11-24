@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js'
-import React, { useCallback, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Contract } from 'web3-eth-contract'
 import { provider } from 'web3-core'
@@ -12,23 +12,21 @@ import { AddIcon } from '../../../components/icons'
 import Label from '../../../components/Label'
 import Value from '../../../components/Value'
 import useAllowance from '../../../hooks/useAllowance'
-import useApprove from '../../../hooks/useApprove'
+// import useApprove from '../../../hooks/useApprove'
 import useModal from '../../../hooks/useModal'
 import useStake from '../../../hooks/useStake'
 import useStakedBalance from '../../../hooks/useStakedBalance'
 import useTokenBalance from '../../../hooks/useTokenBalance'
 import useUnstake from '../../../hooks/useUnstake'
-import { getBalanceNumber, getFullDisplayBalance } from '../../../utils/formatBalance'
+import { getBalanceNumber } from '../../../utils/formatBalance'
 import DepositModal from './DepositModal'
 import WithdrawModal from './WithdrawModal'
-import { univ2, masterChefAddress } from '../../../constants/tokenAddresses'
-import { approve, transfer } from '../../../sushi/utils'
+import { univ2 } from '../../../constants/tokenAddresses'
 import AmountModal from './AmountModal'
 import formar from '../../../../src/assets/img/formar.png'
 import { useWallet } from 'use-wallet'
-import { getContract, getBalance } from '../../../utils/erc20'
+import { getBalance } from '../../../utils/erc20'
 import useTransfer from '../../../hooks/useTransfer'
-import useUserInfo from '../../../hooks/UseUserInfo'
 
 interface StakeProps {
   lpContract: Contract
@@ -38,11 +36,10 @@ interface StakeProps {
 
 const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName }) => {
   const [requestedApproval, setRequestedApproval] = useState(true)
-  const [isAddAmount, setAddAmount] = useState(false)
   const [staked_balance, setStackedBalance] = useState(new BigNumber(0))
 
   const allowance = useAllowance(lpContract)
-  const { onApprove } = useApprove(lpContract)
+  // const { onApprove } = useApprove(lpContract)
   const { account }: { account: string; ethereum: provider } = useWallet()
   const { ethereum } = useWallet()
 
@@ -52,7 +49,6 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName }) => {
   const { onStake } = useStake(pid)
   const { onUnstake } = useUnstake(pid)
   const { onTransfer } = useTransfer(pid)
-  const { onUserInfo } = useUserInfo(pid)
 
   const [onPresentDeposit] = useModal(
     <DepositModal
@@ -80,24 +76,24 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName }) => {
   )
 
   // const handleApprove = useCallback(async () => {
-    // try {
-    //   setRequestedApproval(true)
-    //   const contractAddress = univ2
-    //   const contract = getContract(ethereum as provider, contractAddress)
-    //   console.log(contract)
-    //   const tx = await approve(contract, masterChefAddress, account)
-    //   console.log(tx)
-    //   if (tx.status) {
-    //     // const supply = await transfer(contract, masterChefAddress, account)
-    //     // console.log(supply)
-    //     setAddAmount(true)
-    //     setRequestedApproval(false)
-    //   }
-    // } catch (e) {
-    //   // user rejected tx or didn't go thru
-    //   setRequestedApproval(false)
-    //   console.log(e)
-    // }
+  // try {
+  //   setRequestedApproval(true)
+  //   const contractAddress = univ2
+  //   const contract = getContract(ethereum as provider, contractAddress)
+  //   console.log(contract)
+  //   const tx = await approve(contract, masterChefAddress, account)
+  //   console.log(tx)
+  //   if (tx.status) {
+  //     // const supply = await transfer(contract, masterChefAddress, account)
+  //     // console.log(supply)
+  //     setAddAmount(true)
+  //     setRequestedApproval(false)
+  //   }
+  // } catch (e) {
+  //   // user rejected tx or didn't go thru
+  //   setRequestedApproval(false)
+  //   console.log(e)
+  // }
   // }, [setRequestedApproval])
 
   useEffect(() => {
@@ -138,16 +134,15 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName }) => {
                   onClick={handleApprove}
                   text={`Approve ${tokenName}`}
                 /> */}
-            
-                  <StyledAddButtonContainer>
-                    <Button
-                      disabled={requestedApproval}
-                      size={'lg'}
-                      onClick={onPresentAmountModal}
-                      text={`+`}
-                    />
-                  </StyledAddButtonContainer>
-               
+
+                <StyledAddButtonContainer>
+                  <Button
+                    disabled={requestedApproval}
+                    size={'lg'}
+                    onClick={onPresentAmountModal}
+                    text={`+`}
+                  />
+                </StyledAddButtonContainer>
               </>
             ) : (
               <>

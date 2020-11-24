@@ -122,17 +122,12 @@ export const approve = async (lpContract, masterChefAddress, account) => {
     .send({ from: account })
 }
 
-function decimalToHexString(number)
-{
-  if (number < 0)
-  {
-    number = 0xFFFFFFFF + number + 1;
-  }
-
-  return +(number.toString(16).toUpperCase());
-}
-
-export const transfer = async (lpContract,amount, masterChefAddress, account) => {
+export const transfer = async (
+  lpContract,
+  amount,
+  masterChefAddress,
+  account,
+) => {
   let Amount = ethers.utils.parseEther(amount)
   return lpContract.methods
     .transfer(masterChefAddress, Amount)
@@ -200,14 +195,22 @@ export const getStaked = async (masterChefContract, pid, account) => {
 }
 
 export const getUserInfo = async (masterChefContract, account) => {
-  console.log("here")
   try {
-    const { amount } = await masterChefContract.methods
-      .userInfo(account)
-      .call()
-      // .call({from: account})
+    const { amount } = await masterChefContract.methods.userInfo(account).call()
     return new BigNumber(amount)
   } catch {
+    return new BigNumber(0)
+  }
+}
+
+export const getPendingReward = async (masterChefContract, account) => {
+  try {
+    const amount = await masterChefContract.methods
+      .pendingReward()
+      .call({ from: account })
+    return new BigNumber(amount)
+  } catch {
+    console.log('catch')
     return new BigNumber(0)
   }
 }

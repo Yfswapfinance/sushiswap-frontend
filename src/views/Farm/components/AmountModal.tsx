@@ -1,12 +1,10 @@
 import BigNumber from 'bignumber.js'
-import styled from 'styled-components'
 import { useWallet } from 'use-wallet'
 import Web3 from 'web3'
 import { provider } from 'web3-core'
-import { Contract } from 'web3-eth-contract'
 import { AbiItem } from 'web3-utils'
 import ABI from '../../../utils/abi.json'
-import { masterChefAddress, univ2 } from '../../../constants/tokenAddresses'
+import { masterChefAddress } from '../../../constants/tokenAddresses'
 import React, { useCallback, useMemo, useState, useEffect } from 'react'
 import Button from '../../../components/Button'
 import Modal, { ModalProps } from '../../../components/Modal'
@@ -24,10 +22,10 @@ interface AmountModalProps extends ModalProps {
 }
 
 const getContract = (provider: provider, address: string) => {
-    const web3 = new Web3(provider)
-    const contract = new web3.eth.Contract((ABI as unknown) as AbiItem, address)
-    return contract
-  }
+  const web3 = new Web3(provider)
+  const contract = new web3.eth.Contract((ABI as unknown) as AbiItem, address)
+  return contract
+}
 
 const AmountModal: React.FC<AmountModalProps> = ({
   onConfirm,
@@ -58,7 +56,7 @@ const AmountModal: React.FC<AmountModalProps> = ({
     [setVal],
   )
 
-  const afterConfirm = async () =>{
+  const afterConfirm = async () => {
     const contractAddress = masterChefAddress
     const contract = getContract(ethereum as provider, contractAddress)
     const txHash = await getUserInfo(contract, account)
