@@ -13,6 +13,7 @@ import ModalTitle from '../../../components/ModalTitle'
 import TokenInput from '../../../components/TokenInput'
 import { getFullDisplayBalance } from '../../../utils/formatBalance'
 import { getUserInfo } from '../../../sushi/utils'
+import CustomLoader from '../../../components/Loader'
 
 interface AmountModalProps extends ModalProps {
   tokenName?: string
@@ -36,6 +37,7 @@ const AmountModal: React.FC<AmountModalProps> = ({
 }) => {
   const [val, setVal] = useState('')
   const [isConfirm, setConfirm] = useState(false)
+  const [isLoading, setLoading] = useState(false)
   const [pendingTx, setPendingTx] = useState(false)
   const {
     account,
@@ -64,7 +66,7 @@ const AmountModal: React.FC<AmountModalProps> = ({
   }
 
   useEffect(() => {
-    if (val > fullBalance) {
+    if (val > fullBalance || val == '') {
       setConfirm(true)
     } else {
       setConfirm(false)
@@ -88,13 +90,16 @@ const AmountModal: React.FC<AmountModalProps> = ({
           text={pendingTx ? 'Pending Confirmation' : 'Confirm'}
           onClick={async () => {
             setPendingTx(true)
+            setLoading(true)
             await onConfirm(val)
+            setLoading(false)
             setPendingTx(false)
             setFetchBalance(true)
             onDismiss()
           }}
         />
       </ModalActions>
+      {isLoading && <CustomLoader text="Cooking the rice ..." />}
     </Modal>
   )
 }

@@ -7,6 +7,7 @@ import { AbiItem } from 'web3-utils'
 import ABI from '../../../utils/abi.json'
 import { masterChefAddress } from '../../../constants/tokenAddresses'
 import styled from 'styled-components'
+import useModal from '../../../hooks/useModal'
 import Button from '../../../components/Button'
 import Card from '../../../components/Card'
 import CardContent from '../../../components/CardContent'
@@ -16,18 +17,23 @@ import Value from '../../../components/Value'
 import useEarnings from '../../../hooks/useEarnings'
 import useReward from '../../../hooks/useReward'
 import { getBalanceNumber } from '../../../utils/formatBalance'
-import { getPendingReward } from '../../../sushi/utils'
+import { getPendingReward, getUserInfo } from '../../../sushi/utils'
 import btc from '../../../../src/assets/img/btc.svg'
+import WithdrawModal from './WithdrawModal'
+import { onHarvest } from '../../../sushi/utils'
 
 interface HarvestProps {
   pid: number
+  tokenName: string
 }
 
-const Harvest: React.FC<HarvestProps> = ({ pid }) => {
+const Harvest: React.FC<HarvestProps> = ({ pid, tokenName }) => {
   const earnings = useEarnings(pid)
   const [pendingBalance, setPendingBalance] = useState(new BigNumber(0))
   const [pendingTx, setPendingTx] = useState(false)
   const [isHarvest, setHarvest] = useState(false)
+  const [isLoading, setLoading] = useState(false)
+  const [maxAmount, setMaxAmount] = useState(new BigNumber(0))
   const { onReward } = useReward(pid)
   const {
     account,
@@ -40,22 +46,47 @@ const Harvest: React.FC<HarvestProps> = ({ pid }) => {
     return contract
   }
 
-  const onPendingReward = async () => {
+  const onHarvestCall = async (amount: any) => {
+    setLoading(true)
     const contractAddress = masterChefAddress
     const contract = getContract(ethereum as provider, contractAddress)
-    const txHash = await getPendingReward(contract, account)
-    setPendingBalance(txHash)
+    const txHash = await onHarvest(contract, amount, masterChefAddress, account)
+    setLoading(true)
   }
 
+  const [onPresentWithdraw] = useModal(
+    <WithdrawModal
+      max={maxAmount}
+      onConfirm={onHarvestCall}
+      tokenName={tokenName}
+    />,
+  )
+
   useEffect(() => {
+    const onPendingReward = async () => {
+      const contractAddress = masterChefAddress
+      const contract = getContract(ethereum as provider, contractAddress)
+      const txHash = await getPendingReward(contract, account)
+      setPendingBalance(txHash)
+    }
+    const fetchBalance = async () => {
+      const contractAddress = masterChefAddress
+      const web3 = new Web3(ethereum as provider)
+      const contract = new web3.eth.Contract(
+        (ABI as unknown) as AbiItem,
+        contractAddress,
+      )
+      const txHash = await getUserInfo(contract, account)
+      setMaxAmount(txHash)
+    }
     onPendingReward()
+    fetchBalance()
   }, [])
 
   useEffect(() => {
-    if(getBalanceNumber(pendingBalance) > 0){
+    if (getBalanceNumber(pendingBalance) > 0) {
       setHarvest(true)
-    }
-    else{
+    } else {
       setHarvest(false)
     }
   }, [pendingBalance])
@@ -80,6 +111,7 @@ const Harvest: React.FC<HarvestProps> = ({ pid }) => {
                 // setPendingTx(true)
                 // await onReward()
                 // setPendingTx(false)
+                onPresentWithdraw()
               }}
             />
           </StyledCardActions>

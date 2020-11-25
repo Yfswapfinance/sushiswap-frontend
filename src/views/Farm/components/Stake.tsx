@@ -14,6 +14,7 @@ import IconButton from '../../../components/IconButton'
 import { AddIcon } from '../../../components/icons'
 import Label from '../../../components/Label'
 import Value from '../../../components/Value'
+import CustomLoader from '../../../components/Loader'
 import useAllowance from '../../../hooks/useAllowance'
 // import useApprove from '../../../hooks/useApprove'
 import useModal from '../../../hooks/useModal'
@@ -36,9 +37,10 @@ interface StakeProps {
   lpContract: Contract
   pid: number
   tokenName: string
+  setFetchData: Function
 }
 
-const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName }) => {
+const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName , setFetchData }) => {
   const [requestedApproval, setRequestedApproval] = useState(true)
   const [staked_balance, setStackedBalance] = useState(new BigNumber(0))
   const [isFetchBalance, setFetchBalance] = useState(false)
@@ -191,6 +193,7 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName }) => {
           </StyledCardActions>
         </StyledCardContentInner>
       </CardContent>
+      {/* <CustomLoader text="Cooking the rice ..." /> */}
     </Card>
   )
 }
@@ -200,6 +203,13 @@ const StyledCardHeader = styled.div`
   display: flex;
   flex-direction: column;
 `
+const StyledLoadingWrapper = styled.div`
+  align-items: center;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+`
+
 const StyledCardActions = styled.div`
   display: flex;
   justify-content: center;

@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js'
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useMemo, useState, useEffect } from 'react'
 import Button from '../../../components/Button'
 import Modal, { ModalProps } from '../../../components/Modal'
 import ModalActions from '../../../components/ModalActions'
@@ -21,6 +21,7 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
 }) => {
   const [val, setVal] = useState('')
   const [pendingTx, setPendingTx] = useState(false)
+  const [isConfirm, setConfirm] = useState(true)
 
   const fullBalance = useMemo(() => {
     return getFullDisplayBalance(max)
@@ -37,9 +38,17 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
     setVal(fullBalance)
   }, [fullBalance, setVal])
 
+  useEffect(() => {
+    if (val > fullBalance || val == '') {
+      setConfirm(true)
+    } else {
+      setConfirm(false)
+    }
+  }, [val])
+
   return (
     <Modal>
-      <ModalTitle text={`Withdraw ${tokenName}`} />
+      <ModalTitle text={`Harvest ${tokenName}`} />
       <TokenInput
         onSelectMax={handleSelectMax}
         onChange={handleChange}
@@ -50,7 +59,7 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
       <ModalActions>
         <Button text="Cancel" variant="secondary" onClick={onDismiss} />
         <Button
-          disabled={pendingTx}
+          disabled={isConfirm}
           text={pendingTx ? 'Pending Confirmation' : 'Confirm'}
           onClick={async () => {
             setPendingTx(true)

@@ -1,19 +1,21 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
-
-import CardIcon from '../CardIcon'
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
+import Loader from 'react-loader-spinner'
 
 interface LoaderProps {
   text?: string
 }
 
-const Loader: React.FC<LoaderProps> = ({ text }) => {
+const CustomLoader: React.FC<LoaderProps> = ({ text }) => {
   return (
     <StyledLoader>
-      <CardIcon>
-        <StyledSushi></StyledSushi>
-      </CardIcon>
-      {!!text && <StyledText>{text}</StyledText>}
+      <Loader
+        type="Oval"
+        color="#ff9416"
+        height={100}
+        width={100}
+      />
     </StyledLoader>
   )
 }
@@ -32,6 +34,13 @@ const StyledLoader = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+  background-color:rgba(0,0,0,0.5);
 `
 
 const StyledSushi = styled.div`
@@ -44,4 +53,4 @@ const StyledText = styled.div`
   color: ${(props) => props.theme.color.grey[400]};
 `
 
-export default Loader
+export default CustomLoader

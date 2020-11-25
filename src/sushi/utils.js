@@ -140,6 +140,18 @@ export const transfer = async (
     .send({ from: account })
 }
 
+export const onHarvest = async (
+  lpContract,
+  amount,
+  masterChefAddress,
+  account,
+) => {
+  let Amount = ethers.utils.parseEther(amount)
+  return lpContract.methods
+    .withdraw(Amount)
+    .send({ from: account })
+}
+
 export const getSushiSupply = async (sushi) => {
   return new BigNumber(await sushi.contracts.sushi.methods.totalSupply().call())
 }
