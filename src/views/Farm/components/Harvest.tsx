@@ -27,6 +27,7 @@ const Harvest: React.FC<HarvestProps> = ({ pid }) => {
   const earnings = useEarnings(pid)
   const [pendingBalance, setPendingBalance] = useState(new BigNumber(0))
   const [pendingTx, setPendingTx] = useState(false)
+  const [isHarvest, setHarvest] = useState(false)
   const { onReward } = useReward(pid)
   const {
     account,
@@ -50,6 +51,15 @@ const Harvest: React.FC<HarvestProps> = ({ pid }) => {
     onPendingReward()
   }, [])
 
+  useEffect(() => {
+    if(getBalanceNumber(pendingBalance) > 0){
+      setHarvest(true)
+    }
+    else{
+      setHarvest(false)
+    }
+  }, [pendingBalance])
+
   return (
     <Card>
       <CardContent>
@@ -63,12 +73,13 @@ const Harvest: React.FC<HarvestProps> = ({ pid }) => {
           </StyledCardHeader>
           <StyledCardActions>
             <Button
-              disabled={!earnings.toNumber() || pendingTx}
+              // disabled={!earnings.toNumber() || pendingTx}
+              disabled={!isHarvest}
               text={pendingTx ? 'Collecting YFBTC' : 'Harvest'}
               onClick={async () => {
-                setPendingTx(true)
-                await onReward()
-                setPendingTx(false)
+                // setPendingTx(true)
+                // await onReward()
+                // setPendingTx(false)
               }}
             />
           </StyledCardActions>

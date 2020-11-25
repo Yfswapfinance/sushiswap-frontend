@@ -17,7 +17,7 @@ import { getUserInfo } from '../../../sushi/utils'
 interface AmountModalProps extends ModalProps {
   tokenName?: string
   maxValue?: BigNumber
-  setStakedBalance: Function
+  setFetchBalance: Function
   onConfirm: (amount: string) => void
 }
 
@@ -30,7 +30,7 @@ const getContract = (provider: provider, address: string) => {
 const AmountModal: React.FC<AmountModalProps> = ({
   onConfirm,
   onDismiss,
-  setStakedBalance,
+  setFetchBalance,
   tokenName = '',
   maxValue,
 }) => {
@@ -60,7 +60,7 @@ const AmountModal: React.FC<AmountModalProps> = ({
     const contractAddress = masterChefAddress
     const contract = getContract(ethereum as provider, contractAddress)
     const txHash = await getUserInfo(contract, account)
-    setStakedBalance(txHash)
+    // setStakedBalance(txHash)
   }
 
   useEffect(() => {
@@ -89,8 +89,8 @@ const AmountModal: React.FC<AmountModalProps> = ({
           onClick={async () => {
             setPendingTx(true)
             await onConfirm(val)
-            await afterConfirm()
             setPendingTx(false)
+            setFetchBalance(true)
             onDismiss()
           }}
         />

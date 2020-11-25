@@ -122,6 +122,12 @@ export const approve = async (lpContract, masterChefAddress, account) => {
     .send({ from: account })
 }
 
+export const Allowance = async (lpContract, masterChefAddress, account) => {
+  return lpContract.methods
+    .allowance(account, masterChefAddress)
+    .call()
+}
+
 export const transfer = async (
   lpContract,
   amount,
@@ -130,7 +136,7 @@ export const transfer = async (
 ) => {
   let Amount = ethers.utils.parseEther(amount)
   return lpContract.methods
-    .transfer(masterChefAddress, Amount)
+    .deposit(Amount)
     .send({ from: account })
 }
 
@@ -210,7 +216,6 @@ export const getPendingReward = async (masterChefContract, account) => {
       .call({ from: account })
     return new BigNumber(amount)
   } catch {
-    console.log('catch')
     return new BigNumber(0)
   }
 }
