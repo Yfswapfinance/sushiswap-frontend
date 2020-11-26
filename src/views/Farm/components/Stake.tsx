@@ -161,6 +161,8 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName , setFetchData
     }
     fetchBalance()
     fetchMaxAmount();
+    // To update data in Harvest Card
+    setFetchData(!isFetchAllData)
   }, [isFetchBalance])
 
   return (
