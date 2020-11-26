@@ -20,14 +20,20 @@ import { getBalanceNumber } from '../../../utils/formatBalance'
 import { getPendingReward, getUserInfo } from '../../../sushi/utils'
 import btc from '../../../../src/assets/img/btc.svg'
 import WithdrawModal from './WithdrawModal'
+import CustomLoader from '../../../components/Loader'
 import { onHarvest } from '../../../sushi/utils'
 
 interface HarvestProps {
   pid: number
   tokenName: string
+  isFetchAllData: Boolean
 }
 
-const Harvest: React.FC<HarvestProps> = ({ pid, tokenName }) => {
+const Harvest: React.FC<HarvestProps> = ({
+  pid,
+  tokenName,
+  isFetchAllData,
+}) => {
   const earnings = useEarnings(pid)
   const [pendingBalance, setPendingBalance] = useState(new BigNumber(0))
   const [pendingTx, setPendingTx] = useState(false)
@@ -51,7 +57,7 @@ const Harvest: React.FC<HarvestProps> = ({ pid, tokenName }) => {
     const contractAddress = masterChefAddress
     const contract = getContract(ethereum as provider, contractAddress)
     const txHash = await onHarvest(contract, amount, masterChefAddress, account)
-    setLoading(true)
+    setLoading(false)
   }
 
   const [onPresentWithdraw] = useModal(
@@ -91,6 +97,18 @@ const Harvest: React.FC<HarvestProps> = ({ pid, tokenName }) => {
     }
   }, [pendingBalance])
 
+  useEffect(() => {
+    const onPendingReward = async () => {
+      const contractAddress = masterChefAddress
+      const contract = getContract(ethereum as provider, contractAddress)
+      setTimeout(async () => {
+        const txHash = await getPendingReward(contract, account)
+        setPendingBalance(txHash)
+      }, 2000)
+    }
+    onPendingReward()
+  }, [isFetchAllData])
+
   return (
     <Card>
       <CardContent>
@@ -117,6 +135,7 @@ const Harvest: React.FC<HarvestProps> = ({ pid, tokenName }) => {
           </StyledCardActions>
         </StyledCardContentInner>
       </CardContent>
+      {isLoading && <CustomLoader text="" />}
     </Card>
   )
 }

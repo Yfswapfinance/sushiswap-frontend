@@ -18,6 +18,7 @@ import CustomLoader from '../../../components/Loader'
 interface AmountModalProps extends ModalProps {
   tokenName?: string
   maxValue?: BigNumber
+  isFetchBalance: Boolean
   setFetchBalance: Function
   onConfirm: (amount: string) => void
 }
@@ -31,6 +32,7 @@ const getContract = (provider: provider, address: string) => {
 const AmountModal: React.FC<AmountModalProps> = ({
   onConfirm,
   onDismiss,
+  isFetchBalance,
   setFetchBalance,
   tokenName = '',
   maxValue,
@@ -94,7 +96,7 @@ const AmountModal: React.FC<AmountModalProps> = ({
             await onConfirm(val)
             setLoading(false)
             setPendingTx(false)
-            setFetchBalance(true)
+            setFetchBalance(!isFetchBalance)
             onDismiss()
           }}
         />

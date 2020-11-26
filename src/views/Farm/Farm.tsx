@@ -64,7 +64,11 @@ const Farm: React.FC = () => {
       <StyledFarm>
         <StyledCardsWrapper>
           <StyledCardWrapper>
-            <Harvest pid={pid} tokenName={lpToken.toUpperCase()} />
+            <Harvest
+              pid={pid}
+              tokenName={lpToken.toUpperCase()}
+              isFetchAllData={isFetchAllData}
+            />
           </StyledCardWrapper>
           <Spacer />
           <StyledCardWrapper>

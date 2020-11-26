@@ -80,6 +80,7 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName , setFetchData
       tokenName={tokenName}
       maxValue={maxAmount}
       onConfirm={onTransfer}
+      isFetchBalance={isFetchBalance}
       setFetchBalance={setFetchBalance}
     />,
   )
@@ -138,6 +139,7 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName , setFetchData
   }, [])
 
   useEffect(() => {
+    // Update Balance & Amount after Deposit 
     const fetchBalance = async () => {
       const contractAddress = masterChefAddress
       const web3 = new Web3(ethereum as provider)
@@ -148,9 +150,17 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName , setFetchData
       const txHash = await getUserInfo(contract, account)
       setStackedBalance(txHash)
     }
+    const fetchMaxAmount = async () => {
+      const contractAddress = univ2
+      const balance = await getBalance(
+        ethereum as provider,
+        contractAddress,
+        account,
+      )
+      setMaxAmount(new BigNumber(balance))
+    }
     fetchBalance()
-    //
-    console.log('fetch')
+    fetchMaxAmount();
   }, [isFetchBalance])
 
   return (
