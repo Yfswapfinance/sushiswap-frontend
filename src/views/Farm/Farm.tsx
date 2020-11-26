@@ -73,6 +73,7 @@ const Farm: React.FC = () => {
               pid={pid}
               tokenName={lpToken.toUpperCase()}
               setFetchData={setFetchAllData}
+              isFetchAllData={isFetchAllData}
             />
           </StyledCardWrapper>
         </StyledCardsWrapper>

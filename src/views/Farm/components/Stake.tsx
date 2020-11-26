@@ -37,10 +37,11 @@ interface StakeProps {
   lpContract: Contract
   pid: number
   tokenName: string
+  isFetchAllData: Boolean
   setFetchData: Function
 }
 
-const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName , setFetchData }) => {
+const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName , setFetchData, isFetchAllData }) => {
   const [requestedApproval, setRequestedApproval] = useState(true)
   const [staked_balance, setStackedBalance] = useState(new BigNumber(0))
   const [isFetchBalance, setFetchBalance] = useState(false)
@@ -148,6 +149,8 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName , setFetchData
       setStackedBalance(txHash)
     }
     fetchBalance()
+    //
+    console.log('fetch')
   }, [isFetchBalance])
 
   return (
