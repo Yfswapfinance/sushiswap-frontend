@@ -31,6 +31,7 @@ export const getSushiContract = (sushi) => {
 }
 
 export const getFarms = (sushi) => {
+
   return sushi
     ? sushi.contracts.pools.map(
         ({
@@ -38,7 +39,7 @@ export const getFarms = (sushi) => {
           name,
           symbol,
           icon,
-          tokenAddress,
+          tokenAddresses,
           tokenSymbol,
           tokenContract,
           lpAddress,
@@ -50,7 +51,7 @@ export const getFarms = (sushi) => {
           lpToken: symbol,
           lpTokenAddress: lpAddress,
           lpContract,
-          tokenAddress,
+          tokenAddresses:tokenAddresses[1],
           tokenSymbol,
           tokenContract,
           earnToken: 'YFBTC',
@@ -129,6 +130,7 @@ export const Allowance = async (lpContract, masterChefAddress, account) => {
 }
 
 export const transfer = async (
+  pid,
   lpContract,
   amount,
   masterChefAddress,
@@ -137,11 +139,12 @@ export const transfer = async (
   console.log('amount entered ', amount)
   let Amount = ethers.utils.parseEther(amount)
   return lpContract.methods
-    .deposit(0, Amount)
+    .deposit(pid, Amount)
     .send({ from: account })
 }
 
 export const onHarvest = async (
+  pid,
   lpContract,
   amount,
   masterChefAddress,
@@ -149,7 +152,7 @@ export const onHarvest = async (
 ) => {
   let Amount = ethers.utils.parseEther(amount)
   return lpContract.methods
-    .withdraw(Amount)
+    .withdraw(pid,Amount)
     .send({ from: account })
 }
 
@@ -213,19 +216,19 @@ export const getStaked = async (masterChefContract, pid, account) => {
   }
 }
 
-export const getUserInfo = async (masterChefContract, account) => {
+export const getUserInfo = async (pid, masterChefContract, account) => {
   try {
-    const { amount } = await masterChefContract.methods.userInfo(0, account).call()
+    const { amount } = await masterChefContract.methods.userInfo(pid, account).call()
     return new BigNumber(amount)
   } catch {
     return new BigNumber(0)
   }
 }
 
-export const getPendingReward = async (masterChefContract, account) => {
+export const getPendingReward = async (pid,masterChefContract, account) => {
   try {
     const amount = await masterChefContract.methods
-      .pendingReward(0, account)
+      .pendingReward(pid, account)
       .call({ from: account })
     return new BigNumber(amount)
   } catch {

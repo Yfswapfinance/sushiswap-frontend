@@ -22,7 +22,7 @@ const useTransfer = (pid: number) => {
   const contract = getContract(ethereum as provider, contractAddress)
   const sushi = useSushi()
   const handleStake = async (amount: string) => {
-    const txHash = await transfer(contract, amount, masterChefAddress, account)
+    const txHash = await transfer(pid,contract, amount, masterChefAddress, account)
     console.log(txHash)
   }
 

@@ -37,11 +37,19 @@ interface StakeProps {
   lpContract: Contract
   pid: number
   tokenName: string
+  tokenAddresses: string
   isFetchAllData: Boolean
   setFetchData: Function
 }
 
-const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName , setFetchData, isFetchAllData }) => {
+const Stake: React.FC<StakeProps> = ({
+  lpContract,
+  pid,
+  tokenName,
+  tokenAddresses,
+  setFetchData,
+  isFetchAllData,
+}) => {
   const [requestedApproval, setRequestedApproval] = useState(true)
   const [staked_balance, setStackedBalance] = useState(new BigNumber(0))
   const [isFetchBalance, setFetchBalance] = useState(false)
@@ -109,11 +117,11 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName , setFetchData
         (ABI as unknown) as AbiItem,
         contractAddress,
       )
-      const txHash = await getUserInfo(contract, account)
+      const txHash = await getUserInfo(pid, contract, account)
       setStackedBalance(txHash)
     }
     const fetchAllowance = async () => {
-      const contractAddress = univ2
+      const contractAddress = tokenAddresses
       const contract = getContract(ethereum as provider, contractAddress)
       const tx = await Allowance(contract, masterChefAddress, account)
       if (tx > 0) {
@@ -124,7 +132,7 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName , setFetchData
       }
     }
     const fetchMaxAmount = async () => {
-      const contractAddress = univ2
+      const contractAddress = tokenAddresses
       const balance = await getBalance(
         ethereum as provider,
         contractAddress,
@@ -139,7 +147,7 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName , setFetchData
   }, [])
 
   useEffect(() => {
-    // Update Balance & Amount after Deposit 
+    // Update Balance & Amount after Deposit
     const fetchBalance = async () => {
       const contractAddress = masterChefAddress
       const web3 = new Web3(ethereum as provider)
@@ -147,11 +155,11 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName , setFetchData
         (ABI as unknown) as AbiItem,
         contractAddress,
       )
-      const txHash = await getUserInfo(contract, account)
+      const txHash = await getUserInfo(pid, contract, account)
       setStackedBalance(txHash)
     }
     const fetchMaxAmount = async () => {
-      const contractAddress = univ2
+      const contractAddress = tokenAddresses
       const balance = await getBalance(
         ethereum as provider,
         contractAddress,
@@ -160,7 +168,7 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName , setFetchData
       setMaxAmount(new BigNumber(balance))
     }
     fetchBalance()
-    fetchMaxAmount();
+    fetchMaxAmount()
     // To update data in Harvest Card
     setFetchData(!isFetchAllData)
   }, [isFetchBalance])

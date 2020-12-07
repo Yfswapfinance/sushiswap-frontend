@@ -56,7 +56,7 @@ const Harvest: React.FC<HarvestProps> = ({
     setLoading(true)
     const contractAddress = masterChefAddress
     const contract = getContract(ethereum as provider, contractAddress)
-    const txHash = await onHarvest(contract, amount, masterChefAddress, account)
+    const txHash = await onHarvest(pid,contract, amount, masterChefAddress, account)
     setLoading(false)
   }
 
@@ -72,7 +72,7 @@ const Harvest: React.FC<HarvestProps> = ({
     const onPendingReward = async () => {
       const contractAddress = masterChefAddress
       const contract = getContract(ethereum as provider, contractAddress)
-      const txHash = await getPendingReward(contract, account)
+      const txHash = await getPendingReward(pid,contract, account)
       setPendingBalance(txHash)
     }
     const fetchBalance = async () => {
@@ -82,7 +82,7 @@ const Harvest: React.FC<HarvestProps> = ({
         (ABI as unknown) as AbiItem,
         contractAddress,
       )
-      const txHash = await getUserInfo(contract, account)
+      const txHash = await getUserInfo(pid,contract, account)
       setMaxAmount(txHash)
     }
     onPendingReward()

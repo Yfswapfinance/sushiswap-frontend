@@ -19,7 +19,7 @@ const Farm: React.FC = () => {
     pid,
     lpToken,
     lpTokenAddress,
-    tokenAddress,
+    tokenAddresses,
     earnToken,
     name,
     icon,
@@ -27,7 +27,7 @@ const Farm: React.FC = () => {
     pid: 0,
     lpToken: '',
     lpTokenAddress: '',
-    tokenAddress: '',
+    tokenAddresses: '',
     earnToken: '',
     name: '',
     icon: '',
@@ -76,6 +76,7 @@ const Farm: React.FC = () => {
               lpContract={lpContract}
               pid={pid}
               tokenName={lpToken.toUpperCase()}
+              tokenAddresses={tokenAddresses}
               setFetchData={setFetchAllData}
               isFetchAllData={isFetchAllData}
             />
