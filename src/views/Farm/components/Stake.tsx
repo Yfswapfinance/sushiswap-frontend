@@ -95,7 +95,7 @@ const Stake: React.FC<StakeProps> = ({
 
   const handleApprove = useCallback(async () => {
     try {
-      const contractAddress = univ2
+      const contractAddress = tokenAddresses
       const contract = getContract(ethereum as provider, contractAddress)
       const tx = await approve(contract, masterChefAddress, account)
       if (tx.status) {
@@ -122,8 +122,10 @@ const Stake: React.FC<StakeProps> = ({
     }
     const fetchAllowance = async () => {
       const contractAddress = tokenAddresses
+      console.log('contractAddress ', contractAddress)
       const contract = getContract(ethereum as provider, contractAddress)
       const tx = await Allowance(contract, masterChefAddress, account)
+      console.log('tx', tx)
       if (tx > 0) {
         setRequestedApproval(true)
       } else {
