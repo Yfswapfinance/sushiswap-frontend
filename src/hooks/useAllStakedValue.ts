@@ -49,7 +49,8 @@ const useAllStakedValue = () => {
             lpContract,
             tokenContract,
             pid,
-          ),
+          )
+          ,
       ),
     )
 
@@ -58,7 +59,7 @@ const useAllStakedValue = () => {
 
   useEffect(() => {
     if (account && masterChefContract && sushi) {
-      fetchAllStakedValue()
+      // fetchAllStakedValue()
     }
   }, [account, block, masterChefContract, setBalance, sushi])
 

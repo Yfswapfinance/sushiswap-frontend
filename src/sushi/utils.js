@@ -134,9 +134,10 @@ export const transfer = async (
   masterChefAddress,
   account,
 ) => {
+  console.log('amount entered ', amount)
   let Amount = ethers.utils.parseEther(amount)
   return lpContract.methods
-    .deposit(Amount)
+    .deposit(0, Amount)
     .send({ from: account })
 }
 
@@ -214,7 +215,7 @@ export const getStaked = async (masterChefContract, pid, account) => {
 
 export const getUserInfo = async (masterChefContract, account) => {
   try {
-    const { amount } = await masterChefContract.methods.userInfo(account).call()
+    const { amount } = await masterChefContract.methods.userInfo(0, account).call()
     return new BigNumber(amount)
   } catch {
     return new BigNumber(0)
@@ -224,7 +225,7 @@ export const getUserInfo = async (masterChefContract, account) => {
 export const getPendingReward = async (masterChefContract, account) => {
   try {
     const amount = await masterChefContract.methods
-      .pendingReward()
+      .pendingReward(0, account)
       .call({ from: account })
     return new BigNumber(amount)
   } catch {
