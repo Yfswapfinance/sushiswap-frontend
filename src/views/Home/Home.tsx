@@ -19,97 +19,35 @@ import StickyBar from '../../components/TopBar/stickyNote'
 import useFarms from '../../hooks/useFarms'
 import { Farm } from '../../contexts/Farms'
 import useAllStakedValue, { StakedValue } from '../../hooks/useAllStakedValue'
-import { getUserInfo } from '../../sushi/utils'
+import { getUserInfo, getFarms } from '../../sushi/utils'
 import ABI from '../../utils/abi.json'
 import './home.css'
 import { getBalanceNumber } from '../../utils/formatBalance'
 import { resolve } from 'path'
 import { masterChefAddress } from '../../constants/tokenAddresses'
+import useAllStakedBalance from '../../hooks/useAllStakedBalance'
 
 interface FarmWithStakedValue extends Farm, StakedValue {
-  apy: BigNumber,
+  apy: BigNumber
   stakedBalance: any
 }
 
 const Home: React.FC = () => {
   const [farms] = useFarms()
-  const stakedValue = useAllStakedValue()
-  const [resolved, setIsResolved] = useState(false)
+  const stakedBalances = useAllStakedBalance()
   const { account }: { account: string; ethereum: provider } = useWallet()
   const { ethereum } = useWallet()
 
-  const sushiIndex = farms.findIndex(
-    ({ tokenSymbol }) => tokenSymbol === 'SUSHI',
+  const rows = farms.map<any>(
+    (farm, i) => {
+      return {
+        ...farm,
+        stakedBalance: getBalanceNumber(new BigNumber(stakedBalances[i])),
+      }
+    },
+    [[]],
   )
 
-  // useEffect(() => {
-  //   f();
-  // }, []);
-
-  const BLOCKS_PER_YEAR = new BigNumber(2336000)
-  const SUSHI_PER_BLOCK = new BigNumber(1000)
-
-  const sushiPrice =
-    sushiIndex >= 0 && stakedValue[sushiIndex]
-      ? stakedValue[sushiIndex].tokenPriceInWeth
-      : new BigNumber(0)
-
-  const fetchBalance = async (pid: number, tokenAddress: string) => {
-    const contractAddress = masterChefAddress
-    const web3 = new Web3(ethereum as provider)
-    const contract = new web3.eth.Contract(
-      (ABI as unknown) as AbiItem,
-      contractAddress,
-    )
-    const balance = await getUserInfo(pid, contract, account)
-
-    return getBalanceNumber(balance)
-  }
-
-  // async function s (farms: any) {
-  //   let s = 0;
-  //   for (const farm of farms) {
-  //     s = await fetchBalance(farm.pid, farm.tokenAddresses);
-  //     console.log(s)
-  //   }
-  //   console.log(s)
-  // }
-
-    const rows = farms.reduce<any> (
-       (farmRows, farm, i) => {
-         console.log('farmRows', farmRows)
-         if(farmRows == undefined) return []
-        fetchBalance(farm.pid, farm.tokenAddresses).then(balance=>{
-          // s(farms);
-        const farmWithStakedValue = {
-          ...farm,
-          ...stakedValue[i],
-          apy: stakedValue[i]
-            ? sushiPrice
-                .times(SUSHI_PER_BLOCK)
-                .times(BLOCKS_PER_YEAR)
-                .times(stakedValue[i].poolWeight)
-                .div(stakedValue[i].totalWethValue)
-            : null,
-          stakedBalance: balance,
-        }
-        const newFarmRows = [...farmRows]
-        if (newFarmRows[newFarmRows.length - 1].length === 3) {
-          newFarmRows.push([farmWithStakedValue])
-        } else {
-          newFarmRows[newFarmRows.length - 1].push(farmWithStakedValue)
-        }
-        // console.log('newFarmRows')
-        console.log(newFarmRows)
-        return newFarmRows
-        })
-      },
-      [[]],
-    )
-
-  console.log(rows)
-  console.log('rowsss')
-  // console.log(rows.length > 0 && rows[0])
   const data: any = [
     {
       name: 'BITTO/ETH Stats',
@@ -155,57 +93,47 @@ const Home: React.FC = () => {
     },
   ]
   const renderRateBoxes = () => {
-    console.log('stateked: ', rows);
-
     return (
       <>
         {rows.length > 0
-          ? rows.map((farmRow: any, i:any ) =>
-              farmRow.map((farm:any, j:number) => (
-                <div className="col section-outline mr-3 p-3">
-                  <img
-                    className={'img-con'}
-                    src={farm.icon.toString()}
-                    alt=""
-                  />
-                  <span className="head-text ml-2">{farm.name} Stats</span>
-                  <span className="percentage d-block">
-                    {farm.stakedBalance}
-                  </span>
-                  <span className="d-block">My Stake</span>
-                  <span className="percentage ">0.0000</span>
-                  <small>0.00%</small>
-                  <br />
-                  Total Staked
-                  <br />
-                  <br />
-                  ========== PRICES ==========
-                  <br />
-                  1 YFBTC = 300.0$
-                  <br />
-                  1 USDT = 1.0020$
-                  <br />
-                  <br />
-                  ======== YFBTC REWARDS ========
-                  <br />
-                  <span className="d-block">
-                    Claimable Rewards:0.0000 YFBTC=$0.0000
-                  </span>
-                  Hourly estimate : 0.006 YFBTC = $ 2.4
-                  <br />
-                  Daily estimate : 0.144 YFBTC = $
-                  <br />
-                  Weekly estimate : 57.6 YFBTC = $ 403.2
-                  <br />
-                  Hourly ROI in USD : 0.12%
-                  <br />
-                  Daily ROI in USD : 2.88%
-                  <br />
-                  Weekly ROI in USD : 20.16%
-                  <br />
-                </div>
-              )),
-            )
+          ? rows.map((farm: any, i: any) => (
+              <div className="col section-outline mr-3 p-3" key={i}>
+                <img className={'img-con'} src={farm.icon.toString()} alt="" />
+                <span className="head-text ml-2">{farm.name} Stats</span>
+                <span className="percentage d-block">{farm.stakedBalance}</span>
+                <span className="d-block">My Stake</span>
+                <span className="percentage ">0.0000</span>
+                <small>0.00%</small>
+                <br />
+                Total Staked
+                <br />
+                <br />
+                ========== PRICES ==========
+                <br />
+                1 YFBTC = 300.0$
+                <br />
+                1 USDT = 1.0020$
+                <br />
+                <br />
+                ======== YFBTC REWARDS ========
+                <br />
+                <span className="d-block">
+                  Claimable Rewards:0.0000 YFBTC=$0.0000
+                </span>
+                Hourly estimate : 0.006 YFBTC = $ 2.4
+                <br />
+                Daily estimate : 0.144 YFBTC = $
+                <br />
+                Weekly estimate : 57.6 YFBTC = $ 403.2
+                <br />
+                Hourly ROI in USD : 0.12%
+                <br />
+                Daily ROI in USD : 2.88%
+                <br />
+                Weekly ROI in USD : 20.16%
+                <br />
+              </div>
+            ))
           : null}
       </>
     )
