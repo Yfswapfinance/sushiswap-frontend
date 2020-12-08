@@ -78,8 +78,8 @@ const Balances: React.FC = () => {
 
   useEffect(() => {
     async function fetchTotalSupply() {
-      const supply = await getSushiSupply(sushi)
-      setTotalSupply(supply)
+      // const supply = await getSushiSupply(sushi)
+      setTotalSupply(new BigNumber(0))
     }
     if (sushi) {
       fetchTotalSupply()
