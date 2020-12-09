@@ -12,7 +12,8 @@ import {
   getWethContract,
   getFarms,
   getUserInfo,
-  getTotalSupply
+  getTotalSupply,
+  getPendingReward
 } from '../sushi/utils'
 import useSushi from './useSushi'
 import useBlock from './useBlock'
@@ -26,7 +27,7 @@ export interface StakedValue {
   poolWeight: BigNumber
 }
 
-const useAllStakedBalance = () => {
+const useAllPendingRewards = () => {
   const [balances, setBalance] = useState([] as Array<any>)
   const { account }: { account: string; ethereum: provider } = useWallet()
   const { ethereum } = useWallet()
@@ -53,7 +54,7 @@ const useAllStakedBalance = () => {
           pid: number
           lpContract: Contract
           tokenContract: Contract
-        }) => getUserInfo(pid, contract, account),
+        }) => getPendingReward(pid, contract, account),
       ),
     )
     setBalance(balances)
@@ -68,4 +69,4 @@ const useAllStakedBalance = () => {
   return balances
 }
 
-export default useAllStakedBalance
+export default useAllPendingRewards

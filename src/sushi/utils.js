@@ -64,15 +64,18 @@ export const getFarms = (sushi) => {
 
 export const getPoolWeight = async (masterChefContract, pid) => {
   const { totalSupply } = await masterChefContract.methods.poolInfo(pid).call()
-  // const totalAllocPoint = await masterChefContract.methods
-  //   .totalAllocPoint()
-  //   .call()
   return new BigNumber(totalSupply)
 }
 
 export const getTotalSupply = async (masterChefContract, pid) => {
-  const { totalSupply } = await masterChefContract.methods.poolInfo(pid).call()
+  const { totalSupply, accYfbtcPerShare } = await masterChefContract.methods.poolInfo(pid).call()
   return new BigNumber(totalSupply)
+}
+
+export const getTimeBasedReward = async (masterChefContract,pid) => {
+  const { accYfbtcPerShare } = await masterChefContract.methods.poolInfo(pid).call()
+  let reward = accYfbtcPerShare / (new BigNumber(10).pow(12))
+  return new BigNumber(reward)
 }
 
 export const getEarned = async (masterChefContract, pid, account) => {

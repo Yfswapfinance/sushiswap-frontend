@@ -16,30 +16,32 @@ import useTokenBalance from '../../../hooks/useTokenBalance'
 import useSushi from '../../../hooks/useSushi'
 import { getSushiAddress, getSushiSupply } from '../../../sushi/utils'
 import { getBalanceNumber } from '../../../utils/formatBalance'
+import { yfbtc } from '../../../constants/tokenAddresses'
 import { black } from '../../../theme/colors'
+import useAllStakedBalance from '../../../hooks/useAllStakedBalance'
 
 const PendingRewards: React.FC = () => {
+  const allEarnings = useAllEarnings()
   const [start, setStart] = useState(0)
   const [end, setEnd] = useState(0)
   const [scale, setScale] = useState(1)
-
-  const allEarnings = useAllEarnings()
+  const stakedBalances = useAllStakedBalance()
   let sumEarning = 0
-  for (let earning of allEarnings) {
+  for (let earning of stakedBalances) {
     sumEarning += new BigNumber(earning)
       .div(new BigNumber(10).pow(18))
       .toNumber()
   }
 
-  const [farms] = useFarms()
-  const allStakedValue = useAllStakedValue()
+  // const [farms] = useFarms()
+  // const allStakedValue = useAllStakedValue()
 
-  if (allStakedValue && allStakedValue.length) {
-    const sumWeth = farms.reduce(
-      (c, { id }, i) => c + (allStakedValue[i].totalWethValue.toNumber() || 0),
-      0,
-    )
-  }
+  // if (allStakedValue && allStakedValue.length) {
+  //   const sumWeth = farms.reduce(
+  //     (c, { id }, i) => c + (allStakedValue[i].totalWethValue.toNumber() || 0),
+  //     0,
+  //   )
+  // }
 
   useEffect(() => {
     setStart(end)
@@ -59,7 +61,7 @@ const PendingRewards: React.FC = () => {
         start={start}
         end={end}
         decimals={end < 0 ? 4 : end > 1e5 ? 0 : 3}
-        duration={1}
+        duration={2}
         onStart={() => {
           setScale(1.25)
           setTimeout(() => setScale(1), 600)
@@ -73,7 +75,7 @@ const PendingRewards: React.FC = () => {
 const Balances: React.FC = () => {
   const [totalSupply, setTotalSupply] = useState<BigNumber>()
   const sushi = useSushi()
-  const sushiBalance = useTokenBalance(getSushiAddress(sushi))
+  const sushiBalance = useTokenBalance(yfbtc)
   const { account, ethereum }: { account: any; ethereum: any } = useWallet()
 
   useEffect(() => {
@@ -172,7 +174,7 @@ const StyledBalance = styled.div`
   display: flex;
   flex: 1;
   @media (max-width: 536px) {
-    flex-direction:column
+    flex-direction: column;
   }
 `
 

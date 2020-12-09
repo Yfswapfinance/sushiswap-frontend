@@ -1,10 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import BigNumber from 'bignumber.js'
-import { provider } from 'web3-core'
-import Web3 from 'web3'
-import { AbiItem } from 'web3-utils'
-import { useWallet } from 'use-wallet'
 import formar from '../../assets/img/formar.png'
 import Button from '../../components/Button'
 import Container from '../../components/Container'
@@ -12,184 +7,13 @@ import Page from '../../components/Page'
 import PageHeader from '../../components/PageHeader'
 import Spacer from '../../components/Spacer'
 import Balances from './components/Balances'
-import rocketImg from '../../assets/img/rocket.png'
-import changeImg from '../../assets/img/change.svg'
-import sweetImg from '../../assets/img/sweet.svg'
 import StickyBar from '../../components/TopBar/stickyNote'
-import useFarms from '../../hooks/useFarms'
-import { Farm } from '../../contexts/Farms'
-import useAllStakedValue, { StakedValue } from '../../hooks/useAllStakedValue'
-import { getUserInfo, getFarms, getTotalSupply } from '../../sushi/utils'
-import ABI from '../../utils/abi.json'
 import './home.css'
-import { getBalanceNumber } from '../../utils/formatBalance'
-import { resolve } from 'path'
-import { masterChefAddress } from '../../constants/tokenAddresses'
-import useAllStakedBalance from '../../hooks/useAllStakedBalance'
-import useAllTotalStaked from '../../hooks/useAllTotalStaked'
-
-interface FarmWithStakedValue extends Farm, StakedValue {
-  apy: BigNumber
-  stakedBalance: any
-}
+import { useWallet } from 'use-wallet'
+import StatCards from './components/StatCards'
 
 const Home: React.FC = () => {
-  const [farms] = useFarms()
-  const stakedBalances = useAllStakedBalance()
-  const totalStakedBalances = useAllTotalStaked()
-  const { account }: { account: string; ethereum: provider } = useWallet()
-  const { ethereum } = useWallet()
-  const contractAddress = masterChefAddress
-  const web3 = new Web3(ethereum as provider)
-  const contract = new web3.eth.Contract(
-    (ABI as unknown) as AbiItem,
-    contractAddress,
-  )
-
-  const rows = farms.map<any>(
-    (farm, i) => {
-      return {
-        ...farm,
-        stakedBalance: getBalanceNumber(new BigNumber(stakedBalances[i])),
-        totalStaked: getBalanceNumber(new BigNumber(totalStakedBalances[i])),
-      }
-    },
-    [[]],
-  )
-  const data: any = [
-    {
-      name: 'BITTO/ETH Stats',
-      logo: rocketImg,
-      class: 'img-size',
-      hourlyROI: 0.1,
-      dailyROI: 2.4,
-      weeklyROI: 16.8,
-      hourlyEstimate: 0.005,
-      hourlyEstimateYFBTC: 2,
-      dailyEstimate: 0.12,
-      dailyEstimateYFBTC: 48,
-      weeklyEstimate: 0.84,
-      weeklyEstimateYFBTC: 336,
-    },
-    {
-      name: 'YFBTC/ETH Stats',
-      logo: changeImg,
-      class: 'img-con',
-      hourlyROI: 0.16,
-      dailyROI: 3.84,
-      weeklyROI: 26.88,
-      hourlyEstimate: 0.008,
-      hourlyEstimateYFBTC: 3.2,
-      dailyEstimate: 0.192,
-      dailyEstimateYFBTC: 76.8,
-      weeklyEstimate: 1.344,
-      weeklyEstimateYFBTC: 537,
-    },
-    {
-      name: 'wBTC/wETH Stats',
-      logo: sweetImg,
-      class: 'img-con',
-      hourlyROI: 0.12,
-      dailyROI: 2.88,
-      weeklyROI: 20.16,
-      hourlyEstimate: 0.006,
-      hourlyEstimateYFBTC: 2.4,
-      dailyEstimate: 0.144,
-      dailyEstimateYFBTC: 57.6,
-      weeklyEstimate: 1.008,
-      weeklyEstimateYFBTC: 403.2,
-    },
-  ]
-  const renderRateBoxes = () => {
-    return (
-      <>
-        {rows.length > 0
-          ? rows.map((farm: any, i: any) => (
-              <div className="col section-outline mr-3 p-3" key={i}>
-                <img className={'img-con'} src={farm.icon.toString()} alt="" />
-                <span className="head-text ml-2">{farm.name} Stats</span>
-                <span className="percentage d-block">
-                  {!isNaN(farm.stakedBalance) && farm.stakedBalance}
-                </span>
-                <span className="d-block">My Stake</span>
-                <span className="percentage ">
-                  {!isNaN(farm.totalStaked) && farm.totalStaked}
-                </span>
-                <small>0.00%</small>
-                <br />
-                Total Staked
-                <br />
-                <br />
-                ========== PRICES ==========
-                <br />
-                1 YFBTC = 300.0$
-                <br />
-                1 USDT = 1.0020$
-                <br />
-                <br />
-                ======== YFBTC REWARDS ========
-                <br />
-                <span className="d-block">
-                  Claimable Rewards:0.0000 YFBTC=$0.0000
-                </span>
-                Hourly estimate : 0.006 YFBTC = $ 2.4
-                <br />
-                Daily estimate : 0.144 YFBTC = $
-                <br />
-                Weekly estimate : 57.6 YFBTC = $ 403.2
-                <br />
-                Hourly ROI in USD : 0.12%
-                <br />
-                Daily ROI in USD : 2.88%
-                <br />
-                Weekly ROI in USD : 20.16%
-                <br />
-              </div>
-            ))
-          : null}
-      </>
-    )
-    // data.map((elements: any) => {
-    //   return (
-    //     <div className="col section-outline mr-3 p-3">
-    //       <img className={elements.class} src={elements.logo} alt="" />
-    //       <span className="head-text ml-2">{elements.name}</span>
-    //       <span className="percentage d-block">0.000000</span>
-    //       <span className="d-block">My Stake</span>
-    //       <span className="percentage ">0.0000</span>
-    //       <small>0.00%</small>
-    //       <br />
-    //       Total Staked
-    //       <br />
-    //       <br />
-    //       ========== PRICES ==========
-    //       <br />
-    //       1 YFBTC = 300.0$
-    //       <br />
-    //       1 USDT = 1.0020$
-    //       <br />
-    //       <br />
-    //       ======== YFBTC REWARDS ========
-    //       <br />
-    //       <span className="d-block">
-    //         Claimable Rewards:0.0000 YFBTC=$0.0000
-    //       </span>
-    //       Hourly estimate : {elements.hourlyEstimate} YFBTC = $
-    //       {elements.hourlyEstimateYFBTC}
-    //       <br />
-    //       Daily estimate : {elements.dailyEstimate} YFBTC = $
-    //       {elements.dailyEstimateYFBTC}
-    //       <br />
-    //       Weekly estimate : {elements.weeklyEstimate} YFBTC = $
-    //       {elements.weeklyEstimateYFBTC}
-    //       <br />
-    //       Hourly ROI in USD : {elements.hourlyROI}%<br />
-    //       Daily ROI in USD : {elements.dailyROI}%<br />
-    //       Weekly ROI in USD : {elements.weeklyROI}%<br />
-    //     </div>
-    //   )
-    // })
-  }
+  const { account } = useWallet()
   return (
     <>
       <StickyBar />
@@ -210,11 +34,13 @@ const Home: React.FC = () => {
         </StyledInfo>
         <Spacer size="lg" />
         {!!account && (
-          <div className="row container mt-2 mb-5">{renderRateBoxes()}</div>
+          <div className="row mt-2 mb-5">
+            <StatCards />
+          </div>
         )}
         <div className="row  ">
           <div className="">
-            <div className="red-band ">
+            <div className="red-band">
               THIS ROI IS JUST AN ESTIMATION PLEASE REFER TO{' '}
               <a href="http://bit.ly/DeFiROI">
                 <u>MEDIUM</u>
