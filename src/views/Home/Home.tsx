@@ -209,7 +209,9 @@ const Home: React.FC = () => {
           token rewards per block.
         </StyledInfo>
         <Spacer size="lg" />
-        <div className="row container mt-2 mb-5">{renderRateBoxes()}</div>
+        {!!account && (
+          <div className="row container mt-2 mb-5">{renderRateBoxes()}</div>
+        )}
         <div className="row  ">
           <div className="">
             <div className="red-band ">
