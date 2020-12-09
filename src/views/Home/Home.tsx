@@ -19,13 +19,14 @@ import StickyBar from '../../components/TopBar/stickyNote'
 import useFarms from '../../hooks/useFarms'
 import { Farm } from '../../contexts/Farms'
 import useAllStakedValue, { StakedValue } from '../../hooks/useAllStakedValue'
-import { getUserInfo, getFarms } from '../../sushi/utils'
+import { getUserInfo, getFarms, getTotalSupply } from '../../sushi/utils'
 import ABI from '../../utils/abi.json'
 import './home.css'
 import { getBalanceNumber } from '../../utils/formatBalance'
 import { resolve } from 'path'
 import { masterChefAddress } from '../../constants/tokenAddresses'
 import useAllStakedBalance from '../../hooks/useAllStakedBalance'
+import useAllTotalStaked from '../../hooks/useAllTotalStaked'
 
 interface FarmWithStakedValue extends Farm, StakedValue {
   apy: BigNumber
@@ -35,19 +36,26 @@ interface FarmWithStakedValue extends Farm, StakedValue {
 const Home: React.FC = () => {
   const [farms] = useFarms()
   const stakedBalances = useAllStakedBalance()
+  const totalStakedBalances = useAllTotalStaked()
   const { account }: { account: string; ethereum: provider } = useWallet()
   const { ethereum } = useWallet()
+  const contractAddress = masterChefAddress
+  const web3 = new Web3(ethereum as provider)
+  const contract = new web3.eth.Contract(
+    (ABI as unknown) as AbiItem,
+    contractAddress,
+  )
 
   const rows = farms.map<any>(
     (farm, i) => {
       return {
         ...farm,
         stakedBalance: getBalanceNumber(new BigNumber(stakedBalances[i])),
+        totalStaked: getBalanceNumber(new BigNumber(totalStakedBalances[i])),
       }
     },
     [[]],
   )
-
   const data: any = [
     {
       name: 'BITTO/ETH Stats',
@@ -100,9 +108,13 @@ const Home: React.FC = () => {
               <div className="col section-outline mr-3 p-3" key={i}>
                 <img className={'img-con'} src={farm.icon.toString()} alt="" />
                 <span className="head-text ml-2">{farm.name} Stats</span>
-                <span className="percentage d-block">{farm.stakedBalance}</span>
+                <span className="percentage d-block">
+                  {!isNaN(farm.stakedBalance) && farm.stakedBalance}
+                </span>
                 <span className="d-block">My Stake</span>
-                <span className="percentage ">0.0000</span>
+                <span className="percentage ">
+                  {!isNaN(farm.totalStaked) && farm.totalStaked}
+                </span>
                 <small>0.00%</small>
                 <br />
                 Total Staked

@@ -26,7 +26,7 @@ export interface StakedValue {
   poolWeight: BigNumber
 }
 
-const useAllStakedBalance = () => {
+const useAllTotalStaked = () => {
   const [balances, setBalance] = useState([] as Array<any>)
   const { account }: { account: string; ethereum: provider } = useWallet()
   const { ethereum } = useWallet()
@@ -53,8 +53,7 @@ const useAllStakedBalance = () => {
           pid: number
           lpContract: Contract
           tokenContract: Contract
-          totalStaked: 0
-        }) => getUserInfo(pid, contract, account),
+        }) => getTotalSupply(contract, pid),
       ),
     )
     setBalance(balances)
@@ -69,4 +68,4 @@ const useAllStakedBalance = () => {
   return balances
 }
 
-export default useAllStakedBalance
+export default useAllTotalStaked
