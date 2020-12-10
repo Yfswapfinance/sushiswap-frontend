@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef, useImperativeHandle } from 'react'
 import styled from 'styled-components'
 import formar from '../../assets/img/formar.png'
 import Button from '../../components/Button'
@@ -13,23 +13,37 @@ import { useWallet } from 'use-wallet'
 import { gql, useApolloClient } from '@apollo/client'
 import StatCards from './components/StatCards'
 
-const GET_ALL_PROTOCOL_RATES = gql`
-  query getAllProtocolRates {
-    getAllProtocolRates {
-      data {
-        tokenRates {
-          asset
-          borrowing
-          lending
-          icon
-          tokenId
-        }
-        icon
-        protocol
-        protocolId
+const GET_ETH_PRICE = gql`
+  {
+    bundle(id: "1") {
+      ethPrice
+    }
+  }
+`
+
+const GET_PAIR = gql`
+  {
+    pair(id: "poolAddress") {
+      token0 {
+        id
+        symbol
+        name
+        derivedETH
       }
-      status
-      message
+      token1 {
+        id
+        symbol
+        name
+        derivedETH
+      }
+      reserve0
+      reserve1
+      reserveUSD
+      trackedReserveETH
+      token0Price
+      token1Price
+      volumeUSD
+      txCount
     }
   }
 `
@@ -37,12 +51,22 @@ const GET_ALL_PROTOCOL_RATES = gql`
 const Home: React.FC = () => {
   const { account } = useWallet()
   const client = useApolloClient()
+
   useEffect(() => {
     client
       .query({
-        query: GET_ALL_PROTOCOL_RATES,
+        query: GET_ETH_PRICE,
       })
       .then(({ data }: any) => {
+        const ethPrice = data.bundle.ethPrice
+        console.log(ethPrice)
+      })
+
+    client
+      .query({
+        query: GET_PAIR,
+      })
+      .then((data) => {
         console.log(data)
       })
   }, [])
