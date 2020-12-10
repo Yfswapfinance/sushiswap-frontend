@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import formar from '../../assets/img/formar.png'
 import Button from '../../components/Button'
@@ -10,10 +10,43 @@ import Balances from './components/Balances'
 import StickyBar from '../../components/TopBar/stickyNote'
 import './home.css'
 import { useWallet } from 'use-wallet'
+import { gql, useApolloClient } from '@apollo/client'
 import StatCards from './components/StatCards'
+
+const GET_ALL_PROTOCOL_RATES = gql`
+  query getAllProtocolRates {
+    getAllProtocolRates {
+      data {
+        tokenRates {
+          asset
+          borrowing
+          lending
+          icon
+          tokenId
+        }
+        icon
+        protocol
+        protocolId
+      }
+      status
+      message
+    }
+  }
+`
 
 const Home: React.FC = () => {
   const { account } = useWallet()
+  const client = useApolloClient()
+  useEffect(() => {
+    client
+      .query({
+        query: GET_ALL_PROTOCOL_RATES,
+      })
+      .then(({ data }: any) => {
+        console.log(data)
+      })
+  }, [])
+
   return (
     <>
       <StickyBar />
