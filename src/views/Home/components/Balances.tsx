@@ -18,16 +18,16 @@ import { getSushiAddress, getSushiSupply } from '../../../sushi/utils'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import { yfbtc } from '../../../constants/tokenAddresses'
 import { black } from '../../../theme/colors'
-import useAllStakedBalance from '../../../hooks/useAllStakedBalance'
+import useAllPendingRewards from '../../../hooks/useAllPendingRewards'
 
 const PendingRewards: React.FC = () => {
   const allEarnings = useAllEarnings()
   const [start, setStart] = useState(0)
   const [end, setEnd] = useState(0)
   const [scale, setScale] = useState(1)
-  const stakedBalances = useAllStakedBalance()
+  const pendingRewards = useAllPendingRewards()
   let sumEarning = 0
-  for (let earning of stakedBalances) {
+  for (let earning of pendingRewards) {
     sumEarning += new BigNumber(earning)
       .div(new BigNumber(10).pow(18))
       .toNumber()
