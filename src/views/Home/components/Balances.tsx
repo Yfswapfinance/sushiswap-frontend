@@ -23,6 +23,7 @@ import useAllPendingRewards from '../../../hooks/useAllPendingRewards'
 
 const PendingRewards: React.FC = () => {
   const allEarnings = useAllEarnings()
+  const { account } = useWallet()
   const [start, setStart] = useState(0)
   const [end, setEnd] = useState(0)
   const [scale, setScale] = useState(1)
@@ -60,7 +61,7 @@ const PendingRewards: React.FC = () => {
     >
       <CountUp
         start={start}
-        end={end}
+        end={!!account ? end : start}
         decimals={end < 0 ? 4 : end > 1e5 ? 0 : 3}
         duration={2}
         onStart={() => {

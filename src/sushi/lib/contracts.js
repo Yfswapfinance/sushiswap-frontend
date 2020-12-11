@@ -31,6 +31,7 @@ export class Contracts {
         tokenAddress: pool.tokenAddresses[networkId],
         lpContract: new this.web3.eth.Contract(UNIV2PairAbi),
         tokenContract: new this.web3.eth.Contract(ERC20Abi),
+        liveAddress: pool.liveAddress
       }),
     )
 

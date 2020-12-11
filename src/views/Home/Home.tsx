@@ -21,33 +21,6 @@ const GET_ETH_PRICE = gql`
   }
 `
 
-const GET_PAIR = gql`
-  {
-    pair(id: "poolAddress") {
-      token0 {
-        id
-        symbol
-        name
-        derivedETH
-      }
-      token1 {
-        id
-        symbol
-        name
-        derivedETH
-      }
-      reserve0
-      reserve1
-      reserveUSD
-      trackedReserveETH
-      token0Price
-      token1Price
-      volumeUSD
-      txCount
-    }
-  }
-`
-
 const Home: React.FC = () => {
   const { account } = useWallet()
   const client = useApolloClient()
@@ -59,15 +32,7 @@ const Home: React.FC = () => {
       })
       .then(({ data }: any) => {
         const ethPrice = data.bundle.ethPrice
-        console.log(ethPrice)
-      })
-
-    client
-      .query({
-        query: GET_PAIR,
-      })
-      .then((data) => {
-        console.log(data)
+        // console.log(ethPrice)
       })
   }, [])
 
@@ -80,7 +45,6 @@ const Home: React.FC = () => {
           title="Farming is Ready"
           subtitle="Stake Uniswap LP tokens to claim the future of BTC, YFBTC!"
         />
-
         <Container>
           <Balances />
         </Container>

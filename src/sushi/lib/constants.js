@@ -90,6 +90,7 @@ export const supportedPools = [
   // },
   {
     pid: 0,
+    liveAddress: '0x7bbdb8ea1c4b8e253f6bfe4a8365bbc5b683c68b',
     lpAddresses: {
       1: '0xf80758ab42c3b07da84053fd88804bcb6baa4b5c',
     },
@@ -105,6 +106,7 @@ export const supportedPools = [
   },
   {
     pid: 1,
+    liveAddress: '0xbb2b8038a1640196fbe3e38816f3e67cba72d940',
     lpAddresses: {
       1: '0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc',
     },

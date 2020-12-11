@@ -44,6 +44,7 @@ export const getFarms = (sushi) => {
           tokenContract,
           lpAddress,
           lpContract,
+          liveAddress
         }) => ({
           pid,
           id: symbol,
@@ -51,6 +52,7 @@ export const getFarms = (sushi) => {
           lpToken: symbol,
           lpTokenAddress: lpAddress,
           lpContract,
+          liveAddress,
           tokenAddresses:tokenAddresses[1],
           tokenSymbol,
           tokenContract,
@@ -68,7 +70,7 @@ export const getPoolWeight = async (masterChefContract, pid) => {
 }
 
 export const getTotalSupply = async (masterChefContract, pid) => {
-  const { totalSupply, accYfbtcPerShare } = await masterChefContract.methods.poolInfo(pid).call()
+  const { totalSupply } = await masterChefContract.methods.poolInfo(pid).call()
   return new BigNumber(totalSupply)
 }
 
@@ -76,6 +78,12 @@ export const getTimeBasedReward = async (masterChefContract,pid) => {
   const { accYfbtcPerShare } = await masterChefContract.methods.poolInfo(pid).call()
   let reward = accYfbtcPerShare / (new BigNumber(10).pow(12))
   return new BigNumber(reward)
+}
+
+export const getMultiplier = async (masterChefContract,pid,block) => {
+  const { lastRewardBlock } = await masterChefContract.methods.poolInfo(pid).call()
+  return masterChefContract.methods
+  .getMultiplier(lastRewardBlock,block).call()
 }
 
 export const getEarned = async (masterChefContract, pid, account) => {

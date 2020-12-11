@@ -6,6 +6,7 @@ export interface Farm {
   lpToken: string
   lpTokenAddress: string
   lpContract: Contract
+  liveAddress: String
   tokenAddresses: any
   earnToken: string
   earnTokenAddress: string
