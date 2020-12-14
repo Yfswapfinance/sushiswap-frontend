@@ -1,12 +1,8 @@
 import React from 'react'
 import BigNumber from 'bignumber.js'
-import { provider } from 'web3-core'
-import Web3 from 'web3'
-import { useWallet } from 'use-wallet'
 import useFarms from '../../../hooks/useFarms'
 import '../home.css'
 import { getBalanceNumber } from '../../../utils/formatBalance'
-import { masterChefAddress } from '../../../constants/tokenAddresses'
 import useAllStakedBalance from '../../../hooks/useAllStakedBalance'
 import useAllTotalStaked from '../../../hooks/useAllTotalStaked'
 import useAllTimeRewards from '../../../hooks/useAllTimeRewards'
@@ -24,10 +20,6 @@ const StatCards: React.FC = () => {
   const allMultiplier = useAllMultiplier()
   const allPair = useAllPair()
   const eth_price = useEthPrice()
-  const { account }: { account: string; ethereum: provider } = useWallet()
-  const { ethereum } = useWallet()
-  const contractAddress = masterChefAddress
-  const web3 = new Web3(ethereum as provider)
   const getYfbtcPrice = (pair: any, ethPrice: any) => {
     return (pair.token0Price / ethPrice).toFixed(5)
   }
@@ -67,6 +59,8 @@ const StatCards: React.FC = () => {
   )
 
   const data = rows.filter((farm) => farm.stakedBalance > 0)
+
+  // console.log(data)
 
   return (
     <>

@@ -16,13 +16,13 @@ const GET_PRICE = gql`
 `
 
 const useEthPrice = () => {
-  const [balances, setBalance] = useState([] as Array<any>)
+  const [ethPrice, setEthPrice] = useState([] as Array<any>)
   const { account }: { account: string; ethereum: provider } = useWallet()
   const sushi = useSushi()
   const farms = getFarms(sushi)
   const client = useApolloClient()
 
-const getPair = async () => {
+const getPrice = async () => {
     let result = await client.query({
       query: GET_PRICE,
     })
@@ -30,21 +30,21 @@ const getPair = async () => {
   }
 
   const fetchAllPairValue = useCallback(async () => {
-    const balances: Array<any> = await Promise.all(
+    const rate: Array<any> = await Promise.all(
       farms.map(
-        () => getPair(),
+        () => getPrice(),
       ),
     )
-    setBalance(balances)
+    setEthPrice(rate)
   }, [account, sushi])
 
   useEffect(() => {
     if (account && sushi) {
       fetchAllPairValue()
     }
-  }, [account, setBalance, sushi])
+  }, [account, setEthPrice, sushi])
 
-  return balances
+  return ethPrice
 }
 
 export default useEthPrice
