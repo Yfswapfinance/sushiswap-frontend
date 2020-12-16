@@ -88,7 +88,7 @@ const Home: React.FC = () => {
           />
         </div>
         <StyledVideo>
-        <ReactPlayer url="https://www.youtube.com/watch?v=ysz5S6PUM-U" height={340} width={530}/>
+        <ReactPlayer url="https://www.youtube.com/watch?v=NheGX8Ksc-c" height={340} width={530}/>
         </StyledVideo>
       </Page>
     </>
