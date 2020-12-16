@@ -22,7 +22,7 @@ const StatCards: React.FC = () => {
   const eth_price = useEthPrice()
 
   const getYfbtcPrice = (pair: any, ethPrice: any) => {
-    return (pair.token0Price / ethPrice).toFixed(5)
+    return (pair.token1Price * ethPrice).toFixed(5)
   }
 
   const getYfbtcRewardsDollarPrice = (
@@ -30,7 +30,7 @@ const StatCards: React.FC = () => {
     ethPrice: any,
     amount: any,
   ) => {
-    return ((pair.token0Price / ethPrice) * amount).toFixed(5)
+    return ((pair.token1Price * ethPrice) * amount).toFixed(5)
   }
 
   const getFormatRewards = (rewards: any) => {
