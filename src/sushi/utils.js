@@ -80,6 +80,22 @@ export const getTimeBasedReward = async (masterChefContract,pid) => {
   return new BigNumber(reward)
 }
 
+const getPoolLength = async (masterChefContract)=>{
+  return masterChefContract.methods.poolLength.call()
+}
+
+export const getEligiblePools = async(masterChefContract)=>{
+  const length = await getPoolLength()
+  const poolCount = 0;
+  for (let index = 0; index < length; index++) {
+      const { totalSupply } = await masterChefContract.methods.poolInfo(index).call()
+      console.log('**** supply ', totalSupply)
+      if ( totalSupply > 0 )
+      poolCount++
+  }
+
+}
+
 export const getMultiplier = async (masterChefContract,pid,block) => {
   const { lastRewardBlock } = await masterChefContract.methods.poolInfo(pid).call()
   const diff = (block - lastRewardBlock)
@@ -87,6 +103,11 @@ export const getMultiplier = async (masterChefContract,pid,block) => {
   return 0
   const totalReward = await masterChefContract.methods.getMultiplier(lastRewardBlock,block).call()
   return (totalReward / diff) / new BigNumber(10).pow(18)
+}
+
+export const getRewardPerBlock = async(masterChefContract,pid) =>{
+    const rewardPerBlock = await masterChefContract.methods.rewardPerBlock(pid).call() 
+    return rewardPerBlock / new BigNumber(10).pow(18)
 }
 
 export const getEarned = async (masterChefContract, pid, account) => {
@@ -176,7 +197,10 @@ export const onHarvest = async (
 }
 
 export const getSushiSupply = async (sushi) => {
-  return new BigNumber(await sushi.contracts.sushi.methods.totalSupply().call())
+  console.log('sushi ', sushi)
+  // return new BigNumber(await sushi.methods.cap().call())
+  const supply = 21000 * Math.pow(10, 18)
+  return new BigNumber(supply)
 }
 
 export const stake = async (masterChefContract, pid, amount, account) => {

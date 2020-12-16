@@ -7,7 +7,8 @@ import { Contract } from 'web3-eth-contract'
 import ABI from '../utils/abi.json'
 import {
   getFarms,
-  getMultiplier
+  getMultiplier,
+  getRewardPerBlock
 } from '../sushi/utils'
 import useSushi from './useSushi'
 import useBlock from './useBlock'
@@ -38,7 +39,7 @@ const useAllMultiplier = () => {
               pid: number
               lpContract: Contract
               tokenContract: Contract
-            }) => getMultiplier(contract,pid,block),
+            }) => getRewardPerBlock(contract,pid),
           ),
         )
         SetMultipliers(multipliers)
@@ -48,7 +49,7 @@ const useAllMultiplier = () => {
       fetchAllValues()
     }
   }, [account, block, SetMultipliers, sushi])
-
+  // console.log('multipliers ', multipliers)
   return multipliers
 }
 
