@@ -198,9 +198,8 @@ export const onHarvest = async (
 
 export const getSushiSupply = async (sushi) => {
   console.log('sushi ', sushi)
-  // return new BigNumber(await sushi.methods.cap().call())
-  const supply = 21000 * Math.pow(10, 18)
-  return new BigNumber(supply)
+  const cap = await sushi.methods.cap().call()
+  return new BigNumber(cap)
 }
 
 export const stake = async (masterChefContract, pid, amount, account) => {
