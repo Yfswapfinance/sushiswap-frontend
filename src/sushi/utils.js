@@ -82,8 +82,11 @@ export const getTimeBasedReward = async (masterChefContract,pid) => {
 
 export const getMultiplier = async (masterChefContract,pid,block) => {
   const { lastRewardBlock } = await masterChefContract.methods.poolInfo(pid).call()
-  return masterChefContract.methods
-  .getMultiplier(lastRewardBlock,block).call()
+  const diff = (block - lastRewardBlock)
+  if ( diff <= 0 )
+  return 0
+  const totalReward = await masterChefContract.methods.getMultiplier(lastRewardBlock,block).call()
+  return (totalReward / diff) / new BigNumber(10).pow(18)
 }
 
 export const getEarned = async (masterChefContract, pid, account) => {

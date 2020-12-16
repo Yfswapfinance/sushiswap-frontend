@@ -8,6 +8,7 @@ import PageHeader from '../../components/PageHeader'
 import Spacer from '../../components/Spacer'
 import Balances from './components/Balances'
 import StickyBar from '../../components/TopBar/stickyNote'
+import ReactPlayer from 'react-player'
 import './home.css'
 import { useWallet } from 'use-wallet'
 import { gql, useApolloClient } from '@apollo/client'
@@ -86,6 +87,9 @@ const Home: React.FC = () => {
             variant="secondary"
           />
         </div>
+        <StyledVideo>
+        <ReactPlayer url="https://www.youtube.com/watch?v=ysz5S6PUM-U" height={340} width={530}/>
+        </StyledVideo>
       </Page>
     </>
   )
@@ -102,6 +106,10 @@ const StyledInfo = styled.h3`
   > b {
     color: ${(props) => props.theme.color.grey[900]};
   }
+`
+
+const StyledVideo = styled.div`
+  margin-top:50px;
 `
 
 export default Home
