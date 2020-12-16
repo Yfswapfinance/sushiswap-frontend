@@ -20,8 +20,9 @@ const StatCards: React.FC = () => {
   const allMultiplier = useAllMultiplier()
   const allPair = useAllPair()
   const eth_price = useEthPrice()
+
   const getYfbtcPrice = (pair: any, ethPrice: any) => {
-    return (pair.token0Price / ethPrice).toFixed(5)
+    return (pair.token1Price * ethPrice).toFixed(5)
   }
 
   const getYfbtcRewardsDollarPrice = (
@@ -29,7 +30,7 @@ const StatCards: React.FC = () => {
     ethPrice: any,
     amount: any,
   ) => {
-    return ((pair.token0Price / ethPrice) * amount).toFixed(5)
+    return ((pair.token1Price * ethPrice) * amount).toFixed(5)
   }
 
   const getFormatRewards = (rewards: any) => {
@@ -40,13 +41,13 @@ const StatCards: React.FC = () => {
     }
   }
 
-  const rows = farms.map<any>(
+  const data = farms.map<any>(
     (farm, i) => {
       return {
         ...farm,
         stakedBalance: getBalanceNumber(new BigNumber(stakedBalances[i])),
         totalStaked: getBalanceNumber(new BigNumber(totalStakedBalances[i])),
-        rewards: getFormatRewards(timeRewards[i]),
+        rewards: getFormatRewards(allMultiplier[i]),
         claimReward: getBalanceNumber(new BigNumber(pendingRewards[i])).toFixed(
           5,
         ),
@@ -58,7 +59,7 @@ const StatCards: React.FC = () => {
     [[]],
   )
 
-  const data = rows.filter((farm) => farm.stakedBalance > 0)
+  // const data = rows.filter((farm) => farm.stakedBalance > 0)
 
   // console.log(data)
 
@@ -72,13 +73,13 @@ const StatCards: React.FC = () => {
               <span className="percentage d-block">
                 {!isNaN(farm.stakedBalance) && farm.stakedBalance}
               </span>
-              <span className="d-block">My Stake</span>
+              <span className="d-block">My LP Share</span>
               <span className="percentage ">
                 {!isNaN(farm.totalStaked) && farm.totalStaked}
               </span>
-              <small>0.00%</small>
+              {/* <small>0.00%</small> */}
               <br />
-              Total Staked
+              Total LP's
               <br />
               <br />
               ========== PRICES ==========
@@ -123,11 +124,26 @@ const StatCards: React.FC = () => {
                   farm.rewards.weekly,
                 )}
               <br />
-              Hourly ROI in USD : 0.12%
+              Hourly ROI in USD : {!!farm.pair &&
+                getYfbtcRewardsDollarPrice(
+                  farm.pair,
+                  farm.ethPrice,
+                  farm.rewards.hourly,
+                )}
               <br />
-              Daily ROI in USD : 2.88%
+              Daily ROI in USD : {!!farm.pair &&
+                getYfbtcRewardsDollarPrice(
+                  farm.pair,
+                  farm.ethPrice,
+                  farm.rewards.daily,
+                )}
               <br />
-              Weekly ROI in USD : 20.16%
+              Weekly ROI in USD : {!!farm.pair &&
+                getYfbtcRewardsDollarPrice(
+                  farm.pair,
+                  farm.ethPrice,
+                  farm.rewards.weekly,
+                )}
               <br />
             </div>
           ))

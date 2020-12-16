@@ -2,6 +2,9 @@ import BigNumber from 'bignumber.js'
 import React, { useEffect, useState } from 'react'
 import CountUp from 'react-countup'
 import styled from 'styled-components'
+import Web3 from 'web3'
+import { provider } from 'web3-core'
+import { AbiItem } from 'web3-utils'
 import { useWallet } from 'use-wallet'
 import Card from '../../../components/Card'
 import CardContent from '../../../components/CardContent'
@@ -14,12 +17,15 @@ import useAllStakedValue from '../../../hooks/useAllStakedValue'
 import useFarms from '../../../hooks/useFarms'
 import useTokenBalance from '../../../hooks/useTokenBalance'
 import useSushi from '../../../hooks/useSushi'
-import { getSushiAddress, getSushiSupply } from '../../../sushi/utils'
+import { getSushiAddress, getSushiSupply, getRewardPerBlock, getSushiContract } from '../../../sushi/utils'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import { yfbtc } from '../../../constants/tokenAddresses'
 import { black } from '../../../theme/colors'
 import useAllStakedBalance from '../../../hooks/useAllStakedBalance'
 import useAllPendingRewards from '../../../hooks/useAllPendingRewards'
+import useAllMultiplier from '../../../hooks/useAllMultiplier'
+import { getContract } from '../../../utils/erc20'
+import ABI from '../../../utils/yfbtcAbi.json'
 
 const PendingRewards: React.FC = () => {
   const allEarnings = useAllEarnings()
@@ -34,6 +40,8 @@ const PendingRewards: React.FC = () => {
       .div(new BigNumber(10).pow(18))
       .toNumber()
   }
+
+  
 
   // const [farms] = useFarms()
   // const allStakedValue = useAllStakedValue()
@@ -77,19 +85,32 @@ const PendingRewards: React.FC = () => {
 const Balances: React.FC = () => {
   const [totalSupply, setTotalSupply] = useState<BigNumber>()
   const sushi = useSushi()
+  console.log('yfbtc ', yfbtc)
   const sushiBalance = useTokenBalance(yfbtc)
-  const { account, ethereum }: { account: any; ethereum: any } = useWallet()
+  const { account, ethereum }: { account: any; ethereum: provider } = useWallet()
+  const allMultiplier = useAllMultiplier()
+  // const { account }: { account: string; ethereum: provider } = useWallet()
+
+  const contractAddress = yfbtc
+  const web3 = new Web3(ethereum as provider)
+        const yfbtcContractObj = new web3.eth.Contract(
+          (ABI as unknown) as AbiItem,
+          contractAddress,
+        )
+  // const yfbtcContractObj = getContract(ABI, contractAddress)
 
   useEffect(() => {
     async function fetchTotalSupply() {
-      // const supply = await getSushiSupply(sushi)
-      setTotalSupply(new BigNumber(0))
+      const supply = await getSushiSupply(yfbtcContractObj)
+      setTotalSupply(supply)
     }
     if (sushi) {
       fetchTotalSupply()
     }
   }, [sushi, setTotalSupply])
-
+  const sumOfMultipliers =()=>{
+    return allMultiplier.reduce((a, b) => a + b, 0)
+  }
   return (
     <StyledWrapper>
       <Card>
@@ -139,7 +160,7 @@ const Balances: React.FC = () => {
         </CardContent>
         <Footnote>
           New rewards per block
-          <FootnoteValue>1,000 YFBTC</FootnoteValue>
+          <FootnoteValue>{sumOfMultipliers()}</FootnoteValue>
         </Footnote>
       </Card>
     </StyledWrapper>

@@ -106,12 +106,12 @@ export const supportedPools = [
   },
   {
     pid: 1,
-    liveAddress: '0xbb2b8038a1640196fbe3e38816f3e67cba72d940',
+    liveAddress: '0x7bbdb8ea1c4b8e253f6bfe4a8365bbc5b683c68b',
     lpAddresses: {
       1: '0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc',
     },
     tokenAddresses: {
-      1: '0xB10cf58E08b94480fCb81d341A63295eBb2062C2',
+      1: '0xe97DeCe9f7C817FA09594abf14b040cAF8C7f3dB',
     },
     // name: 'YFBTC/DAI',
     name:'tBTC/ETH',

@@ -59,6 +59,7 @@ const getPair = async (address: any) => {
         }) => getPair(liveAddress),
       ),
     )
+    console.log('balances ', balances)
     setBalance(balances)
   }, [account, sushi])
 
