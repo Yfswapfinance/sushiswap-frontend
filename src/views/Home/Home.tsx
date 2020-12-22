@@ -39,7 +39,7 @@ const Home: React.FC = () => {
 
   return (
     <>
-      {/* <StickyBar /> */}
+      <StickyBar />
       <Page>
         <PageHeader
           icon={<img src={formar} height={120} />}
