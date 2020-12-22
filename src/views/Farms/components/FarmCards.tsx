@@ -7,7 +7,7 @@ import Button from '../../../components/Button'
 import Card from '../../../components/Card-custom'
 import CardContent from '../../../components/CardContent'
 import CardIcon from '../../../components/CardIcon'
-import Loader from '../../../components/Loader'
+import CustomLoader from '../../../components/Loader'
 import Spacer from '../../../components/Spacer'
 import { Farm } from '../../../contexts/Farms'
 import useAllStakedValue, {
@@ -78,7 +78,7 @@ const FarmCards: React.FC = () => {
         ))
       ) : (
         <StyledLoadingWrapper>
-          <Loader text="Cooking the rice ..." />
+          <CustomLoader text="Cooking the rice ..." />
         </StyledLoadingWrapper>
       )}
     </StyledCards>

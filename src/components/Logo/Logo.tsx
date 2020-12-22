@@ -1,15 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import mainlogo from '../../assets/img/mainlogo.png';
+import mainlogo from '../../assets/img/yfbtc-logo.svg';
 
 const Logo: React.FC = () => {
   return (
     <StyledLogo to="/">
       <img src={mainlogo} height="50" style={{  }} />
-      <StyledText>
-        <MasterChefText>.net</MasterChefText>
-      </StyledText>
     </StyledLogo>
   )
 }

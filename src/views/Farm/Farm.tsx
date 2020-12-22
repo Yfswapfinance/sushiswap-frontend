@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { useWallet } from 'use-wallet'
@@ -19,7 +19,7 @@ const Farm: React.FC = () => {
     pid,
     lpToken,
     lpTokenAddress,
-    tokenAddress,
+    tokenAddresses,
     earnToken,
     name,
     icon,
@@ -27,7 +27,7 @@ const Farm: React.FC = () => {
     pid: 0,
     lpToken: '',
     lpTokenAddress: '',
-    tokenAddress: '',
+    tokenAddresses: '',
     earnToken: '',
     name: '',
     icon: '',
@@ -39,7 +39,7 @@ const Farm: React.FC = () => {
 
   const sushi = useSushi()
   const { ethereum } = useWallet()
-
+  const [isFetchAllData, setFetchAllData] = useState(false)
   const lpContract = useMemo(() => {
     return getContract(ethereum as provider, lpTokenAddress)
   }, [ethereum, lpTokenAddress])
@@ -56,7 +56,6 @@ const Farm: React.FC = () => {
 
   return (
     <>
-          
       <PageHeader
         icon={<img src={icon.toString()} alt="" />}
         subtitle={`Deposit ${lpTokenName}  Tokens and earn ${earnTokenName}`}
@@ -65,7 +64,11 @@ const Farm: React.FC = () => {
       <StyledFarm>
         <StyledCardsWrapper>
           <StyledCardWrapper>
-            <Harvest pid={pid} />
+            <Harvest
+              pid={pid}
+              tokenName={lpToken.toUpperCase()}
+              isFetchAllData={isFetchAllData}
+            />
           </StyledCardWrapper>
           <Spacer />
           <StyledCardWrapper>
@@ -73,6 +76,9 @@ const Farm: React.FC = () => {
               lpContract={lpContract}
               pid={pid}
               tokenName={lpToken.toUpperCase()}
+              tokenAddresses={tokenAddresses}
+              setFetchData={setFetchAllData}
+              isFetchAllData={isFetchAllData}
             />
           </StyledCardWrapper>
         </StyledCardsWrapper>

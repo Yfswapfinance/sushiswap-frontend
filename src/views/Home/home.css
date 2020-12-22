@@ -1,36 +1,46 @@
-.section-outline{
-   border-radius: 12px;
-   color: #5c5c5c;
-   line-height: 1.2;
-   box-shadow: 0 20px 40px 0 rgba(255, 148, 22, 0.8);
-   border: solid 1px rgba(0, 0, 0, 0);
-   background-color: #ffffff;
+.section-outline {
+  border-radius: 12px;
+  color: #5c5c5c;
+  line-height: 1.2;
+  box-shadow: 0 20px 40px 0 rgba(255, 148, 22, 0.8);
+  border: solid 1px rgba(0, 0, 0, 0);
+  background-color: #ffffff;
 }
-.img-size{
-   width: 3rem;
+.img-size {
+  width: 3rem;
 }
-.img-con{
-   width: 6rem;
-   height: 6rem;
+.img-con {
+  width: 6rem;
+  height: 6rem;
 }
-.head-text{
-   color: #5c5c5c;
-   font-size: 22px;
-   font-weight: 700;
+.head-text {
+  color: #5c5c5c;
+  font-size: 22px;
+  font-weight: 700;
 }
-.percentage{
-   color: #5c5c5c;
-   font-size: 30px;
-   font-weight: 700;
+.percentage {
+  color: #5c5c5c;
+  font-size: 30px;
+  font-weight: 700;
 }
 .red-band {
-   background-image: linear-gradient(to right, #c91f66, #720332);
-   color: #fff;
-   text-align: center;
-   padding: 10px 25px;
-   border-radius: 15px;
-   margin-bottom: 30px;
-   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
-   font-family: "Montserrat", sans-serif;
-   font-size: 14px;
+  background-image: linear-gradient(to right, #c91f66, #720332);
+  color: #fff;
+  text-align: center;
+  padding: 10px 25px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+}
+.player-wrapper {
+  position: relative;
+  padding-top: 56.25% /* Player ratio: 100 / (1280 / 720) */
+}
+
+@media (max-width: 536px) {
+  .red-band {
+    width: 330px;
+  }
 }

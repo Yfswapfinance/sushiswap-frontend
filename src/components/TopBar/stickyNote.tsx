@@ -1,15 +1,25 @@
 import React from 'react'
 import styled from 'styled-components'
+import Countdown from "react-countdown";
 
 interface stickybarProps { }
 
 const AccountButton: React.FC<stickybarProps> = (props) => {
+  const renderer = (renderer: any) => {
+    
+    // Render a countdown
+    return <span><span className="span-timer">{renderer.hours}</span> hrs <span className="span-timer">{renderer.minutes}</span> min <span className="span-timer">{renderer.seconds}</span> sec</span>;
+  
+};
+console.log("Counter Time", Date.now() + 3600000, 1608632606)
+
     return (
         <StyledStickyBar>
            <StyledInner>
-                <div>
-                    🚨 <span  className="mx-2">Claim is now over. <a href="/getYfbtc"> Click here for further info</a> is the link to next page</span> 🚨
+           <div>
+                    🚨 <span  className="mx-2">Countdown to starting YFBTC Yield farming</span> 🚨
                 </div>
+                <Countdown date={1608654379000} renderer={renderer}/>
             </StyledInner>
         </StyledStickyBar>
     )

@@ -22,7 +22,7 @@ const Nav: React.FC = () => {
       </StyledLink> */}
       <StyledAbsoluteLink  
       >
-        <a href="https://yfswapfi.medium.com/" style={style} target="blank"> About</a>
+        <a href="https://help.yfswap.finance/" style={style} target="blank">Documentation</a>
         
       </StyledAbsoluteLink>
     </StyledNav>
@@ -34,6 +34,9 @@ const StyledNav = styled.nav`
   display: flex;
   margin-right : 156px;
   padding-top:2px;
+  @media (max-width: 768px) {
+    margin-right : 0px;
+  }
 `
 
 

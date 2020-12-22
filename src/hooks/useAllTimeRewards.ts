@@ -1,18 +1,23 @@
 import { useCallback, useEffect, useState } from 'react'
 import { provider } from 'web3-core'
-
+import Web3 from 'web3'
+import { AbiItem } from 'web3-utils'
 import BigNumber from 'bignumber.js'
 import { useWallet } from 'use-wallet'
 import { Contract } from 'web3-eth-contract'
+import ABI from '../utils/abi.json'
 
 import {
   getMasterChefContract,
   getWethContract,
   getFarms,
-  getTotalLPWethValue,
+  getUserInfo,
+  getTotalSupply,
+  getTimeBasedReward
 } from '../sushi/utils'
 import useSushi from './useSushi'
 import useBlock from './useBlock'
+import { masterChefAddress } from '../constants/tokenAddresses'
 
 export interface StakedValue {
   tokenAmount: BigNumber
@@ -22,17 +27,24 @@ export interface StakedValue {
   poolWeight: BigNumber
 }
 
-const useAllStakedValue = () => {
-  const [balances, setBalance] = useState([] as Array<StakedValue>)
+const useAllTimeRewards = () => {
+  const [balances, setBalance] = useState([] as Array<any>)
   const { account }: { account: string; ethereum: provider } = useWallet()
+  const { ethereum } = useWallet()
   const sushi = useSushi()
   const farms = getFarms(sushi)
-  const masterChefContract = getMasterChefContract(sushi)
+  // const masterChefContract = getMasterChefContract(sushi)
   const wethContact = getWethContract(sushi)
   const block = useBlock()
 
   const fetchAllStakedValue = useCallback(async () => {
-    const balances: Array<StakedValue> = await Promise.all(
+    const contractAddress = masterChefAddress
+    const web3 = new Web3(ethereum as provider)
+    const contract = new web3.eth.Contract(
+      (ABI as unknown) as AbiItem,
+      contractAddress,
+    )
+    const balances: Array<any> = await Promise.all(
       farms.map(
         ({
           pid,
@@ -42,28 +54,19 @@ const useAllStakedValue = () => {
           pid: number
           lpContract: Contract
           tokenContract: Contract
-        }) =>
-          getTotalLPWethValue(
-            masterChefContract,
-            wethContact,
-            lpContract,
-            tokenContract,
-            pid,
-          )
-          ,
+        }) => getTimeBasedReward(contract,pid),
       ),
     )
-
     setBalance(balances)
-  }, [account, masterChefContract, sushi])
+  }, [account, sushi])
 
   useEffect(() => {
-    if (account && masterChefContract && sushi) {
-      // fetchAllStakedValue()
+    if (account && sushi) {
+      fetchAllStakedValue()
     }
-  }, [account, block, masterChefContract, setBalance, sushi])
+  }, [account, block, setBalance, sushi])
 
   return balances
 }
 
-export default useAllStakedValue
+export default useAllTimeRewards

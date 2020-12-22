@@ -2,6 +2,9 @@ import BigNumber from 'bignumber.js'
 import React, { useEffect, useState } from 'react'
 import CountUp from 'react-countup'
 import styled from 'styled-components'
+import Web3 from 'web3'
+import { provider } from 'web3-core'
+import { AbiItem } from 'web3-utils'
 import { useWallet } from 'use-wallet'
 import Card from '../../../components/Card'
 import CardContent from '../../../components/CardContent'
@@ -14,32 +17,41 @@ import useAllStakedValue from '../../../hooks/useAllStakedValue'
 import useFarms from '../../../hooks/useFarms'
 import useTokenBalance from '../../../hooks/useTokenBalance'
 import useSushi from '../../../hooks/useSushi'
-import { getSushiAddress, getSushiSupply } from '../../../sushi/utils'
+import { getSushiAddress, getSushiSupply, getRewardPerBlock, getSushiContract } from '../../../sushi/utils'
 import { getBalanceNumber } from '../../../utils/formatBalance'
+import { yfbtc } from '../../../constants/tokenAddresses'
 import { black } from '../../../theme/colors'
+import useAllStakedBalance from '../../../hooks/useAllStakedBalance'
+import useAllPendingRewards from '../../../hooks/useAllPendingRewards'
+import useAllMultiplier from '../../../hooks/useAllMultiplier'
+import { getContract } from '../../../utils/erc20'
+import ABI from '../../../utils/yfbtcAbi.json'
 
 const PendingRewards: React.FC = () => {
+  const allEarnings = useAllEarnings()
+  const { account } = useWallet()
   const [start, setStart] = useState(0)
   const [end, setEnd] = useState(0)
   const [scale, setScale] = useState(1)
-
-  const allEarnings = useAllEarnings()
+  const pendingRewards = useAllPendingRewards()
   let sumEarning = 0
-  for (let earning of allEarnings) {
+  for (let earning of pendingRewards) {
     sumEarning += new BigNumber(earning)
       .div(new BigNumber(10).pow(18))
       .toNumber()
   }
 
-  const [farms] = useFarms()
-  const allStakedValue = useAllStakedValue()
+  
 
-  if (allStakedValue && allStakedValue.length) {
-    const sumWeth = farms.reduce(
-      (c, { id }, i) => c + (allStakedValue[i].totalWethValue.toNumber() || 0),
-      0,
-    )
-  }
+  // const [farms] = useFarms()
+  // const allStakedValue = useAllStakedValue()
+
+  // if (allStakedValue && allStakedValue.length) {
+  //   const sumWeth = farms.reduce(
+  //     (c, { id }, i) => c + (allStakedValue[i].totalWethValue.toNumber() || 0),
+  //     0,
+  //   )
+  // }
 
   useEffect(() => {
     setStart(end)
@@ -57,9 +69,9 @@ const PendingRewards: React.FC = () => {
     >
       <CountUp
         start={start}
-        end={end}
+        end={!!account ? end : start}
         decimals={end < 0 ? 4 : end > 1e5 ? 0 : 3}
-        duration={1}
+        duration={2}
         onStart={() => {
           setScale(1.25)
           setTimeout(() => setScale(1), 600)
@@ -73,19 +85,32 @@ const PendingRewards: React.FC = () => {
 const Balances: React.FC = () => {
   const [totalSupply, setTotalSupply] = useState<BigNumber>()
   const sushi = useSushi()
-  const sushiBalance = useTokenBalance(getSushiAddress(sushi))
-  const { account, ethereum }: { account: any; ethereum: any } = useWallet()
+  console.log('yfbtc ', yfbtc)
+  const sushiBalance = useTokenBalance(yfbtc)
+  const { account, ethereum }: { account: any; ethereum: provider } = useWallet()
+  const allMultiplier = useAllMultiplier()
+  // const { account }: { account: string; ethereum: provider } = useWallet()
+
+  const contractAddress = yfbtc
+  const web3 = new Web3(ethereum as provider)
+        const yfbtcContractObj = new web3.eth.Contract(
+          (ABI as unknown) as AbiItem,
+          contractAddress,
+        )
+  // const yfbtcContractObj = getContract(ABI, contractAddress)
 
   useEffect(() => {
     async function fetchTotalSupply() {
-      const supply = await getSushiSupply(sushi)
+      const supply = await getSushiSupply(yfbtcContractObj)
       setTotalSupply(supply)
     }
     if (sushi) {
       fetchTotalSupply()
     }
   }, [sushi, setTotalSupply])
-
+  const sumOfMultipliers =()=>{
+    return allMultiplier.reduce((a, b) => a + b, 0)
+  }
   return (
     <StyledWrapper>
       <Card>
@@ -119,10 +144,14 @@ const Balances: React.FC = () => {
               <div style={{ color: '#5c5c5c' }}>
                 <Label text="Total YFBTC Supply" />
               </div>
-              {totalSupply ?
-                '':
-                <><Spacer /><Spacer /></>
-              }
+              {totalSupply ? (
+                ''
+              ) : (
+                <>
+                  <Spacer />
+                  <Spacer />
+                </>
+              )}
               <Value
                 value={totalSupply ? getBalanceNumber(totalSupply) : 'Locked'}
               />
@@ -131,7 +160,7 @@ const Balances: React.FC = () => {
         </CardContent>
         <Footnote>
           New rewards per block
-          <FootnoteValue>1,000 YFBTC</FootnoteValue>
+          <FootnoteValue>{sumOfMultipliers()}</FootnoteValue>
         </Footnote>
       </Card>
     </StyledWrapper>
@@ -167,6 +196,9 @@ const StyledBalance = styled.div`
   align-items: center;
   display: flex;
   flex: 1;
+  @media (max-width: 536px) {
+    flex-direction: column;
+  }
 `
 
 export default Balances

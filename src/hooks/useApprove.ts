@@ -4,6 +4,7 @@ import useSushi from './useSushi'
 import { useWallet } from 'use-wallet'
 import { provider } from 'web3-core'
 import { Contract } from 'web3-eth-contract'
+import { getContract, getBalance } from '../utils/erc20'
 
 import { approve, getMasterChefContract } from '../sushi/utils'
 

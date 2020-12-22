@@ -25,3 +25,8 @@ code {
   align-items: center;
   /* color: #ffdde3 */
 }
+
+.span-timer {
+  font-weight: bolder;
+    font-size: 22px;
+}

@@ -74,27 +74,28 @@ UNI-V2 LP Address on mainnet for reference
 */
 
 export const supportedPools = [
+  // {
+  //   pid: 12,
+  //   lpAddresses: {
+  //     1: '0xce84867c3c02b05dc570d0135103d3fb9cc19433',
+  //   },
+  //   tokenAddresses: {
+  //     1: '0x6b3595068778dd592e39a122f4f5a5cf09c90fe2',
+  //   },
+  //   // name: 'YFBTC/BITTO 2.5x',
+  //   name: 'BITTO/ETH 1.5x',
+  //   symbol: 'BITTO-ETH UNI-V2 LP',
+  //   tokenSymbol: 'YFBTC',
+  //   icon: rocket,
+  // },
   {
-    pid: 12,
-    lpAddresses: {
-      1: '0xce84867c3c02b05dc570d0135103d3fb9cc19433',
-    },
-    tokenAddresses: {
-      1: '0x6b3595068778dd592e39a122f4f5a5cf09c90fe2',
-    },
-    // name: 'YFBTC/BITTO 2.5x',
-    name: 'BITTO/ETH 1.5x',
-    symbol: 'BITTO-ETH UNI-V2 LP',
-    tokenSymbol: 'YFBTC',
-    icon: rocket,
-  },
-  {
-    pid: 3,
+    pid: 0,
+    liveAddress: '0x7bbdb8ea1c4b8e253f6bfe4a8365bbc5b683c68b',
     lpAddresses: {
       1: '0xf80758ab42c3b07da84053fd88804bcb6baa4b5c',
     },
     tokenAddresses: {
-      1: '0x57ab1ec28d129707052df4df418d58a2d46d5f51',
+      1: '0xe97DeCe9f7C817FA09594abf14b040cAF8C7f3dB',
     },
     // name: 'YFBTC/ETH 1.5x',
     name:'YFBTC/ETH 2x',
@@ -105,11 +106,12 @@ export const supportedPools = [
   },
   {
     pid: 1,
+    liveAddress: '0x7bbdb8ea1c4b8e253f6bfe4a8365bbc5b683c68b',
     lpAddresses: {
       1: '0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc',
     },
     tokenAddresses: {
-      1: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
+      1: '0xe97DeCe9f7C817FA09594abf14b040cAF8C7f3dB',
     },
     // name: 'YFBTC/DAI',
     name:'tBTC/ETH',
@@ -117,49 +119,49 @@ export const supportedPools = [
     tokenSymbol: 'USDC',
     icon: sweet,
   },
-  {
-    pid: 2,
-    lpAddresses: {
-      1: '0xa478c2975ab1ea89e8196811f51a7b7ade33eb11',
-    },
-    tokenAddresses: {
-      1: '0x6b175474e89094c44da98b954eedeac495271d0f',
-    },
-    // name: 'YFBTC/USDT',
-    name:'RenBTC/ETH',
-    symbol: 'RenBTC-ETH UNI-V2 LP',
-    tokenSymbol: 'DAI',
-    icon: duck,
-  },
-  {
-    pid: 0,
-    lpAddresses: {
-      1: '0x0d4a11d5eeaac28ec3f61d100daf4d40471f1852',
-    },
-    tokenAddresses: {
-      1: '0xdac17f958d2ee523a2206206994597c13d831ec7',
-    },
-    // name: 'YFBTC/RenBTC',
-    name:'wBTC/USDT',
-    symbol: 'BITTO-ETH UNI-V2 LP',
-    tokenSymbol: 'USDT',
-    icon: turt,
-  },
+  // {
+  //   pid: 2,
+  //   lpAddresses: {
+  //     1: '0xa478c2975ab1ea89e8196811f51a7b7ade33eb11',
+  //   },
+  //   tokenAddresses: {
+  //     1: '0x6b175474e89094c44da98b954eedeac495271d0f',
+  //   },
+  //   // name: 'YFBTC/USDT',
+  //   name:'RenBTC/ETH',
+  //   symbol: 'RenBTC-ETH UNI-V2 LP',
+  //   tokenSymbol: 'DAI',
+  //   icon: duck,
+  // },
+  // {
+  //   pid: 0,
+  //   lpAddresses: {
+  //     1: '0x0d4a11d5eeaac28ec3f61d100daf4d40471f1852',
+  //   },
+  //   tokenAddresses: {
+  //     1: '0xdac17f958d2ee523a2206206994597c13d831ec7',
+  //   },
+  //   // name: 'YFBTC/RenBTC',
+  //   name:'wBTC/USDT',
+  //   symbol: 'BITTO-ETH UNI-V2 LP',
+  //   tokenSymbol: 'USDT',
+  //   icon: turt,
+  // },
 
-  {
-    pid: 7,
-    lpAddresses: {
-      1: '0x88d97d199b9ed37c29d846d00d443de980832a22',
-    },
-    tokenAddresses: {
-      1: '0x04fa0d235c4abf4bcf4787af4cf447de572ef828',
-    },
-    // name: 'YFBTC/wBTC 1.5x',
-    name:'wBTC/wETH 1.5x',
-    symbol: 'wBTC-wETH UNI-V2 LP',
-    tokenSymbol: 'UMA',
-    icon: hen,
-  },
+  // {
+  //   pid: 7,
+  //   lpAddresses: {
+  //     1: '0x88d97d199b9ed37c29d846d00d443de980832a22',
+  //   },
+  //   tokenAddresses: {
+  //     1: '0x04fa0d235c4abf4bcf4787af4cf447de572ef828',
+  //   },
+  //   // name: 'YFBTC/wBTC 1.5x',
+  //   name:'wBTC/wETH 1.5x',
+  //   symbol: 'wBTC-wETH UNI-V2 LP',
+  //   tokenSymbol: 'UMA',
+  //   icon: hen,
+  // },
   // {
   //   pid: 9,
   //   lpAddresses: {

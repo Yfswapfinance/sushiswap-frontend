@@ -19,8 +19,10 @@ const useEarnings = (pid: number) => {
   const block = useBlock()
 
   const fetchBalance = useCallback(async () => {
-    const balance = await getEarned(masterChefContract, pid, account)
-    setBalance(new BigNumber(balance))
+    // const balance = await getEarned(masterChefContract, pid, account)
+    // setBalance(new BigNumber(balance))
+    // console.log('earned') 
+    // console.log(new BigNumber(balance))
   }, [account, masterChefContract, sushi])
 
   useEffect(() => {

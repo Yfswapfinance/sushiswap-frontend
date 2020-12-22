@@ -15,7 +15,9 @@ import Farms from './views/Farms'
 import Home from './views/Home'
 import Stake from './views/Stake'
 import GetYfbtc from './views/sticky'
-
+import Config from './constants/abi/config'
+import { ApolloProvider } from '@apollo/client'
+import GraphqlClient from './utils/connections/graphQLClient'
 
 const App: React.FC = () => {
   const [mobileMenu, setMobileMenu] = useState(false)
@@ -55,22 +57,24 @@ const App: React.FC = () => {
 
 const Providers: React.FC = ({ children }) => {
   return (
-    <ThemeProvider theme={theme}>
-      <UseWalletProvider
-        chainId={1}
-        connectors={{
-          walletconnect: { rpcUrl: 'https://mainnet.eth.aragon.network/' },
-        }}
-      >
-        <SushiProvider>
-          <TransactionProvider>
-            <FarmsProvider>
-              <ModalsProvider>{children}</ModalsProvider>
-            </FarmsProvider>
-          </TransactionProvider>
-        </SushiProvider>
-      </UseWalletProvider>
-    </ThemeProvider>
+    <ApolloProvider client={GraphqlClient}>
+      <ThemeProvider theme={theme}>
+        <UseWalletProvider
+          chainId={Config.chainId}
+          connectors={{
+            walletconnect: { rpcUrl: Config.rpcUrl },
+          }}
+        >
+          <SushiProvider>
+            <TransactionProvider>
+              <FarmsProvider>
+                <ModalsProvider>{children}</ModalsProvider>
+              </FarmsProvider>
+            </TransactionProvider>
+          </SushiProvider>
+        </UseWalletProvider>
+      </ThemeProvider>
+    </ApolloProvider>
   )
 }
 
