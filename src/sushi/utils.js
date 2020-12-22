@@ -105,9 +105,13 @@ export const getMultiplier = async (masterChefContract,pid,block) => {
   return (totalReward / diff) / new BigNumber(10).pow(18)
 }
 
-export const getRewardPerBlock = async(masterChefContract,pid) =>{
+export const getRewardPerBlock = async(masterChefContract,pid,account) =>{
     const rewardPerBlock = await masterChefContract.methods.rewardPerBlock(pid).call() 
-    return rewardPerBlock / new BigNumber(10).pow(18)
+    let { amount } = await masterChefContract.methods.userInfo(pid, account).call()
+    amount = amount > 0 ? amount /new BigNumber(10).pow(18) : 1
+    let res = new BigNumber(rewardPerBlock) * new BigNumber(amount)
+    console.log('res -->',res / new BigNumber(10).pow(18))
+    return res / new BigNumber(10).pow(18)
 }
 
 export const getEarned = async (masterChefContract, pid, account) => {

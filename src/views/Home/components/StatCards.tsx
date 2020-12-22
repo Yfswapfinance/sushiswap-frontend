@@ -59,6 +59,9 @@ const StatCards: React.FC = () => {
     [[]],
   )
 
+  console.log(allMultiplier)
+
+
   // const data = rows.filter((farm) => farm.stakedBalance > 0)
 
   // console.log(data)
