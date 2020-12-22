@@ -13,7 +13,7 @@ interface TopBarProps {
 
 const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu }) => {
   return (
-    <StyledTopBar>
+    <StyledTopBar style={{marginTop: '50px'}}>
       {/* <StickyBar /> */}
       <Container size="lg">
         <StyledTopBarInner>
