@@ -121,6 +121,7 @@ const Harvest: React.FC<HarvestProps> = ({
           <StyledCardActions>
             <Button
               // disabled={!earnings.toNumber() || pendingTx}
+              variant="tertiary"
               disabled={!isHarvest}
               text={pendingTx ? 'Collecting YFBTC' : 'Harvest'}
               onClick={async () => {

@@ -129,10 +129,13 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
   return (
     <StyledCardWrapper>
       {farm.tokenSymbol === 'SUSHI' && <StyledCardAccent />}
-      <StyledBoxBorder/>
+      <StyledBoxBorder />
       <Card>
         <CardContent>
           <StyledContent>
+            <StyledMultiplier>
+              <div>{farm.rewardMultiplier}</div>
+            </StyledMultiplier>
             <img
               style={{ width: 55, height: 65 }}
               src={farm.icon.toString()}
@@ -263,6 +266,15 @@ const StyledTitle = styled.h4`
   font-size: 20px;
   font-weight: 700;
   margin: ${(props) => props.theme.spacing[2]}px 0 0;
+  padding: 0;
+`
+
+const StyledMultiplier = styled.div`
+  align-self: flex-end;
+  color: ${(props) => props.theme.color.grey[1000]};
+  font-size: 18px;
+  font-weight: 700;
+  margin-right: 5px;
   padding: 0;
 `
 

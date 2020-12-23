@@ -30,7 +30,7 @@ const StatCards: React.FC = () => {
     ethPrice: any,
     amount: any,
   ) => {
-    return ((pair.token1Price * ethPrice) * amount).toFixed(5)
+    return (pair.token1Price * ethPrice * amount).toFixed(5)
   }
 
   const getFormatRewards = (rewards: any) => {
@@ -59,9 +59,6 @@ const StatCards: React.FC = () => {
     [[]],
   )
 
-  console.log(allMultiplier)
-
-
   // const data = rows.filter((farm) => farm.stakedBalance > 0)
 
   // console.log(data)
@@ -71,9 +68,10 @@ const StatCards: React.FC = () => {
       {data.length > 0
         ? data.map((farm: any, i: any) => (
             <div className="col section-outline mr-3 p-3" key={i}>
+              <div className="row mul-text mr-1">{farm.rewardMultiplier}</div>
               <img className={'img-con'} src={farm.icon.toString()} alt="" />
               <span className="head-text ml-2">{farm.name} Stats</span>
-              <span className="percentage d-block">
+              <span className="my-percentage d-block">
                 {!isNaN(farm.stakedBalance) && farm.stakedBalance}
               </span>
               <span className="d-block">My LP Share</span>
@@ -127,21 +125,24 @@ const StatCards: React.FC = () => {
                   farm.rewards.weekly,
                 )}
               <br />
-              Hourly ROI in USD : {!!farm.pair &&
+              Hourly ROI in USD :{' '}
+              {!!farm.pair &&
                 getYfbtcRewardsDollarPrice(
                   farm.pair,
                   farm.ethPrice,
                   farm.rewards.hourly,
                 )}
               <br />
-              Daily ROI in USD : {!!farm.pair &&
+              Daily ROI in USD :{' '}
+              {!!farm.pair &&
                 getYfbtcRewardsDollarPrice(
                   farm.pair,
                   farm.ethPrice,
                   farm.rewards.daily,
                 )}
               <br />
-              Weekly ROI in USD : {!!farm.pair &&
+              Weekly ROI in USD :{' '}
+              {!!farm.pair &&
                 getYfbtcRewardsDollarPrice(
                   farm.pair,
                   farm.ethPrice,

@@ -34,6 +34,9 @@ const Button: React.FC<ButtonProps> = ({
     case 'normal':
       buttonColor = color.grey[900]
       break
+    case 'tertiary':
+      buttonColor = '#ff9416'
+      break
     case 'default':
     default:
       buttonColor = color.primary.main
@@ -131,9 +134,11 @@ const StyledButton = styled.button<StyledButtonProps>`
       ? '#110f40'
       : (props) => props.theme.color.grey[200]};
   border: 0;
-  border-radius: ${(props) => (props.fontSize === 12 || props.fontSize === 11.8 ? '18px' : '12px')};
+  border-radius: ${(props) =>
+    props.fontSize === 12 || props.fontSize === 11.8 ? '18px' : '12px'};
   box-shadow: ${(props) => props.boxShadow};
-  color: ${(props) => (!props.disabled ? props.color : `${props.color}55`)};
+  color: ${(props) =>
+    !props.disabled ? props.color : props.theme.color.grey[2000]};
   cursor: pointer;
   display: flex;
   font-size: ${(props) => (props.fontSize === 11 ? '10' : props.fontSize)}px;
@@ -141,7 +146,8 @@ const StyledButton = styled.button<StyledButtonProps>`
   height: ${(props) => props.size}px;
   justify-content: center;
   outline: none;
-  padding-left: ${(props) => (props.fontSize === 11.8 ? '63' :  props.padding)}px;
+  padding-left: ${(props) =>
+    props.fontSize === 11.8 ? '63' : props.padding}px;
   padding-right: ${(props) => props.padding}px;
   pointer-events: ${(props) => (!props.disabled ? undefined : 'none')};
   width: 100%;
@@ -154,7 +160,7 @@ const StyledButton = styled.button<StyledButtonProps>`
 
 const StyledLink = styled(Link)`
   align-items: center;
-  color: inherit;
+  color: #ff9416;
   display: flex;
   flex: 1;
   height: 56px;

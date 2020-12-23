@@ -19,7 +19,7 @@ console.log("Counter Time", Date.now() + 3600000, 1608632606)
            <div>
                     🚨 <span  className="mx-2">Countdown to starting YFBTC Yield farming</span> 🚨
                 </div>
-                <Countdown date={1608706800000} renderer={renderer}/>
+                <Countdown date={1608736200000} renderer={renderer}/>
             </StyledInner>
         </StyledStickyBar>
     )

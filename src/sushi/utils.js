@@ -44,7 +44,8 @@ export const getFarms = (sushi) => {
           tokenContract,
           lpAddress,
           lpContract,
-          liveAddress
+          liveAddress,
+          rewardMultiplier
         }) => ({
           pid,
           id: symbol,
@@ -53,6 +54,7 @@ export const getFarms = (sushi) => {
           lpTokenAddress: lpAddress,
           lpContract,
           liveAddress,
+          rewardMultiplier,
           tokenAddresses:tokenAddresses[1],
           tokenSymbol,
           tokenContract,
@@ -109,8 +111,9 @@ export const getRewardPerBlock = async(masterChefContract,pid,account) =>{
     const rewardPerBlock = await masterChefContract.methods.rewardPerBlock(pid).call() 
     let { amount } = await masterChefContract.methods.userInfo(pid, account).call()
     amount = amount > 0 ? amount /new BigNumber(10).pow(18) : 1
+    // console.log(rewardPerBlock)
     let res = new BigNumber(rewardPerBlock) * new BigNumber(amount)
-    console.log('res -->',res / new BigNumber(10).pow(18))
+    // console.log('res -->',res / new BigNumber(10).pow(18))
     return res / new BigNumber(10).pow(18)
 }
 
