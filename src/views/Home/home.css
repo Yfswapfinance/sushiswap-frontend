@@ -29,8 +29,19 @@
   font-size: 22px;
   font-weight: 700;
 }
-.percentage {
+.mul-text {
   color: #5c5c5c;
+  float: right;
+  font-size: 18px;
+  font-weight: bold;
+}
+.my-percentage {
+  color: rgba(62, 62, 62, 0.95);
+  font-size: 30px;
+  font-weight: 700;
+}
+.percentage {
+  color: rgba(92, 92, 92, 0.95);
   font-size: 30px;
   font-weight: 700;
 }

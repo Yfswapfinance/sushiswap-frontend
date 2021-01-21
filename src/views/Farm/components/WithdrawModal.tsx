@@ -59,6 +59,7 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
       <ModalActions>
         <Button text="Cancel" variant="secondary" onClick={onDismiss} />
         <Button
+          variant="tertiary"
           disabled={isConfirm}
           text={pendingTx ? 'Pending Confirmation' : 'Confirm'}
           onClick={async () => {

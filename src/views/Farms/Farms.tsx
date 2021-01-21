@@ -47,6 +47,7 @@ const Farms: React.FC = () => {
             <Button
               onClick={onPresentWalletProviderModal}
               text="🔓 Unlock Wallet"
+              variant='tertiary'
             />
           </div>
         )}

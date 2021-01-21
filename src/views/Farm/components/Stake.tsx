@@ -190,12 +190,14 @@ const Stake: React.FC<StakeProps> = ({
             {!allowance.toNumber() ? (
               <>
                 <Button
+                  variant="tertiary"
                   disabled={requestedApproval}
                   onClick={handleApprove}
                   text={`Approve ${tokenName}`}
                 />
                 <StyledAddButtonContainer>
                   <Button
+                    variant="tertiary"
                     disabled={isAddAmount}
                     onClick={onPresentAmountModal}
                     text={`+`}
