@@ -190,14 +190,14 @@ const Stake: React.FC<StakeProps> = ({
             {!allowance.toNumber() ? (
               <>
                 <Button
-                  variant="tertiary"
+                  variant="normal"
                   disabled={requestedApproval}
                   onClick={handleApprove}
                   text={`Approve ${tokenName}`}
                 />
                 <StyledAddButtonContainer>
                   <Button
-                    variant="tertiary"
+                    variant="normal"
                     disabled={isAddAmount}
                     onClick={onPresentAmountModal}
                     text={`+`}
@@ -239,7 +239,7 @@ const StyledLoadingWrapper = styled.div`
 
 const StyledCardActions = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   margin-top: ${(props) => props.theme.spacing[6]}px;
   width: 100%;
 `
@@ -257,6 +257,7 @@ const StyledCardContentInner = styled.div`
   justify-content: space-between;
 `
 const StyledAddButtonContainer = styled.div`
+  margin-left: 10px;
   align-items: center;
   display: flex;
   flex-direction: column;

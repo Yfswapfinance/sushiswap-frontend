@@ -60,14 +60,14 @@ const StatCards: React.FC = () => {
   )
 
   // const data = rows.filter((farm) => farm.stakedBalance > 0)
+    console.log(data)
 
-  // console.log(data)
 
   return (
     <>
       {data.length > 0
         ? data.map((farm: any, i: any) => (
-            <div className="col section-outline mr-3 p-3" key={i}>
+            <div className="col section-outline mr-3 p-3 " key={i}>
               <div className="row mul-text mr-1">{farm.rewardMultiplier}</div>
               <img className={'img-con'} src={farm.icon.toString()} alt="" />
               <span className="head-text ml-2">{farm.name} Stats</span>

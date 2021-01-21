@@ -129,10 +129,11 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
   return (
     <StyledCardWrapper>
       {farm.tokenSymbol === 'SUSHI' && <StyledCardAccent />}
-      <StyledBoxBorder/>
+      <StyledBoxBorder />
       <Card>
         <CardContent>
           <StyledContent>
+            <div className="row menu-mul-text mr-1">{farm.rewardMultiplier}</div>
             <img
               style={{ width: 55, height: 65 }}
               src={farm.icon.toString()}
@@ -145,9 +146,11 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
             </StyledDetails>
             <Spacer />
             <Button
+              size="ps"
               disabled={!poolActive}
               text={poolActive ? 'Select' : undefined}
               to={`/farms/${farm.id}`}
+              variant="normal"
             >
               {!poolActive && (
                 <Countdown
@@ -256,6 +259,7 @@ const StyledCardWrapper = styled.div`
   display: flex;
   width: calc((900px - ${(props) => props.theme.spacing[4]}px * 2) / 3);
   position: relative;
+  overflow: hidden;
 `
 
 const StyledTitle = styled.h4`

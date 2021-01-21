@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js/bignumber'
-import change from "../../assets/img/change.svg"
+import change from "../../assets/img/btc.svg"
 import rocket from "../../assets/img/rocket.svg"
 import sweet from "../../assets/img/sweet.svg"
 import hen from "../../assets/img/hen.svg"
@@ -121,38 +121,38 @@ export const supportedPools = [
     tokenSymbol: 'USDC',
     icon: sweet,
   },
-  {
-    pid: 2,
-    liveAddress: '0x9fb24efec63c6a978efd21bda010099cb4f23707',
-    lpAddresses: {
-      1: '0xa478c2975ab1ea89e8196811f51a7b7ade33eb11',
-    },
-    tokenAddresses: {
-      1: '0x81fbef4704776cc5bba0a5df3a90056d2c6900b3',
-    },
-    // name: 'YFBTC/USDT',
-    name:'RenBTC/ETH',
-    rewardMultiplier: '1.0x',
-    symbol: 'RenBTC-ETH UNI-V2 LP',
-    tokenSymbol: 'DAI',
-    icon: duck,
-  },
-  {
-    pid: 3,
-    liveAddress: '0x9fb24efec63c6a978efd21bda010099cb4f23707',
-    lpAddresses: {
-      1: '0x0d4a11d5eeaac28ec3f61d100daf4d40471f1852',
-    },
-    tokenAddresses: {
-      1: '0xbb2b8038a1640196fbe3e38816f3e67cba72d940',
-    },
-    // name: 'YFBTC/RenBTC',
-    name:'wBTC/ETH',
-    rewardMultiplier: '1.0x',
-    symbol: 'wBTC-ETH UNI-V2 LP',
-    tokenSymbol: 'USDT',
-    icon: turt,
-  },
+  // {
+  //   pid: 2,
+  //   liveAddress: '0x9fb24efec63c6a978efd21bda010099cb4f23707',
+  //   lpAddresses: {
+  //     1: '0xa478c2975ab1ea89e8196811f51a7b7ade33eb11',
+  //   },
+  //   tokenAddresses: {
+  //     1: '0x81fbef4704776cc5bba0a5df3a90056d2c6900b3',
+  //   },
+  //   // name: 'YFBTC/USDT',
+  //   name:'RenBTC/ETH',
+  //   rewardMultiplier: '1.0x',
+  //   symbol: 'RenBTC-ETH UNI-V2 LP',
+  //   tokenSymbol: 'DAI',
+  //   icon: duck,
+  // },
+  // {
+  //   pid: 3,
+  //   liveAddress: '0x9fb24efec63c6a978efd21bda010099cb4f23707',
+  //   lpAddresses: {
+  //     1: '0x0d4a11d5eeaac28ec3f61d100daf4d40471f1852',
+  //   },
+  //   tokenAddresses: {
+  //     1: '0xbb2b8038a1640196fbe3e38816f3e67cba72d940',
+  //   },
+  //   // name: 'YFBTC/RenBTC',
+  //   name:'wBTC/ETH',
+  //   rewardMultiplier: '1.0x',
+  //   symbol: 'wBTC-ETH UNI-V2 LP',
+  //   tokenSymbol: 'USDT',
+  //   icon: turt,
+  // },
 
   // {
   //   pid: 7,

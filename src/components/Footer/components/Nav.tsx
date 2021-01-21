@@ -1,34 +1,41 @@
 import React from 'react'
 import styled from 'styled-components'
-import { AiFillMediumCircle, AiOutlineGithub } from 'react-icons/ai';
-import { FaTelegram } from 'react-icons/fa';
+import { AiFillMediumCircle, AiOutlineGithub } from 'react-icons/ai'
+import { FaTelegram } from 'react-icons/fa'
+import medium from '../../../assets/img/medium.png'
+import logo1 from '../../../assets/img/logo1.png'
+import discord from '../../../assets/img/discord.png'
+import telegram from '../../../assets/img/twitter.png'
 
 const style = {
-  color: 'white', 
-};
+  width: 50,
+}
 const Nav: React.FC = () => {
   return (
     <StyledNav>
       <div className="py-5">
         <div className="center">
-          <a href="https://yfswapfi.medium.com/" target="blank" style={style}>
-            <AiFillMediumCircle className="mr-2" style={{ fontSize: 30 }}/>
+          <a href="" target="blank">
+            <img src={logo1} alt="" style={style} />
+          </a>
+          {/* https://github.com/abanshinoburu */}
+          <a href="" target="blank">
+            <img src={discord} alt="" style={style} />
+          </a>
+          <a href="https://yfswapfi.medium.com/" target="blank">
+            <img src={medium} alt="" style={style} />
           </a>
 
-          <a href="https://t.me/yfswap" target="blank" style={style}>
-            <FaTelegram className="mr-2" style={{ fontSize: 30 }} />
+          <a href="https://t.me/yfswap" target="blank">
+            <img src={telegram} alt="" style={style} />
           </a>
-          <a href="https://github.com/abanshinoburu" target="blank" style={style}>
-          <AiOutlineGithub style={{ fontSize: 30 }} />
-          </a>
-          
         </div>
         <Styledspan>
-          <span>© 2020 yfswap.finance</span>
+          <span>© 2021 yfbtc.net</span>
         </Styledspan>
       </div>
     </StyledNav>
-    // 
+    //
     //   <StyledLink
 
     //   >
@@ -55,7 +62,7 @@ const Nav: React.FC = () => {
 const StyledNav = styled.nav`
   align-items: center;
   display: flex;
-  margin-top: 50px
+  margin-top: 50px;
 `
 
 const StyledLink = styled.a`
@@ -68,16 +75,18 @@ const StyledLink = styled.a`
   }
 `
 const Styledspan = styled.span`
-font-family: sans-serif, Chivo;
-font-size: 14px;
-font-weight: normal;
-font-stretch: normal;
-font-style: normal;
-line-height: 1.56;
-letter-spacing: -0.18px;
-text-align: left;
-color: #eaa8c4;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  font-family: sans-serif, Chivo;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.56;
+  letter-spacing: -0.18px;
+  text-align: center;
+  color: #eaa8c4;
 `
 
 export default Nav
-

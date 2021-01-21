@@ -44,7 +44,8 @@ export const getFarms = (sushi) => {
           tokenContract,
           lpAddress,
           lpContract,
-          liveAddress
+          liveAddress,
+          rewardMultiplier
         }) => ({
           pid,
           id: symbol,
@@ -59,6 +60,7 @@ export const getFarms = (sushi) => {
           earnToken: 'YFBTC',
           earnTokenAddress: sushi.contracts.sushi.options.address,
           icon,
+          rewardMultiplier
         }),
       )
     : []

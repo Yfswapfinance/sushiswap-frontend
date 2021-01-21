@@ -160,7 +160,7 @@ const StyledButton = styled.button<StyledButtonProps>`
 
 const StyledLink = styled(Link)`
   align-items: center;
-  color: #ff9416;
+  color: #ffffff;
   display: flex;
   flex: 1;
   height: 56px;

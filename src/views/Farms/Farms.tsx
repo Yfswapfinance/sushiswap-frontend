@@ -3,7 +3,7 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { useWallet } from 'use-wallet'
 
 import formar from '../../assets/img/formar.png'
-
+import StickyBar from '../../components/TopBar/stickyNote'
 import Button from '../../components/Button'
 import Page from '../../components/Page'
 import PageHeader from '../../components/PageHeader'
@@ -22,6 +22,7 @@ const Farms: React.FC = () => {
   return (
     <Switch>
       <Page>
+        <StickyBar />
         {!!account ? (
           <>
             <Route exact path={path}>
@@ -47,7 +48,7 @@ const Farms: React.FC = () => {
             <Button
               onClick={onPresentWalletProviderModal}
               text="🔓 Unlock Wallet"
-              variant='tertiary'
+              variant="tertiary"
             />
           </div>
         )}
