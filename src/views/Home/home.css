@@ -9,6 +9,17 @@
 .img-size {
   width: 3rem;
 }
+.youtube-icon {
+  width: 35px;
+  margin-left: 10px;
+}
+.link-color {
+  color: white;
+}
+.link-color:hover {
+  color: white;
+  text-decoration: none;
+}
 .img-con {
   width: 6rem;
   height: 6rem;
@@ -36,7 +47,7 @@
 }
 .player-wrapper {
   position: relative;
-  padding-top: 56.25% /* Player ratio: 100 / (1280 / 720) */
+  padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
 }
 
 @media (max-width: 536px) {

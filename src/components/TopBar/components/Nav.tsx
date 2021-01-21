@@ -15,16 +15,18 @@ const Nav: React.FC = () => {
         Home
       </StyledLink>
       <StyledLink exact activeClassName="active" to="/farms">
-        Menu
+        Menu 🔥
       </StyledLink>
       {/* <StyledLink exact activeClassName="active" to="/staking">
         Staking
       </StyledLink> */}
       <StyledAbsoluteLink  
       >
-        <a href="https://help.yfswap.finance/" style={style} target="blank">Documentation</a>
-        
+        <a href="https://help.yfswap.finance/" style={style} target="blank">Documentation 📋</a>
       </StyledAbsoluteLink>
+      <StyledLink exact activeClassName="active" to="/governance" style={{opacity:0.4}}>
+        Governance
+      </StyledLink>
     </StyledNav>
   )
 }
@@ -46,11 +48,12 @@ const StyledLink = styled(NavLink)`
   padding-left: ${(props) => props.theme.spacing[3]}px;
   padding-right: ${(props) => props.theme.spacing[3]}px;
   text-decoration: none;
+  padding-bottom:5px;
   &:hover {
     color: ${(props) => props.theme.color.grey[500]};
   }
   &.active {
-      
+      border-bottom: 2px solid #ff9416;
   }
   @media (max-width: 400px) {
     padding-left: ${(props) => props.theme.spacing[2]}px;

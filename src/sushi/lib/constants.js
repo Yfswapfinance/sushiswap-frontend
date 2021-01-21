@@ -95,7 +95,7 @@ export const supportedPools = [
       1: '0xf80758ab42c3b07da84053fd88804bcb6baa4b5c',
     },
     tokenAddresses: {
-      1: '0xe97DeCe9f7C817FA09594abf14b040cAF8C7f3dB',
+      1: '0x9fb24efec63c6a978efd21bda010099cb4f23707',
     },
     // name: 'YFBTC/ETH 1.5x',
     name:'YFBTC/ETH 2x',
@@ -111,7 +111,7 @@ export const supportedPools = [
       1: '0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc',
     },
     tokenAddresses: {
-      1: '0xe97DeCe9f7C817FA09594abf14b040cAF8C7f3dB',
+      1: '0x9fb24efec63c6a978efd21bda010099cb4f23707',
     },
     // name: 'YFBTC/DAI',
     name:'tBTC/ETH',

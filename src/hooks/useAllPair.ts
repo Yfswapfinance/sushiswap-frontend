@@ -53,10 +53,10 @@ const getPair = async (address: any) => {
     const balances: Array<any> = await Promise.all(
       farms.map(
         ({
-          liveAddress
+          tokenAddresses
         }: {
-          liveAddress: String
-        }) => getPair(liveAddress),
+          tokenAddresses: String
+        }) => getPair(tokenAddresses),
       ),
     )
     console.log('balances ', balances)
