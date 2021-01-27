@@ -51,7 +51,7 @@ const StyledTopBarInner = styled.div`
   @media (max-width: 768px) {
     flex-direction:column;
     align-items:center;
-    height:230px;
+    height:330px;
   }
 `
 const StyledNavWrapper = styled.div`
@@ -68,7 +68,7 @@ const StyledAccountButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   width: 156px;
-  @media (max-width: 400px) {
+  @media (max-width: 768px) {
     justify-content: center;
     width: auto;
   }

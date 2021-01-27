@@ -246,6 +246,7 @@ const StyledLoadingWrapper = styled.div`
 
 const StyledRow = styled.div`
   display: flex;
+  justify-content:center;
   margin-bottom: ${(props) => props.theme.spacing[4]}px;
   flex-flow: row wrap;
   @media (max-width: 768px) {

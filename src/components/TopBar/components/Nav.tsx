@@ -22,6 +22,7 @@ const Nav: React.FC = () => {
         Documentation 📋
       </StyledAbsoluteLink>
       <StyledLink
+        onClick={(e) => e.preventDefault()}
         exact
         activeClassName="active"
         to="/governance"
@@ -39,6 +40,7 @@ const StyledNav = styled.nav`
   margin-right: 156px;
   padding-top: 2px;
   @media (max-width: 768px) {
+    flex-direction: column;
     margin-right: 0px;
   }
 `
@@ -60,6 +62,10 @@ const StyledLink = styled(NavLink)`
   @media (max-width: 400px) {
     padding-left: ${(props) => props.theme.spacing[2]}px;
     padding-right: ${(props) => props.theme.spacing[2]}px;
+  }
+  @media (max-width: 768px) {
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 `
 

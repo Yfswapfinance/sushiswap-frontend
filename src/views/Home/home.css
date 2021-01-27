@@ -6,6 +6,10 @@
   background-color: #ffffff;
   overflow: hidden;
 }
+.stat-cards {
+  display: flex;
+  flex-direction: row;
+}
 .img-size {
   width: 3rem;
 }

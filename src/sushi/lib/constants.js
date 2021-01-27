@@ -119,7 +119,7 @@ export const supportedPools = [
     rewardMultiplier: '1.0x',
     symbol: 'BITTO-ETH UNI-V2 LP',
     tokenSymbol: 'USDC',
-    icon: sweet,
+    icon: rocket,
   },
   // {
   //   pid: 2,

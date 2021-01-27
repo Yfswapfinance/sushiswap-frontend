@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useImperativeHandle } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import formar from '../../assets/img/formar.png'
 import Button from '../../components/Button'
@@ -16,6 +16,7 @@ import { gql, useApolloClient } from '@apollo/client'
 import StatCards from './components/StatCards'
 import yticon from '../../assets/img/youtube_icon.png'
 import certik from '../../assets/img/certik_logo.png'
+import YoutubeModal from './components/YoutubeModal'
 
 const GET_ETH_PRICE = gql`
   {
@@ -28,6 +29,7 @@ const GET_ETH_PRICE = gql`
 const Home: React.FC = () => {
   const { account } = useWallet()
   const client = useApolloClient()
+  const [popUp,setPopUp] = useState(false)
 
   useEffect(() => {
     client
@@ -39,6 +41,8 @@ const Home: React.FC = () => {
         // console.log(ethPrice)
       })
   }, [])
+
+  const toggleModal = () => setPopUp(!popUp)
 
   return (
     <>
@@ -68,15 +72,9 @@ const Home: React.FC = () => {
             <Spacer />
             {!account && (
               <StyledCard>
-                <StyledCardContent>
-                  <a
-                    href="https://youtu.be/NheGX8Ksc-c"
-                    target="_blank"
-                    className="link-color"
-                  >
+                <StyledCardContent onClick={toggleModal}>                 
                     WATCH INTRO VIDEO
                     <img src={yticon} alt="" className="youtube-icon" />
-                  </a>
                 </StyledCardContent>
               </StyledCard>
             )}
@@ -89,7 +87,7 @@ const Home: React.FC = () => {
         </StyledInfo>
         <Spacer size="lg" />
         {!!account && (
-          <div className="row mt-2 mb-5 pb-5">
+          <div className="stat-cards mt-2 mb-5 pb-5">
             <StatCards />
           </div>
         )}
@@ -102,6 +100,7 @@ const Home: React.FC = () => {
           <img src={certik} alt="" className="ml-2" />
         </StyledLogo>
       </Page>
+      <YoutubeModal popUp={popUp} toggleModal={toggleModal} />
     </>
   )
 }

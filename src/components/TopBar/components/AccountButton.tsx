@@ -33,6 +33,11 @@ const AccountButton: React.FC<AccountButtonProps> = (props) => {
 }
 
 const StyledAccountButton = styled.div`
+@media (max-width: 768px) {
+ border:2px solid red
+ display:flex;
+ justify-content:center;
+}
 `
 
 export default AccountButton

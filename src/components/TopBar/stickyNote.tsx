@@ -17,7 +17,7 @@ console.log("Counter Time", Date.now() + 3600000, 1608632606)
         <StyledStickyBar>
            <StyledInner>
            <div>
-                    🚨 <span  className="mx-2">YFBitcoin is an alternative to bitcoin, a defi bitcoin version with yield farming <a href="https://help.yfswap.finance/" style={{color:'inherit',textDecoration:'underline'}} target="blank">Learn More.</a></span> 🚨
+                    🚨 <span  className="mx-2">YFBitcoin is an alternative to bitcoin, a defi bitcoin version with yield farming <a href="https://yfswapfi.medium.com/bitcoin-defi-explained-748217d76e14" style={{color:'inherit',textDecoration:'underline'}} target="blank">Learn More.</a></span> 🚨
                 </div>
                 {/* <Countdown date={1608654379000} renderer={renderer}/> */}
             </StyledInner>
