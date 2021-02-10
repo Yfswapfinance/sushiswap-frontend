@@ -24,7 +24,7 @@ const AccountButton: React.FC<stickybarProps> = (props) => {
         🚨 <span  className="mx-2">Countdown to starting YFBTC Yield farming</span> 🚨
           {/* 🚨 <span  className="mx-2">YFBitcoin is an alternative to bitcoin, a defi bitcoin version with yield farming <a href="https://yfswapfi.medium.com/bitcoin-defi-explained-748217d76e14" style={{color:'inherit',textDecoration:'underline'}} target="blank">Learn More.</a></span> 🚨 */}
         </div>
-        <Countdown date={1613044800000} renderer={renderer}/>
+        <Countdown date={16130664000000} renderer={renderer}/>
       </StyledInner>
     </StyledStickyBar>
   )
