@@ -30,10 +30,17 @@ const StatCards: React.FC = () => {
     ethPrice: any,
     amount: any,
   ) => {
-    return ((pair.token0Price * ethPrice) * amount).toFixed(5)
+    return (pair.token0Price * ethPrice * amount).toFixed(5)
   }
 
   const getFormatRewards = (rewards: any) => {
+    if (rewards === undefined) {
+      return {
+        hourly: 0,
+        daily: 0,
+        weekly: 0,
+      }
+    }
     return {
       hourly: (240 * rewards).toFixed(5),
       daily: (5760 * rewards).toFixed(5),
