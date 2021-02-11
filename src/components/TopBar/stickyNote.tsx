@@ -30,8 +30,8 @@ const AccountButton: React.FC<stickybarProps> = (props) => {
         </div>
         <Countdown
           daysInHours={true}
-          // date={new Date('2021-02-12T18:02:03')}
-          date={1613134800000}
+          // date={new Date('2021-02-12T12:00:00 GMT+05:00')}
+          date={1613113200000}
           renderer={renderer}
         />
       </StyledInner>
