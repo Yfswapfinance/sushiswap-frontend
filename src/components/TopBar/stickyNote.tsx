@@ -9,22 +9,31 @@ const AccountButton: React.FC<stickybarProps> = (props) => {
     // Render a countdown
     return (
       <span>
+        <span className="span-timer">{renderer.days}</span> day{' '}
         <span className="span-timer">{renderer.hours}</span> hrs{' '}
         <span className="span-timer">{renderer.minutes}</span> min{' '}
         <span className="span-timer">{renderer.seconds}</span> sec
       </span>
     )
   }
-  console.log('Counter Time', Date.now() + 3600000, 1608632606)
 
   return (
     <StyledStickyBar>
       <StyledInner>
         <div>
-        🚨 <span  className="mx-2">Countdown to starting YFBTC Yield farming</span> 🚨
+          🚨
+          <span className="mx-2">
+            Countdown to starting YFBTC Yield farming
+          </span>
+          🚨
           {/* 🚨 <span  className="mx-2">YFBitcoin is an alternative to bitcoin, a defi bitcoin version with yield farming <a href="https://yfswapfi.medium.com/bitcoin-defi-explained-748217d76e14" style={{color:'inherit',textDecoration:'underline'}} target="blank">Learn More.</a></span> 🚨 */}
         </div>
-        <Countdown date={1613044800000} renderer={renderer}/>
+        <Countdown
+          daysInHours={true}
+          // date={new Date('2021-02-12T18:02:03')}
+          date={1613134800000}
+          renderer={renderer}
+        />
       </StyledInner>
     </StyledStickyBar>
   )
