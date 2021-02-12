@@ -13,6 +13,8 @@ const GAS_LIMIT = {
   },
 }
 
+const YFBTC_MULTIPLIER = 5;
+
 export const getMasterChefAddress = (sushi) => {
   return sushi && sushi.masterChefAddress
 }
@@ -99,6 +101,7 @@ export const getEligiblePools = async(masterChefContract)=>{
 }
 
 export const getMultiplier = async (masterChefContract,pid,block) => {
+  console.log('getMultiplier is called')
   const { lastRewardBlock } = await masterChefContract.methods.poolInfo(pid).call()
   const diff = (block - lastRewardBlock)
   if ( diff <= 0 )
@@ -108,8 +111,17 @@ export const getMultiplier = async (masterChefContract,pid,block) => {
 }
 
 export const getRewardPerBlock = async(masterChefContract,pid) =>{
-    const rewardPerBlock = await masterChefContract.methods.rewardPerBlock(pid).call() 
-    return rewardPerBlock / new BigNumber(10).pow(18)
+  let { totalSupply } = await masterChefContract.methods.poolInfo(pid).call()
+  totalSupply = totalSupply / new BigNumber(10).pow(18);
+    const rewardPerBlock =  0.00683734462
+    const distribution = YFBTC_MULTIPLIER + 3;
+    let rewardPerPool = rewardPerBlock / (distribution);
+    if (pid == 0 ){
+      rewardPerPool = (rewardPerPool * YFBTC_MULTIPLIER) / totalSupply
+    }else{
+      rewardPerPool = rewardPerPool / totalSupply
+    }
+    return rewardPerPool;
 }
 
 export const getEarned = async (masterChefContract, pid, account) => {
