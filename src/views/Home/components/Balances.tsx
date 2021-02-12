@@ -109,7 +109,8 @@ const Balances: React.FC = () => {
     }
   }, [sushi, setTotalSupply])
   const sumOfMultipliers =()=>{
-    return allMultiplier.reduce((a, b) => a + b, 0)
+   return 0.00683734462
+    // return allMultiplier.reduce((a, b) => a + b, 0)
   }
   return (
     <StyledWrapper>
