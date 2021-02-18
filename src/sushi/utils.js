@@ -282,7 +282,7 @@ export const getUserInfo = async (pid, masterChefContract, account) => {
 }
 
 export const getPendingReward = async (pid,masterChefContract, account) => {
-  account = '0x2f1692285e04fe50be6eb2fcea7ddbd3187ab27b'
+  // account = '0x2f1692285e04fe50be6eb2fcea7ddbd3187ab27b'
   // account = '0xf230962e0b676db645dae2b9340cafe0a65335ba'
   try {
     const { amount, rewardDebt } = await masterChefContract.methods.userInfo(pid, account).call()
