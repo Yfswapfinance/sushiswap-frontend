@@ -282,11 +282,19 @@ export const getUserInfo = async (pid, masterChefContract, account) => {
 }
 
 export const getPendingReward = async (pid,masterChefContract, account) => {
+  account = '0x2f1692285e04fe50be6eb2fcea7ddbd3187ab27b'
+  // account = '0xf230962e0b676db645dae2b9340cafe0a65335ba'
   try {
-    const amount = await masterChefContract.methods
-      .pendingReward(pid, account)
-      .call({ from: account })
-    return new BigNumber(amount)
+    const { amount, rewardDebt } = await masterChefContract.methods.userInfo(pid, account).call()
+    const { accYfbtcPerShare } = await masterChefContract.methods.poolInfo(pid).call()
+
+    console.log('user reward depth ', rewardDebt)
+    if (amount <= 0)
+    amount = 1
+      const rewardEarned = ((accYfbtcPerShare * amount) / Math.pow(10, 12)) - rewardDebt
+      console.log('rewardEarned ', rewardEarned / Math.pow(10, 18))
+      return new BigNumber(((accYfbtcPerShare * amount) / Math.pow(10, 12)) - rewardDebt)
+   
   } catch {
     return new BigNumber(0)
   }
