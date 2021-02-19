@@ -29,7 +29,7 @@ const GET_ETH_PRICE = gql`
 const Home: React.FC = () => {
   const { account } = useWallet()
   const client = useApolloClient()
-  const [popUp,setPopUp] = useState(false)
+  const [popUp, setPopUp] = useState(false)
 
   useEffect(() => {
     client
@@ -58,23 +58,20 @@ const Home: React.FC = () => {
         </Container>
         <Container>
           <StyledWrapper>
-            <StyledTransCard style={{ flex: !!account ? 0.5 : 1 }}>
-              <StyledButton>
-                <a
-                  href="https://app.uniswap.org/#/swap?outputCurrency=0xff034D12353867fC4228f4Ae3E689CD6dCAad120"
-                  target="_blank"
-                  className="buy-link-color"
-                >
-                  BUY YFBTC
-                </a>
-              </StyledButton>
+            <StyledTransCard
+              style={{ flex: !!account ? 0.5 : 1 }}
+              href="https://app.uniswap.org/#/swap?outputCurrency=0xff034D12353867fC4228f4Ae3E689CD6dCAad120"
+              target="_blank"
+              className="buy-link-color"
+            >
+              <StyledButton>BUY YFBTC</StyledButton>
             </StyledTransCard>
             <Spacer />
             {!account && (
-              <StyledCard>
-                <StyledCardContent onClick={toggleModal}>                 
-                    WATCH INTRO VIDEO
-                    <img src={yticon} alt="" className="youtube-icon" />
+              <StyledCard onClick={toggleModal}>
+                <StyledCardContent>
+                  WATCH INTRO VIDEO
+                  <img src={yticon} alt="" className="youtube-icon" />
                 </StyledCardContent>
               </StyledCard>
             )}
@@ -97,7 +94,13 @@ const Home: React.FC = () => {
         <StyledLogo>
           <MdDone color="white" size={22} className="mr-2 green-bg" />
           Audited By:
-          <img src={certik} alt="" className="ml-2" />
+          <a
+            href="https://certik.org/projects/yfbtc"
+            target="_blank"
+            className="buy-link-color"
+          >
+            <img src={certik} alt="" className="ml-2" />
+          </a>
         </StyledLogo>
       </Page>
       <YoutubeModal popUp={popUp} toggleModal={toggleModal} />
@@ -141,8 +144,9 @@ const StyledCard = styled.div`
   align-items: center;
   border: solid 1px rgba(0, 0, 0, 0);
   background-color: #dc0067;
+  cursor: pointer;
 `
-const StyledTransCard = styled.div`
+const StyledTransCard = styled.a`
   display: flex;
   flex-direction: column;
   align-items: center;

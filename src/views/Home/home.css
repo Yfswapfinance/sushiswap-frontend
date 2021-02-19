@@ -2,13 +2,16 @@
   border-radius: 12px;
   color: #5c5c5c;
   line-height: 1.2;
+  position:relative;
   box-shadow: 0 20px 40px 0 rgba(255, 148, 22, 0.8);
   background-color: #ffffff;
   overflow: hidden;
+  margin:20px;
 }
 .stat-cards {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .img-size {
   width: 3rem;
