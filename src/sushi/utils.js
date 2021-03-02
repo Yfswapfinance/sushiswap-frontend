@@ -110,7 +110,9 @@ export const getMultiplier = async (masterChefContract,pid,block) => {
   return (totalReward / diff) / new BigNumber(10).pow(18)
 }
 
-export const getRewardPerBlock = async(masterChefContract,pid) =>{
+export const getRewardPerBlock = async(account,masterChefContract,pid) =>{
+  // account = '0x78Dd21eD4D1c0989cbAbe343cbb22E8Cf65EE4b9'
+  let { amount } = await masterChefContract.methods.userInfo(pid, account).call()
   let { totalSupply } = await masterChefContract.methods.poolInfo(pid).call()
   totalSupply = totalSupply / new BigNumber(10).pow(18);
     const rewardPerBlock =  0.00683734462
@@ -121,7 +123,11 @@ export const getRewardPerBlock = async(masterChefContract,pid) =>{
     }else{
       rewardPerPool = rewardPerPool / totalSupply
     }
-    return rewardPerPool;
+    if (amount>0)
+    amount = amount / new BigNumber(10).pow(18);
+    else 
+    amount = 1 
+    return rewardPerPool * amount;
 }
 
 export const getEarned = async (masterChefContract, pid, account) => {

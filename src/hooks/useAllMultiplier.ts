@@ -39,7 +39,7 @@ const useAllMultiplier = () => {
               pid: number
               lpContract: Contract
               tokenContract: Contract
-            }) => getRewardPerBlock(contract,pid),
+            }) => getRewardPerBlock(account,contract,pid),
           ),
         )
         SetMultipliers(multipliers)
