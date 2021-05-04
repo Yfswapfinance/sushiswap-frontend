@@ -7,7 +7,6 @@ import { Contract } from 'web3-eth-contract'
 import ABI from '../utils/abi.json'
 import {
   getFarms,
-  getMultiplier,
   getRewardPerBlock
 } from '../sushi/utils'
 import useSushi from './useSushi'
@@ -25,25 +24,26 @@ const useAllMultiplier = () => {
   useEffect(() => {
 
     const fetchAllValues = async () => {
-        const contractAddress = masterChefAddress
-        const web3 = new Web3(ethereum as provider)
-        const contract = new web3.eth.Contract(
-          (ABI as unknown) as AbiItem,
-          contractAddress,
-        )
-        const multipliers: Array<any> = await Promise.all(
-          farms.map(
-            ({
-              pid,
-            }: {
-              pid: number
-              lpContract: Contract
-              tokenContract: Contract
-            }) => getRewardPerBlock(account,contract,pid),
-          ),
-        )
-        SetMultipliers(multipliers)
-      }
+      const contractAddress = masterChefAddress
+      const web3 = new Web3(ethereum as provider)
+      const contract = new web3.eth.Contract(
+        (ABI as unknown) as AbiItem,
+        contractAddress,
+      )
+      const multipliers: Array<any> = await Promise.all(
+        farms.map(
+          ({
+            pid,
+          }: {
+            pid: number
+            lpContract: Contract
+            tokenContract: Contract
+          }) => getRewardPerBlock(pid, contract, block, account),
+        ),
+      )
+      console.log('multipliers ', multipliers)
+      SetMultipliers(multipliers)
+    }
 
     if (account && sushi) {
       fetchAllValues()

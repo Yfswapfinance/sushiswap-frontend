@@ -88,8 +88,6 @@ const Balances: React.FC = () => {
   console.log('yfbtc ', yfbtc)
   const sushiBalance = useTokenBalance(yfbtc)
   const { account, ethereum }: { account: any; ethereum: provider } = useWallet()
-  const allMultiplier = useAllMultiplier()
-  // const { account }: { account: string; ethereum: provider } = useWallet()
 
   const contractAddress = yfbtc
   const web3 = new Web3(ethereum as provider)
@@ -97,7 +95,6 @@ const Balances: React.FC = () => {
           (ABI as unknown) as AbiItem,
           contractAddress,
         )
-  // const yfbtcContractObj = getContract(ABI, contractAddress)
 
   useEffect(() => {
     async function fetchTotalSupply() {
@@ -109,7 +106,7 @@ const Balances: React.FC = () => {
     }
   }, [sushi, setTotalSupply])
   const sumOfMultipliers =()=>{
-   return 0.00683734462
+   return 0.01760609568
     // return allMultiplier.reduce((a, b) => a + b, 0)
   }
   return (

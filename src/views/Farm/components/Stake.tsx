@@ -25,7 +25,7 @@ import useUnstake from '../../../hooks/useUnstake'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import DepositModal from './DepositModal'
 import WithdrawModal from './WithdrawModal'
-import { univ2, masterChefAddress } from '../../../constants/tokenAddresses'
+import { masterChefAddress } from '../../../constants/tokenAddresses'
 import AmountModal from './AmountModal'
 import formar from '../../../../src/assets/img/formar.png'
 import { useWallet } from 'use-wallet'
@@ -118,6 +118,7 @@ const Stake: React.FC<StakeProps> = ({
         contractAddress,
       )
       const txHash = await getUserInfo(pid, contract, account)
+      console.log('staked balance txHash form ', txHash)
       setStackedBalance(txHash)
     }
     const fetchAllowance = async () => {
@@ -162,6 +163,7 @@ const Stake: React.FC<StakeProps> = ({
     }
     const fetchMaxAmount = async () => {
       const contractAddress = tokenAddresses
+      console.log('balance token address ', contractAddress)
       const balance = await getBalance(
         ethereum as provider,
         contractAddress,

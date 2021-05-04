@@ -8,15 +8,11 @@ import Spacer from '../../components/Spacer'
 import BtcIcon from "../../assets/img/btc.svg"
 import "./sticky.css"
 import Unicon from "../../assets/img/unicon.png"
-import useSushi from '../../hooks/useSushi'
-import useClaim from '../../hooks/useClaim'
-import { getSushiContract } from '../../sushi/utils'
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Farms: React.FC = () => {
 
-  const { onClaim } = useClaim()
     return (
         <StyledPage>
           <ToastContainer />
@@ -129,14 +125,6 @@ const StyledButtonDiv = styled.div`
   align-self: center;
   position: relative;
   
-  @media (max-width: 768px) {
-    width: 80%;
-  }
-`
-const StyledButton = styled.div`
-  width: 190px;
-  margin-top : auto;
-  align-self: center;
   @media (max-width: 768px) {
     width: 80%;
   }

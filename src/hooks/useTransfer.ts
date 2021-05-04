@@ -4,7 +4,7 @@ import Web3 from 'web3'
 import { AbiItem } from 'web3-utils'
 import ABI from '../utils/abi.json'
 import { useWallet } from 'use-wallet'
-import { masterChefAddress, univ2 } from '../constants/tokenAddresses'
+import { masterChefAddress } from '../constants/tokenAddresses'
 import { transfer } from '../sushi/utils'
 
 const getContract = (provider: provider, address: string) => {

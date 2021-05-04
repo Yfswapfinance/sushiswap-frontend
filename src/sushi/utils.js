@@ -13,8 +13,6 @@ const GAS_LIMIT = {
   },
 }
 
-const YFBTC_MULTIPLIER = 5;
-
 export const getMasterChefAddress = (sushi) => {
   return sushi && sushi.masterChefAddress
 }
@@ -33,7 +31,6 @@ export const getSushiContract = (sushi) => {
 }
 
 export const getFarms = (sushi) => {
-
   return sushi
     ? sushi.contracts.pools.map(
         ({
@@ -47,7 +44,7 @@ export const getFarms = (sushi) => {
           lpAddress,
           lpContract,
           liveAddress,
-          rewardMultiplier
+          rewardMultiplier,
         }) => ({
           pid,
           id: symbol,
@@ -56,13 +53,13 @@ export const getFarms = (sushi) => {
           lpTokenAddress: lpAddress,
           lpContract,
           liveAddress,
-          tokenAddresses:tokenAddresses[1],
+          tokenAddresses: tokenAddresses[1],
           tokenSymbol,
           tokenContract,
           earnToken: 'YFBTC',
           earnTokenAddress: sushi.contracts.sushi.options.address,
           icon,
-          rewardMultiplier
+          rewardMultiplier,
         }),
       )
     : []
@@ -78,56 +75,100 @@ export const getTotalSupply = async (masterChefContract, pid) => {
   return new BigNumber(totalSupply)
 }
 
-export const getTimeBasedReward = async (masterChefContract,pid) => {
-  const { accYfbtcPerShare } = await masterChefContract.methods.poolInfo(pid).call()
-  let reward = accYfbtcPerShare / (new BigNumber(10).pow(12))
+export const getTimeBasedReward = async (masterChefContract, pid) => {
+  const { accYfbtcPerShare } = await masterChefContract.methods
+    .poolInfo(pid)
+    .call()
+  let reward = accYfbtcPerShare / new BigNumber(10).pow(12)
   return new BigNumber(reward)
 }
 
-const getPoolLength = async (masterChefContract)=>{
+const getPoolLength = async (masterChefContract) => {
   return masterChefContract.methods.poolLength.call()
 }
 
-export const getEligiblePools = async(masterChefContract)=>{
+export const getEligiblePools = async (masterChefContract) => {
   const length = await getPoolLength()
-  const poolCount = 0;
+  const poolCount = 0
   for (let index = 0; index < length; index++) {
-      const { totalSupply } = await masterChefContract.methods.poolInfo(index).call()
-      console.log('**** supply ', totalSupply)
-      if ( totalSupply > 0 )
-      poolCount++
+    const { totalSupply } = await masterChefContract.methods
+      .poolInfo(index)
+      .call()
+    console.log('**** supply ', totalSupply)
+    if (totalSupply > 0) poolCount++
   }
-
 }
 
-export const getMultiplier = async (masterChefContract,pid,block) => {
+export const getMultiplier = async (masterChefContract, pid, block) => {
   console.log('getMultiplier is called')
-  const { lastRewardBlock } = await masterChefContract.methods.poolInfo(pid).call()
-  const diff = (block - lastRewardBlock)
-  if ( diff <= 0 )
-  return 0
-  const totalReward = await masterChefContract.methods.getMultiplier(lastRewardBlock,block).call()
-  return (totalReward / diff) / new BigNumber(10).pow(18)
+  const { lastRewardBlock } = await masterChefContract.methods
+    .poolInfo(pid)
+    .call()
+  const diff = block - lastRewardBlock
+  if (diff <= 0) return 0
+  const totalReward = await masterChefContract.methods
+    .getMultiplier(lastRewardBlock, block)
+    .call()
+  return totalReward / diff / new BigNumber(10).pow(18)
 }
 
-export const getRewardPerBlock = async(account,masterChefContract,pid) =>{
-  // account = '0x78Dd21eD4D1c0989cbAbe343cbb22E8Cf65EE4b9'
-  let { amount } = await masterChefContract.methods.userInfo(pid, account).call()
-  let { totalSupply } = await masterChefContract.methods.poolInfo(pid).call()
-  totalSupply = totalSupply / new BigNumber(10).pow(18);
-    const rewardPerBlock =  0.00683734462
-    const distribution = YFBTC_MULTIPLIER + 3;
-    let rewardPerPool = rewardPerBlock / (distribution);
-    if (pid == 0 ){
-      rewardPerPool = (rewardPerPool * YFBTC_MULTIPLIER) / totalSupply
-    }else{
-      rewardPerPool = rewardPerPool / totalSupply
+export const getRewardPerBlock = async (
+  pid,
+  masterChefContract,
+  block,
+  account,
+) => {
+  console.log('called ', pid, block, account)
+  let hourly = 0,
+    weekly = 0,
+    daily = 0
+  try {
+    if (block == 0) {
+      return { hourly, daily, weekly }
     }
-    if (amount>0)
-    amount = amount / new BigNumber(10).pow(18);
-    else 
-    amount = 1 
-    return rewardPerPool * amount;
+    hourly =
+      (await masterChefContract.methods
+        .estimateReward(pid, account, block + 240)
+        .call()) / Math.pow(10, 18)
+    daily =
+      (await masterChefContract.methods
+        .estimateReward(pid, account, block + 5760)
+        .call()) / Math.pow(10, 18)
+    weekly =
+      (await masterChefContract.methods
+        .estimateReward(pid, account, block + 40320)
+        .call()) / Math.pow(10, 18)
+
+    console.log('called and return ', hourly, daily)
+  } catch (err) {
+    console.log('error while getting data')
+  }
+  hourly = hourly.toFixed(5)
+  daily = daily.toFixed(5)
+  weekly = weekly.toFixed(5)
+
+  return { hourly, daily, weekly }
+}
+export const getUpdatedRewardPerBlock = async (
+  account,
+  masterChefContract,
+  pid,
+) => {
+  // account = '0x78Dd21eD4D1c0989cbAbe343cbb22E8Cf65EE4b9'
+  let { amount } = await masterChefContract.methods
+    .userInfo(pid, account)
+    .call()
+
+  if (amount < 0) amount = 1
+
+  let accYfbtcPerShare = await masterChefContract.methods
+    .rewardPerBlock(pid)
+    .call()
+
+  if (accYfbtcPerShare < 0) accYfbtcPerShare = 1
+
+  console.log('accYfbtcPerShare ', accYfbtcPerShare, amount)
+  return (accYfbtcPerShare * amount) / Math.pow(10, 12) / Math.pow(10, 18)
 }
 
 export const getEarned = async (masterChefContract, pid, account) => {
@@ -184,9 +225,7 @@ export const approve = async (lpContract, masterChefAddress, account) => {
 }
 
 export const Allowance = async (lpContract, masterChefAddress, account) => {
-  return lpContract.methods
-    .allowance(account, masterChefAddress)
-    .call()
+  return lpContract.methods.allowance(account, masterChefAddress).call()
 }
 
 export const transfer = async (
@@ -198,9 +237,7 @@ export const transfer = async (
 ) => {
   console.log('amount entered ', amount)
   let Amount = ethers.utils.parseEther(amount)
-  return lpContract.methods
-    .deposit(pid, Amount)
-    .send({ from: account })
+  return lpContract.methods.deposit(pid, Amount).send({ from: account })
 }
 
 export const onHarvest = async (
@@ -211,9 +248,7 @@ export const onHarvest = async (
   account,
 ) => {
   let Amount = ethers.utils.parseEther(amount)
-  return lpContract.methods
-    .withdraw(pid,Amount)
-    .send({ from: account })
+  return lpContract.methods.withdraw(pid, Amount).send({ from: account })
 }
 
 export const getSushiSupply = async (sushi) => {
@@ -280,30 +315,50 @@ export const getStaked = async (masterChefContract, pid, account) => {
 
 export const getUserInfo = async (pid, masterChefContract, account) => {
   try {
-    const { amount } = await masterChefContract.methods.userInfo(pid, account).call()
+    const { amount } = await masterChefContract.methods
+      .userInfo(pid, account)
+      .call()
+    console.log('amount staked in pool ', amount)
     return new BigNumber(amount)
   } catch {
     return new BigNumber(0)
   }
 }
 
-export const getPendingReward = async (pid,masterChefContract, account) => {
+export const getPendingReward = async (
+  pid,
+  masterChefContract,
+  account,
+  isConvertable = false,
+) => {
   // account = '0x2f1692285e04fe50be6eb2fcea7ddbd3187ab27b'
   // account = '0xf230962e0b676db645dae2b9340cafe0a65335ba'
-  try {
-    const { amount, rewardDebt } = await masterChefContract.methods.userInfo(pid, account).call()
-    const { accYfbtcPerShare } = await masterChefContract.methods.poolInfo(pid).call()
+  // try {
+  //   const { amount, rewardDebt } = await masterChefContract.methods.userInfo(pid, account).call()
+  //   const { accYfbtcPerShare } = await masterChefContract.methods.poolInfo(pid).call()
 
-    console.log('user reward depth ', rewardDebt)
-    if (amount <= 0)
-    amount = 1
-      const rewardEarned = ((accYfbtcPerShare * amount) / Math.pow(10, 12)) - rewardDebt
-      console.log('rewardEarned ', rewardEarned / Math.pow(10, 18))
-      return new BigNumber(((accYfbtcPerShare * amount) / Math.pow(10, 12)) - rewardDebt)
-   
-  } catch {
-    return new BigNumber(0)
-  }
+  //   console.log(`amount ${amount } rewardDebt ${rewardDebt} `)
+  //   if (amount <= 0)
+  //   amount = 1
+  //     const rewardEarned = ((accYfbtcPerShare * amount) / Math.pow(10, 12)) - rewardDebt
+  //     console.log('rewardEarned ', ((accYfbtcPerShare * amount) / Math.pow(10, 12)))
+  //     if (!isConvertable)
+  //     return new BigNumber(((accYfbtcPerShare * amount) / Math.pow(10, 12)) - rewardDebt)
+  //     else{
+  //       return ((accYfbtcPerShare * amount) / Math.pow(10, 12)) - rewardDebt
+  //     }
+
+  // } catch {
+  //   return new BigNumber(0)
+  // }
+  const reward = await masterChefContract.methods
+    .pendingReward(pid, account)
+    .call()
+  console.log('reward Amount ', reward / Math.pow(10, 18))
+  // if (!isConvertable)
+  return new BigNumber(reward)
+  // // else
+  // return reward / Math.pow(10, 18)
 }
 
 export const redeem = async (masterChefContract, account) => {

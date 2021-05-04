@@ -8,11 +8,8 @@ import { Contract } from 'web3-eth-contract'
 import ABI from '../utils/abi.json'
 
 import {
-  getMasterChefContract,
   getWethContract,
   getFarms,
-  getUserInfo,
-  getTotalSupply,
   getTimeBasedReward
 } from '../sushi/utils'
 import useSushi from './useSushi'
@@ -54,7 +51,7 @@ const useAllTimeRewards = () => {
           pid: number
           lpContract: Contract
           tokenContract: Contract
-        }) => getTimeBasedReward(contract,pid),
+        }) => getTimeBasedReward(contract, pid),
       ),
     )
     setBalance(balances)

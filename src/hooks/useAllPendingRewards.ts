@@ -8,11 +8,8 @@ import { Contract } from 'web3-eth-contract'
 import ABI from '../utils/abi.json'
 
 import {
-  getMasterChefContract,
-  getWethContract,
   getFarms,
-  getUserInfo,
-  getTotalSupply,
+
   getPendingReward
 } from '../sushi/utils'
 import useSushi from './useSushi'
@@ -33,8 +30,6 @@ const useAllPendingRewards = () => {
   const { ethereum } = useWallet()
   const sushi = useSushi()
   const farms = getFarms(sushi)
-  // const masterChefContract = getMasterChefContract(sushi)
-  const wethContact = getWethContract(sushi)
   const block = useBlock()
 
   const fetchAllStakedValue = useCallback(async () => {

@@ -28,24 +28,17 @@ const StatCards: React.FC = () => {
   const getYfbtcRewardsDollarPrice = (
     pair: any,
     ethPrice: any,
-    amount: any,
+    amount: any
   ) => {
     return (pair.token0Price * ethPrice * amount).toFixed(5)
   }
 
   const getFormatRewards = (rewards: any) => {
-    if (rewards === undefined) {
-      return {
-        hourly: 0,
-        daily: 0,
-        weekly: 0,
-      }
+    console.log('rewards ', rewards)
+    if (!rewards) {
+      return {hourly: 0, weekly: 0, daily:0}
     }
-    return {
-      hourly: (240 * rewards).toFixed(5),
-      daily: (5760 * rewards).toFixed(5),
-      weekly: (40320 * rewards).toFixed(5),
-    }
+    return rewards
   }
 
   const data = farms.map<any>(
@@ -67,7 +60,7 @@ const StatCards: React.FC = () => {
   )
 
   // const data = rows.filter((farm) => farm.stakedBalance > 0)
-
+console.log('farms ', data)
   return (
     <>
       {data.length > 0
