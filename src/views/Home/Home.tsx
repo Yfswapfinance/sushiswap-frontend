@@ -79,7 +79,7 @@ const Home: React.FC = () => {
         </Container>
         <Spacer size="lg" />
         <StyledInfo>
-          🏆<b>Pro Tip</b>: YFBTC-ETH UNI-V2 LP token pool yields 5.0x more
+          🏆<b>Pro Tip</b>: YFBTC-ETH UNI-V2 LP token pool yields 20.0x more
           token rewards per block.
         </StyledInfo>
         <Spacer size="lg" />
