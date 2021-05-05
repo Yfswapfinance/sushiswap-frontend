@@ -125,22 +125,6 @@ export const supportedPools = [
     pid: 2,
     liveAddress: '0x9fb24efec63c6a978efd21bda010099cb4f23707',
     lpAddresses: {
-      1: '0xa478c2975ab1ea89e8196811f51a7b7ade33eb11',
-    },
-    tokenAddresses: {
-      1: '0x81fbef4704776cc5bba0a5df3a90056d2c6900b3',
-    },
-    // name: 'YFBTC/USDT',
-    name: 'RenBTC/ETH',
-    rewardMultiplier: '1.0x',
-    symbol: 'RenBTC-ETH UNI-V2 LP',
-    tokenSymbol: 'DAI',
-    icon: duck,
-  },
-  {
-    pid: 3,
-    liveAddress: '0x9fb24efec63c6a978efd21bda010099cb4f23707',
-    lpAddresses: {
       1: '0x0d4a11d5eeaac28ec3f61d100daf4d40471f1852',
     },
     tokenAddresses: {
@@ -153,7 +137,22 @@ export const supportedPools = [
     tokenSymbol: 'USDT',
     icon: turt,
   },
-
+  {
+    pid: 3,
+    liveAddress: '0x9fb24efec63c6a978efd21bda010099cb4f23707',
+    lpAddresses: {
+      1: '0xa478c2975ab1ea89e8196811f51a7b7ade33eb11',
+    },
+    tokenAddresses: {
+      1: '0xd3d2E2692501A5c9Ca623199D38826e513033a17',
+    },
+    // name: 'YFBTC/USDT',
+    name: 'UNI/ETH',
+    rewardMultiplier: '1.0x',
+    symbol: 'UNI-ETH UNI-V2 LP',
+    tokenSymbol: 'UNI',
+    icon: duck,
+  },
   // {
   //   pid: 7,
   //   lpAddresses: {
