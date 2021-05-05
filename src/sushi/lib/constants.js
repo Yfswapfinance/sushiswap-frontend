@@ -1,10 +1,10 @@
 import BigNumber from 'bignumber.js/bignumber'
-import change from "../../assets/img/btc.svg"
-import rocket from "../../assets/img/rocket.svg"
-import sweet from "../../assets/img/sweet.svg"
-import hen from "../../assets/img/hen.svg"
-import duck from "../../assets/img/duck.svg"
-import turt from "../../assets/img/turt.svg"
+import change from '../../assets/img/btc.svg'
+import rocket from '../../assets/img/rocket.svg'
+import sweet from '../../assets/img/sweet.svg'
+import hen from '../../assets/img/hen.svg'
+import duck from '../../assets/img/duck.svg'
+import turt from '../../assets/img/turt.svg'
 export const SUBTRACT_GAS_LIMIT = 100000
 
 const ONE_MINUTE_IN_SECONDS = new BigNumber(60)
@@ -98,11 +98,11 @@ export const supportedPools = [
       1: '0x9fb24efec63c6a978efd21bda010099cb4f23707',
     },
     // name: 'YFBTC/ETH 1.5x',
-    name:'YFBTC/ETH',
-    rewardMultiplier: '5.0x',
+    name: 'YFBTC/ETH',
+    rewardMultiplier: '20.0x',
     symbol: 'YFBTC-ETH UNI-V2 LP',
     tokenSymbol: 'SUSD',
-    
+
     icon: change,
   },
   {
@@ -115,8 +115,8 @@ export const supportedPools = [
       1: '0x0f74c81c67531146290bc34bd85516e2f9891d2c',
     },
     // name: 'YFBTC/DAI',
-    name:'BITTO/ETH',
-    rewardMultiplier: '1.0x',
+    name: 'BITTO/ETH',
+    rewardMultiplier: '4.0x',
     symbol: 'BITTO-ETH UNI-V2 LP',
     tokenSymbol: 'USDC',
     icon: rocket,
@@ -131,7 +131,7 @@ export const supportedPools = [
       1: '0x81fbef4704776cc5bba0a5df3a90056d2c6900b3',
     },
     // name: 'YFBTC/USDT',
-    name:'RenBTC/ETH',
+    name: 'RenBTC/ETH',
     rewardMultiplier: '1.0x',
     symbol: 'RenBTC-ETH UNI-V2 LP',
     tokenSymbol: 'DAI',
@@ -147,7 +147,7 @@ export const supportedPools = [
       1: '0xbb2b8038a1640196fbe3e38816f3e67cba72d940',
     },
     // name: 'YFBTC/RenBTC',
-    name:'wBTC/ETH',
+    name: 'wBTC/ETH',
     rewardMultiplier: '1.0x',
     symbol: 'wBTC-ETH UNI-V2 LP',
     tokenSymbol: 'USDT',
